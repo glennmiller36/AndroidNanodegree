@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.glennmiller.myappportfolio.PortfolioActivity"
+    android:background="#ffdfeaf1">
+
+    <TextView android:text="@string/my_nanodegree_apps" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="@string/spotify_streamer"
+        android:id="@+id/btnSpotify"
+        android:layout_marginTop="23dp"
+        style="@style/MyApp.Button.Orange"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@+id/btnCapstone"
+        android:layout_alignEnd="@+id/btnCapstone"
+        android:onClick="onClickSpotifyStreamer" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="@string/scores_app"
+        android:id="@+id/btnScores"
+        style="@style/MyApp.Button.Orange"
+        android:layout_below="@+id/btnSpotify"
+        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@+id/btnCapstone"
+        android:layout_alignEnd="@+id/btnCapstone"
+        android:onClick="onClickScoresApps" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="@string/library_app"
+        android:id="@+id/btnLibrary"
+        android:layout_below="@+id/btnScores"
+        android:layout_centerHorizontal="true"
+        style="@style/MyApp.Button.Orange"
+        android:layout_alignStart="@+id/btnCapstone"
+        android:layout_alignEnd="@+id/btnCapstone"
+        android:onClick="onClickLibraryApp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="@string/build_it_bigger"
+        android:id="@+id/btnBuildIt"
+        android:layout_below="@+id/btnLibrary"
+        android:layout_centerHorizontal="true"
+        style="@style/MyApp.Button.Orange"
+        android:layout_alignStart="@+id/btnCapstone"
+        android:layout_alignEnd="@+id/btnCapstone"
+        android:onClick="onClickBuildItBigger" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="@string/xyz_reader"
+        android:id="@+id/btnXYZ"
+        android:layout_below="@+id/btnBuildIt"
+        android:layout_centerHorizontal="true"
+        style="@style/MyApp.Button.Orange"
+        android:layout_alignStart="@+id/btnCapstone"
+        android:layout_alignEnd="@+id/btnCapstone"
+        android:onClick="onClickXYZReader" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="@string/capstone_my_own_app"
+        android:id="@+id/btnCapstone"
+        android:layout_below="@+id/btnXYZ"
+        android:layout_centerHorizontal="true"
+        style="@style/MyApp.Button.Red"
+        android:onClick="onClickMyOwnApp" />
+
+</RelativeLayout>
