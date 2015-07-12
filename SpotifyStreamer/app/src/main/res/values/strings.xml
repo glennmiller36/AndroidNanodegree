@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Spotify Streamer</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_artist_tracks">ArtistTracksActivity</string>
+    <string name="search_watermark">Search artists</string>
+    <string name="title_activity_player">PlayerActivity</string>
+    <string name="contentDesc_AlbumImage">Album Cover Image</string>
+    <string name="contentDesc_Previous">Media Player Previous Track</string>
+    <string name="contentDesc_Play">Media Player Play Song</string>
+    <string name="contentDesc_Pause">Media Player Pause Song</string>
+    <string name="contentDesc_Next">Media Player Next Track</string>
+    <string name="initialTrackPosition">0:0</string>
+    <string name="previewSongDuration">0:30</string>
+    <string name="top10Tracks">Top 10 Tracks</string>
+    <string name="listIsEmpty">List Is Empty</string>
+</resources>
