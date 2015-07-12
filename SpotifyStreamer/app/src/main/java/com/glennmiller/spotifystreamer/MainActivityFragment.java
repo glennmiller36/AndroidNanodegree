@@ -74,6 +74,10 @@ public class MainActivityFragment extends Fragment implements SearchView.OnQuery
         _artistList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // global variable of Artist tracks to share between ArtistTracksActivity and PlayerActivity
+                SpotifyStreamerApp.arrayOfTracks.clear();
+
                 Artist item = _adapter.getItem(position);
 
                 Intent intent = new Intent(getActivity(), ArtistTracksActivity.class);

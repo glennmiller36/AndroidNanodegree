@@ -53,9 +53,6 @@ public class ArtistTracksActivityFragment extends Fragment {
         _messageText = (TextView) view.findViewById(R.id.textMessage);
         _messageText.setAllCaps(true);
 
-        // global variable of Artist tracks to share between ArtistTracksActivity and PlayerActivity
-        SpotifyStreamerApp.arrayOfTracks.clear();
-
         // create the adapter to convert the array to views
         _adapter = new TracksListAdapter(getActivity(), SpotifyStreamerApp.arrayOfTracks);
 
@@ -72,44 +69,58 @@ public class ArtistTracksActivityFragment extends Fragment {
             }
         });
 
-        SpotifyApi api = new SpotifyApi();
-        SpotifyService spotify = api.getService();
+        if (SpotifyStreamerApp.arrayOfTracks.size() == 0) {
 
-        Map<String, Object> options = new HashMap<>();
-        options.put("country", "US");
+            SpotifyApi api = new SpotifyApi();
+            SpotifyService spotify = api.getService();
 
-        spotify.getArtistTopTrack(artistID, options, new Callback<Tracks>() {
-            @Override
-            public void success(Tracks tracks, retrofit.client.Response response) {
-                _adapter.clear();
+            Map<String, Object> options = new HashMap<>();
+            options.put("country", "US");
 
-                for (Track track : tracks.tracks) {
-                    _adapter.add(track);
+            spotify.getArtistTopTrack(artistID, options, new Callback<Tracks>() {
+                @Override
+                public void success(Tracks tracks, retrofit.client.Response response) {
+                    _adapter.clear();
+
+                    for (Track track : tracks.tracks) {
+                        _adapter.add(track);
+                    }
+
+                    _progressBar.setVisibility(View.INVISIBLE);
+
+                    if (tracks.tracks.size() == 0) {
+                        _messageText.setText(R.string.listIsEmpty);
+                        _messageText.setVisibility(View.VISIBLE);
+                    } else {
+                        _messageText.setVisibility(View.INVISIBLE);
+                        _artistList.setVisibility(View.VISIBLE);
+                    }
+
+                    _adapter.notifyDataSetChanged();
                 }
 
-                _progressBar.setVisibility(View.INVISIBLE);
+                @Override
+                public void failure(RetrofitError error) {
+                    _progressBar.setVisibility(View.INVISIBLE);
 
-                if (tracks.tracks.size() == 0) {
-                    _messageText.setText(R.string.listIsEmpty);
+                    _messageText.setText(error.getMessage());
                     _messageText.setVisibility(View.VISIBLE);
                 }
-                else {
-                    _messageText.setVisibility(View.INVISIBLE);
-                    _artistList.setVisibility(View.VISIBLE);
-                }
+            });
+        }
+        else {
+            _progressBar.setVisibility(View.INVISIBLE);
 
-                _adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                _progressBar.setVisibility(View.INVISIBLE);
-
-                _messageText.setText(error.getMessage());
+            if (SpotifyStreamerApp.arrayOfTracks.size() == 0) {
+                _messageText.setText(R.string.listIsEmpty);
                 _messageText.setVisibility(View.VISIBLE);
+            } else {
+                _messageText.setVisibility(View.INVISIBLE);
+                _artistList.setVisibility(View.VISIBLE);
             }
-        });
 
+            _adapter.notifyDataSetChanged();
+        }
         return view;
     }
 }
