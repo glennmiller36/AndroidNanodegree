@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:baselineAligned="false">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragmentSearch"
+        android:name="com.glennmiller.spotifystreamer.MainActivityFragment"
+        tools:layout="@layout/fragment_main" android:layout_width="0dp"
+        android:layout_weight="1" android:layout_height="match_parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="1dip"
+        android:layout_height="fill_parent"
+        android:background="@color/black"/>
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragmentTracks"
+        android:name="com.glennmiller.spotifystreamer.ArtistTracksActivityFragment"
+        tools:layout="@layout/fragment_artist_tracks" android:layout_width="0dp"
+        android:layout_weight="2" android:layout_height="match_parent" />
+
+</LinearLayout>

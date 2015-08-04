@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.glennmiller.spotifystreamer.adapters.ArtistsListAdapter;
 
@@ -75,18 +76,26 @@ public class MainActivityFragment extends Fragment implements SearchView.OnQuery
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                // global variable of Artist tracks to share between ArtistTracksActivity and PlayerActivity
-                SpotifyStreamerApp.arrayOfTracks.clear();
+                ArtistTracksActivityFragment tracksFragment = ((MainActivity) getActivity()).getTabletTracksFragment();
 
                 Artist item = _adapter.getItem(position);
 
-                Intent intent = new Intent(getActivity(), ArtistTracksActivity.class);
-                intent.putExtra("ArtistName", item.name);
-                intent.putExtra("ID", item.id);
+                if (tracksFragment == null){
+                    // global variable of Artist tracks to share between ArtistTracksActivity and PlayerActivity
+                    SpotifyStreamerApp.arrayOfTracks.clear();
 
-                startActivity(intent);
+                    Intent intent = new Intent(getActivity(), ArtistTracksActivity.class);
+                    intent.putExtra("ArtistName", item.name);
+                    intent.putExtra("ID", item.id);
+
+                    startActivity(intent);
+                }
+                else{
+                    tracksFragment.getArtistTopTrack(item.id);
+                }
             }
         });
+
         return view;
     }
 
@@ -97,6 +106,12 @@ public class MainActivityFragment extends Fragment implements SearchView.OnQuery
 
         _arrayOfArtists.clear();
         _adapter.notifyDataSetChanged();
+
+        ArtistTracksActivityFragment tracksFragment = ((MainActivity) getActivity()).getTabletTracksFragment();
+        if (tracksFragment != null) {
+            SpotifyStreamerApp.arrayOfTracks.clear();
+            tracksFragment.clearArtistTopTrack();
+        }
 
         if (query.length() > 0) {
 
@@ -140,6 +155,16 @@ public class MainActivityFragment extends Fragment implements SearchView.OnQuery
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        if (newText.length() == 0) {
+            _arrayOfArtists.clear();
+            _adapter.notifyDataSetChanged();
+
+            ArtistTracksActivityFragment tracksFragment = ((MainActivity) getActivity()).getTabletTracksFragment();
+            if (tracksFragment != null) {
+                SpotifyStreamerApp.arrayOfTracks.clear();
+                tracksFragment.getArtistTopTrack("");
+            }
+        }
         return false;
     }
 

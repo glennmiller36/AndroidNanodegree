@@ -3,11 +3,12 @@ package com.glennmiller.spotifystreamer;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -24,7 +25,7 @@ import kaaes.spotify.webapi.android.models.Track;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class PlayerActivityFragment extends Fragment {
+public class PlayerActivityFragment extends DialogFragment {
 
     private int _trackPosition;
     private TextView _artistNameText;
@@ -47,6 +48,13 @@ public class PlayerActivityFragment extends Fragment {
 
         // retain this fragment when activity is re-initlized
         setRetainInstance(true);
+
+        // tablet - request a window without the title
+        Bundle bundle = getActivity().getIntent().getExtras();
+        if (bundle == null) {
+            setStyle(DialogFragment.STYLE_NO_TITLE,
+                    android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth);
+        }
     }
 
     @Override
@@ -69,6 +77,11 @@ public class PlayerActivityFragment extends Fragment {
 
         // get the passed-in track position
         Bundle bundle = getActivity().getIntent().getExtras();
+        if (bundle == null) {
+            bundle = getArguments();    // tablet using DialogFragment
+            setShowsDialog(true);
+        }
+
         _trackPosition = bundle.getInt("TRACK_POSITION", 0);
 
         // setup scrubBar change
@@ -173,6 +186,17 @@ public class PlayerActivityFragment extends Fragment {
             _mediaPlayer.release();
             _mediaPlayer = null;
         }
+    }
+
+    /*
+     * Retain a DialogFragment through rotation - code to stop dialog from being dismissed
+     * on rotation, due to a bug with the compatibility library
+     */
+    @Override
+    public void onDestroyView() {
+        if (getDialog() != null && getRetainInstance())
+            getDialog().setDismissMessage(null);
+        super.onDestroyView();
     }
 
     /*

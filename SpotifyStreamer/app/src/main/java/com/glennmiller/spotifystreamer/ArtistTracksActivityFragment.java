@@ -1,5 +1,6 @@
 package com.glennmiller.spotifystreamer;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -47,7 +48,10 @@ public class ArtistTracksActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_artist_tracks,
                 container, false);
 
-        String artistID = getActivity().getIntent().getExtras().getString("ID");
+        String artistID = null;
+
+        if (getActivity().getIntent().getExtras() != null)
+            artistID = getActivity().getIntent().getExtras().getString("ID");
 
         _progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         _messageText = (TextView) view.findViewById(R.id.textMessage);
@@ -62,21 +66,50 @@ public class ArtistTracksActivityFragment extends Fragment {
         _artistList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(getActivity(), PlayerActivity.class);
-            intent.putExtra("TRACK_POSITION", position);
 
-            startActivity(intent);
+                Intent intent = new Intent(getActivity(), PlayerActivity.class);
+                intent.putExtra("TRACK_POSITION", position);
+
+                ArtistTracksActivityFragment tracksFragment = ((MainActivity) getActivity()).getTabletTracksFragment();
+                if (tracksFragment != null) {
+                    PlayerActivityFragment fragment = new PlayerActivityFragment();
+                    fragment.setArguments(intent.getExtras());
+                    fragment.show(getActivity().getSupportFragmentManager(), "Tablet_specific");
+                }
+                else {
+                    startActivity(intent);
+                }
             }
         });
 
-        if (SpotifyStreamerApp.arrayOfTracks.size() == 0) {
+        if (SpotifyStreamerApp.arrayOfTracks.size() == 0 && artistID != null) {
 
-            SpotifyApi api = new SpotifyApi();
-            SpotifyService spotify = api.getService();
+            getArtistTopTrack(artistID);
+        }
+        else {
+            _progressBar.setVisibility(View.INVISIBLE);
 
-            Map<String, Object> options = new HashMap<>();
-            options.put("country", "US");
+            if (SpotifyStreamerApp.arrayOfTracks.size() == 0) {
+                _messageText.setText(R.string.listIsEmpty);
+                _messageText.setVisibility(View.VISIBLE);
+            } else {
+                _messageText.setVisibility(View.INVISIBLE);
+                _artistList.setVisibility(View.VISIBLE);
+            }
 
+            _adapter.notifyDataSetChanged();
+        }
+        return view;
+    }
+
+    public void getArtistTopTrack(String artistID) {
+        SpotifyApi api = new SpotifyApi();
+        SpotifyService spotify = api.getService();
+
+        Map<String, Object> options = new HashMap<>();
+        options.put("country", "US");
+
+        if (artistID.length() > 0) {
             spotify.getArtistTopTrack(artistID, options, new Callback<Tracks>() {
                 @Override
                 public void success(Tracks tracks, retrofit.client.Response response) {
@@ -109,18 +142,14 @@ public class ArtistTracksActivityFragment extends Fragment {
             });
         }
         else {
-            _progressBar.setVisibility(View.INVISIBLE);
-
-            if (SpotifyStreamerApp.arrayOfTracks.size() == 0) {
-                _messageText.setText(R.string.listIsEmpty);
-                _messageText.setVisibility(View.VISIBLE);
-            } else {
-                _messageText.setVisibility(View.INVISIBLE);
-                _artistList.setVisibility(View.VISIBLE);
-            }
-
-            _adapter.notifyDataSetChanged();
+            clearArtistTopTrack();
         }
-        return view;
+    }
+
+    public void clearArtistTopTrack() {
+        _messageText.setText(R.string.listIsEmpty);
+        _messageText.setVisibility(View.VISIBLE);
+
+        _adapter.notifyDataSetChanged();
     }
 }
