@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="book_background" type="color">#FF681000</item>
+    <item name="book_text" type="color">#FFDD9D68</item>
+</resources>

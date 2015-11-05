@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context=".JokeFragment"
+    android:background="@color/book_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/book_title"
+        android:id="@+id/textTitle"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:layout_gravity="center|right"
+        android:gravity="center"
+        android:textColor="@color/book_text" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textJoke"
+        android:layout_gravity="left|top"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/book_text"
+        android:password="false"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+</LinearLayout>

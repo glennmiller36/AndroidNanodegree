@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.udacity.gradle.builditbigger"
+        minSdkVersion 10
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors{
+        free {
+            applicationId "com.udacity.gradle.builditbigger.free"
+        }
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.paid"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Added for AdMob
+    compile project(':javajokes')
+    compile project(':androidjokes')
+    compile project(path: ':backend', configuration: 'android-endpoints')
+    compile 'com.android.support:appcompat-v7:22.1.0'
+    compile 'com.google.android.gms:play-services:8.1.0'
+    compile 'com.google.android.gms:play-services-ads:8.1.0'
+    compile 'com.google.android.gms:play-services-identity:8.1.0'
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
+}
+android {
+    defaultConfig {
+        multiDexEnabled = true
+    }
+}
+
+/**
+ * Launches the GCE local development server
+ */
+task deployGCE {
+    dependsOn ":backend:appengineRun"
+    doLast {
+        println ":backend:appengineRun done"
+    }
+}
+
+/**
+ * Runs all tests
+ */
+task runTests {
+    dependsOn ":app:connectedAndroidTest"
+    mustRunAfter deployGCE
+    doLast {
+        println ":app:connectedAndroidTest done"
+    }
+}
+
+/**
+ * Gradle task to deploy CGE local server, run all unit tests and then shut server down
+ */
+task runAppEngineAndTest(dependsOn: [":app:deployGCE", ":app:runTests"]) {
+    evaluationDependsOn ":backend"
+
+    // configure the task to run in daemon mode so that the build would continue
+    project(":backend") {
+        appengine {
+            daemon true
+        }
+    }
+    doLast {
+        println "runAppEngineAndTest done"
+    }
+}
+
+/**
+ * Shuts the server down again
+ */
+runAppEngineAndTest.finalizedBy ":backend:appengineStop"
