@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/palette-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="285506e1cf9d5a66878e2aab3884b3427f8734e9">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/classes-7e80010dbf92b68cb29ba33a02a85b5facbe0a06.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/1.1.0/d51280dbb4e8539f6c3f369d516edc26f9d89d31/okhttp-1.1.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d51280dbb4e8539f6c3f369d516edc26f9d89d31">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/okhttp-1.1.0-c47919e7ad578fe65f7f0674e1141effd48ef1bb.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/support-v13/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="def3eff2b7b4774d96ae15b07b3fc0111edbfe24">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-ba28b3fbe5f7ecb894a4c0d0b14ecaa17e407f2d.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2b92e9d421d856eca1cd4004f5cd578786285950.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/classes-b2098f2eaf8880e88489794695512064b348f06f.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="11842de6a309c447b3a3d60d73ad637a87c58994">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/classes-2a497f7b81039083542247073cb0a6c134d456a8.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/libs/volley.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c68094cbd011a3f9dccbfe16e77a2cf43622e277">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/volley-b79b00e3a430b4b84116f57c0faa429962ec5fa4.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/classes-60c14bd6093fe4ab749a8337bd805da3e8e82d0b.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c6d79137693d494dee16372d3921f919eb724ced">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/classes-d09bb3d0c5c1a2dd6ed5f70e661530199a2e4318.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-8a000d605b1ce1343db8c8cc27a41b73bc463459.jar" />
+    </item>
+    <item
+        jar="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/support-v13/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7f9cca1caa023a880b00c382bcc5c90245ae4895">
+        <dex dex="/Users/MillerMac/Documents/AndroidNanodegree/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/classes-dd9a6721340c9f031fe481907ccd48fa5d8588e9.jar" />
+    </item>
+
+</items>
