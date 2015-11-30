@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Wear</string>
+    <string name="app_name">Sunshine</string>
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
 </resources>

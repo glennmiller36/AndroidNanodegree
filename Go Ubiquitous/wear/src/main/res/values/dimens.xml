@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="watchface_time_text_size">40dp</dimen>
+    <dimen name="watchface_time_text_size_round">45dp</dimen>
+    <dimen name="am_pm_size">25dp</dimen>
+    <dimen name="am_pm_size_round">30dp</dimen>
+</resources>
