@@ -35,4 +35,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-wearable:7.3.0'
     compile 'com.google.android.apps.muzei:muzei-api:2.0'
     wearApp project(':wear')
+    compile project(':weathericonlibrary')
 }

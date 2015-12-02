@@ -1,10 +1,13 @@
 package com.example.android.sunshine.app;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +18,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.WindowInsets;
 
+import com.example.android.sunshine.weathericonlibrary.LibraryUtility;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -136,6 +140,7 @@ public class SunshineWatchFaceService extends CanvasWatchFaceService {
 
         String mWeatherHigh;
         String mWeatherLow;
+        Bitmap mWeatherIcon;
 
         int mInteractiveBackgroundColor = SunshineWatchFaceUtil.COLOR_VALUE_DEFAULT_AND_AMBIENT_BACKGROUND;
         int mInteractiveTimeDigitsColor = SunshineWatchFaceUtil.COLOR_VALUE_DEFAULT_AND_AMBIENT_TIME_DIGITS;
@@ -458,7 +463,7 @@ public class SunshineWatchFaceService extends CanvasWatchFaceService {
 //            }
 
             // Draw high and low temp if we have it
-            if (mWeatherHigh != null && mWeatherLow != null /* && mWeatherIcon != null*/) {
+            if (mWeatherHigh != null && mWeatherLow != null && mWeatherIcon != null) {
 
                 // High
                 canvas.drawText(
@@ -484,7 +489,7 @@ public class SunshineWatchFaceService extends CanvasWatchFaceService {
 //                    canvas.drawText(mWeatherHigh, xOffset, mWeatherYOffset, mTextTempHighPaint);
 //                    canvas.drawText(mWeatherLow, bounds.centerX() + (highTextLen / 2) + 20, mWeatherYOffset, mTextTempLowPaint);
 //                    float iconXOffset = bounds.centerX() - ((highTextLen / 2) + mWeatherIcon.getWidth() + 30);
-//                    canvas.drawBitmap(mWeatherIcon, iconXOffset, mWeatherYOffset - mWeatherIcon.getHeight(), null);
+                    canvas.drawBitmap(mWeatherIcon, 80/*iconXOffset*/, 220/*mWeatherYOffset - mWeatherIcon.getHeight()*/, null);
 //                }
             }
 
@@ -574,7 +579,13 @@ public class SunshineWatchFaceService extends CanvasWatchFaceService {
                     mWeatherLow = dataMap.getString("low");
                 }
 
-
+                if (dataMap.containsKey("weatherId")) {
+                    int weatherId = dataMap.getInt("weatherId");
+                    Drawable b = getResources().getDrawable(LibraryUtility.getIconResourceForWeatherCondition(weatherId));
+                    Bitmap icon = ((BitmapDrawable) b).getBitmap();
+                    float scaledWidth = 150; /*(18/*mTextTempHighPaint.getTextSize()*/// icon.getHeight()) * icon.getWidth();*/
+                    mWeatherIcon = Bitmap.createScaledBitmap(icon, (int) scaledWidth, (int) 150/*mTextTempHighPaint.getTextSize()*/, true);
+                }
                 //LOG  String contentText = String.format(context.getString(R.string.format_notification),
                 //        desc,
                 //        Utility.formatTemperature(context, high),

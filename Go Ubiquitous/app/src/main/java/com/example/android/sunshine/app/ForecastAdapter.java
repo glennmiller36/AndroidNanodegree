@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.android.sunshine.app.data.WeatherContract;
+import com.example.android.sunshine.weathericonlibrary.LibraryUtility;
 
 /**
  * {@link ForecastAdapter} exposes a list of weather forecasts
@@ -135,7 +136,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
                 useLongToday = true;
                 break;
             default:
-                defaultImage = Utility.getIconResourceForWeatherCondition(weatherId);
+                defaultImage = LibraryUtility.getIconResourceForWeatherCondition(weatherId);
                 useLongToday = false;
         }
 
