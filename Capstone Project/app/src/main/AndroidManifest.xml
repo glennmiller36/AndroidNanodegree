@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".activities.SubjectListActivity"
             android:label="@string/subjects"
@@ -21,6 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="@string/content_authority"
+            android:name=".data.StudiosityProvider"
+            android:exported="false"
+            android:syncable="true" />
+
     </application>
 
 </manifest>

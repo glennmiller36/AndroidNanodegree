@@ -10,7 +10,7 @@
         android:scaleType="centerCrop"/>
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/textSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
