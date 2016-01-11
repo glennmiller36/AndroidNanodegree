@@ -1,7 +1,9 @@
 package com.fluidminds.android.studiosity.fragments;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.activities.SubjectEditActivity;
 import com.fluidminds.android.studiosity.adapters.SubjectAdapter;
 import com.fluidminds.android.studiosity.data.DataContract;
 
@@ -52,6 +55,13 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
         mGridSubjects = (GridView) view.findViewById(R.id.gridSubjects);
         mGridSubjects.setAdapter(mSubjectAdapter);
 
+        FloatingActionButton fabAdd = (FloatingActionButton) view.findViewById(R.id.fabAdd);
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), SubjectEditActivity.class));
+            }
+        });
+
         return view;
     }
 
@@ -67,7 +77,7 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Sort order:  Ascending, by subject name.
-        String sortOrder = DataContract.SubjectEntry.COLUMN_SUBJECT + " ASC";
+        String sortOrder = DataContract.SubjectEntry.COLUMN_SUBJECT + " COLLATE NOCASE ASC";
 
         return new CursorLoader(getActivity(),
                 DataContract.SubjectEntry.CONTENT_URI,

@@ -23,6 +23,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activities.SubjectEditActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <provider
             android:authorities="@string/content_authority"
             android:name=".data.StudiosityProvider"

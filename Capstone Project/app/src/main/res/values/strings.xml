@@ -4,4 +4,7 @@
     <string name="subjects">Subjects</string>
     <string name="no_subjects">No Subjects</string>
     <string name="content_authority">com.fluidminds.android.studiosity</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="select_color">Select a Color</string>
 </resources>

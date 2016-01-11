@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.SubjectListActivity">
+    tools:context=".activities.SubjectEditActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,18 +17,14 @@
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+            <!-- Include our custom Toolbar -->
+            <include layout="@layout/toolbar_canceldone" />
 
         </android.support.design.widget.AppBarLayout>
 
         <fragment
-            android:name="com.fluidminds.android.studiosity.fragments.SubjectListFragment"
-            android:id="@+id/fragSubjectList"
+            android:name="com.fluidminds.android.studiosity.fragments.SubjectEditFragment"
+            android:id="@+id/fragSubjectEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
