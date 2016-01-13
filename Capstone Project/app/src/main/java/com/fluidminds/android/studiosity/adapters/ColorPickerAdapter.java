@@ -80,6 +80,8 @@ public class ColorPickerAdapter extends ArrayAdapter<Integer> {
                 viewHolder.fabColor.setImageResource(R.drawable.ic_check_white_24dp);
             }
         }
+        else
+            viewHolder.fabColor.setImageResource(0);
 
         return row;
     }

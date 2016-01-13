@@ -1,5 +1,6 @@
 package com.fluidminds.android.studiosity.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fluidminds.android.studiosity.R;
@@ -36,6 +39,13 @@ public class SubjectEditFragment extends Fragment implements ColorPickerDialogFr
                 ColorPickerDialogFragment dialogFragment = new ColorPickerDialogFragment();
                 dialogFragment.setTargetFragment(targetFragment, 0);
                 dialogFragment.show(fm, "SubjectEditFragment");
+            }
+        });
+
+        ImageButton circle = (ImageButton) view.findViewById(R.id.circle);
+        circle.setColorFilter(Color.argb(255, 255, 255, 255)); // White Tint
+        circle.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
             }
         });
 

@@ -32,7 +32,7 @@ public class ColorPickerDialogFragment extends DialogFragment implements GridVie
         getDialog().setTitle(R.string.select_color);
 
         // convert supported colors TypedArray to Integer[]
-        TypedArray ta = getResources().obtainTypedArray(R.array.colors);
+        TypedArray ta = getResources().obtainTypedArray(R.array.color500);
         Integer[] colors = new Integer[ta.length()];
         for (int i = 0; i < ta.length(); i++) {
             colors[i] = ta.getColor(i, 0);
