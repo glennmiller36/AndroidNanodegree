@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.graphics.ColorUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.utils.ThemeColor;
 
 /**
  * ColorPickerAdapter exposes a list of colors
@@ -74,10 +74,10 @@ public class ColorPickerAdapter extends ArrayAdapter<Integer> {
 
         if (mSelectedColor == color) {
             // determine the appropriate checkmark color to show that contrasts the color
-            if (ColorUtils.calculateLuminance(color) > 0.250) {
-                viewHolder.fabColor.setImageResource(R.drawable.ic_check_black_24dp);
-            } else {
+            if (ThemeColor.isWhiteContrastColor(color)) {
                 viewHolder.fabColor.setImageResource(R.drawable.ic_check_white_24dp);
+            } else {
+                viewHolder.fabColor.setImageResource(R.drawable.ic_check_black_24dp);
             }
         }
         else
