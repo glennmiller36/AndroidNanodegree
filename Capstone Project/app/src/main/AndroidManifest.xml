@@ -4,6 +4,7 @@
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +26,8 @@
 
         <activity
             android:name=".activities.SubjectEditActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
         </activity>
 
         <provider

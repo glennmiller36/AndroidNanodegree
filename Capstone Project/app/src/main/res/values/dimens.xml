@@ -3,4 +3,15 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Detail View -->
+    <dimen name="content_spacer_height">72dp</dimen>
+    <dimen name="content_margin_left">72dp</dimen>
+    <dimen name="screen_edge_margin">16dp</dimen>
+    <dimen name="edittext_margin_left">68dp</dimen>
+    <dimen name="avatar_margin">0dp</dimen>
+    <dimen name="avatar_size">40dp</dimen>
+    <dimen name="detail_item_height">72dp</dimen>
+    <dimen name="space_between_fields">16dp</dimen>
+    <dimen name="textview_label_padding_bottom">4dp</dimen>
 </resources>
