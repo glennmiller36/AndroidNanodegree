@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.fragments.SubjectListFragment;
+import com.fluidminds.android.studiosity.models.SubjectModel;
 
 /**
  * SubjectAdapter exposes a list of school subjects
@@ -59,5 +60,17 @@ public class SubjectAdapter extends CursorAdapter {
     @Override
     public int getViewTypeCount() {
         return VIEW_TYPE_COUNT;
+    }
+
+    public SubjectModel get(int position) {
+        Cursor cursor = getCursor();
+
+        SubjectModel model = new SubjectModel();
+        model.setId(cursor.getLong(SubjectListFragment.COL_ID));
+        model.setSubject(cursor.getString(SubjectListFragment.COL_SUBJECT));
+        model.setColorInt(cursor.getInt(SubjectListFragment.COL_COLOR));
+        model.MarkAsOld();
+
+        return model;
     }
 }

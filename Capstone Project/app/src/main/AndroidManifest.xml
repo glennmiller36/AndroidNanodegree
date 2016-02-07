@@ -2,9 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fluidminds.android.studiosity">
 
+    <uses-sdk
+        android:minSdkVersion="5"
+        android:targetSdkVersion="18" />
+
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="18" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +19,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activities.SubjectListActivity"
             android:label="@string/subjects"
@@ -23,19 +29,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.SubjectEditActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <provider
-            android:authorities="@string/content_authority"
             android:name=".data.StudiosityProvider"
+            android:authorities="@string/content_authority"
             android:exported="false"
             android:syncable="true" />
 
+        <activity
+            android:name=".activities.SubjectCardsActivity"
+            android:label="@string/title_activity_subject_cards"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
