@@ -26,11 +26,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
         // Create a table to hold Subjects.
         final String SQL_CREATE_SUBJECT_TABLE = "CREATE TABLE " + SubjectEntry.TABLE_NAME + " (" +
                 SubjectEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                SubjectEntry.COLUMN_SUBJECT + " TEXT NOT NULL " +
+                SubjectEntry.COLUMN_SUBJECT + " TEXT NOT NULL UNIQUE, " +
+                SubjectEntry.COLUMN_COLOR + " INTEGER NOT NULL " +
                 " );";
         sqLiteDatabase.execSQL(SQL_CREATE_SUBJECT_TABLE);
 
@@ -42,13 +42,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void seedData(SQLiteDatabase sqLiteDatabase) {
-
         // Subjects
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject) VALUES ('Computers')");
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject) VALUES ('Chemistry')");
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject) VALUES ('Science')");
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject) VALUES ('Social Studies')");
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject) VALUES ('U.S. Geography')");
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject) VALUES ('abcdefghijklmnopqrstuvwxyz')");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject, Color) VALUES ('Computers', -769226)");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject, Color) VALUES ('Chemistry', -1499549)");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject, Color) VALUES ('Science', -6543440)");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject, Color) VALUES ('Social Studies', -10011977)");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject, Color) VALUES ('U.S. Geography', -12627531)");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Subject, Color) VALUES ('abcdefghijklmnopqrstuvwxyz', -14575885)");
     }
 }

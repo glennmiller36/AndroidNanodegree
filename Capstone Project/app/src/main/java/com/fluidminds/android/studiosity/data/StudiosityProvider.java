@@ -1,6 +1,5 @@
 package com.fluidminds.android.studiosity.data;
 
-import android.annotation.TargetApi;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -19,7 +18,8 @@ public class StudiosityProvider extends ContentProvider {
     // The URI Matcher used by this content provider.
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
-    static final int SUBJECT = 100;
+    static final int SUBJECTS = 100;
+    static final int SUBJECT_ID = 101;
 
     /**
      * UriMatcher will match each integer constants defined above.
@@ -30,7 +30,9 @@ public class StudiosityProvider extends ContentProvider {
         final String authority = DataContract.CONTENT_AUTHORITY;
 
         // For each type of URI you want to add, create a corresponding code.
-        matcher.addURI(authority, DataContract.PATH_SUBJECT, SUBJECT);
+        matcher.addURI(authority, DataContract.PATH_SUBJECT, SUBJECTS);
+        matcher.addURI(authority, DataContract.PATH_SUBJECT + "/#", SUBJECT_ID);
+
         return matcher;
     }
 
@@ -53,9 +55,18 @@ public class StudiosityProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
 
         switch (match) {
-            // Student: Uncomment and fill out these two cases
-            case SUBJECT:
-                return DataContract.SubjectEntry.CONTENT_TYPE;
+            /**
+             * Get all Subject records
+             */
+            case SUBJECTS:
+                return DataContract.SubjectEntry.CONTENT_LIST_TYPE;
+
+            /**
+             * Get a particular Subject
+             */
+            case SUBJECT_ID:
+                return DataContract.SubjectEntry.CONTENT_ITEM_TYPE;
+
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -71,12 +82,25 @@ public class StudiosityProvider extends ContentProvider {
         // and query the database accordingly.
         Cursor retCursor;
         switch (sUriMatcher.match(uri)) {
-            // "subject"
-            case SUBJECT: {
+
+            case SUBJECTS: {
                 retCursor = mDatabase.getReadableDatabase().query(
                         DataContract.SubjectEntry.TABLE_NAME,
                         projection,
                         selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+
+            case SUBJECT_ID: {
+                retCursor = mDatabase.getReadableDatabase().query(
+                        DataContract.SubjectEntry.TABLE_NAME,
+                        projection,
+                        DataContract.SubjectEntry._ID + " = " + uri.getLastPathSegment(),
                         selectionArgs,
                         null,
                         null,
@@ -99,15 +123,11 @@ public class StudiosityProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         final SQLiteDatabase db = mDatabase.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
-        Uri returnUri;
+        Uri returnUri = null;
 
         switch (match) {
-            case SUBJECT: {
-                long _id = db.insert(DataContract.SubjectEntry.TABLE_NAME, null, values);
-                if ( _id > 0 )
-                    returnUri = DataContract.SubjectEntry.buildLocationUri(_id);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
+            case SUBJECT_ID: {
+                db.insertOrThrow(DataContract.SubjectEntry.TABLE_NAME, null, values);
                 break;
             }
             default:
@@ -128,7 +148,7 @@ public class StudiosityProvider extends ContentProvider {
         // this makes delete all rows return the number of rows deleted
         if ( null == selection ) selection = "1";
         switch (match) {
-            case SUBJECT:
+            case SUBJECT_ID:
                 rowsDeleted = db.delete(
                         DataContract.SubjectEntry.TABLE_NAME, selection, selectionArgs);
                 break;
@@ -152,8 +172,8 @@ public class StudiosityProvider extends ContentProvider {
         int rowsUpdated;
 
         switch (match) {
-            case SUBJECT:
-                rowsUpdated = db.update(DataContract.SubjectEntry.TABLE_NAME, values, selection,
+            case SUBJECT_ID:
+                rowsUpdated = db.update(DataContract.SubjectEntry.TABLE_NAME, values, DataContract.SubjectEntry._ID + " = " + uri.getLastPathSegment(),
                         selectionArgs);
                 break;
             default:
@@ -163,15 +183,5 @@ public class StudiosityProvider extends ContentProvider {
             getContext().getContentResolver().notifyChange(uri, null);
         }
         return rowsUpdated;
-    }
-
-    // You do not need to call this method. This is a method specifically to assist the testing
-    // framework in running smoothly. You can read more at:
-    // http://developer.android.com/reference/android/content/ContentProvider.html#shutdown()
-    @Override
-    @TargetApi(11)
-    public void shutdown() {
-        mDatabase.close();
-        super.shutdown();
     }
 }
