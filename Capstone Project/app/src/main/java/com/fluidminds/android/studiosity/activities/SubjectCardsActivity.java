@@ -46,7 +46,7 @@ public class SubjectCardsActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_subject_edit, menu);
+        getMenuInflater().inflate(R.menu.menu_subject_cards, menu);
         mMenu = menu;
 
         colorizeToolbar(getIntent().getIntExtra("color", 0));
