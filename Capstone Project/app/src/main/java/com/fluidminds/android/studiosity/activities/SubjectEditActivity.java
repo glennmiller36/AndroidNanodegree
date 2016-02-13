@@ -1,17 +1,19 @@
 package com.fluidminds.android.studiosity.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.eventbus.ThemeColorChangedEvent;
+
+import org.greenrobot.eventbus.Subscribe;
 
 /**
  * An activity to Add or Edit an individual school Subject.
  */
-public class SubjectEditActivity extends AppCompatActivity {
+public class SubjectEditActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +21,30 @@ public class SubjectEditActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_subject_edit);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        // Register as a subscriber
+        mEventBus.register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        // Unregister
+        mEventBus.unregister(this);
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_subject_edit, menu);
+        mMenu = menu;
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -32,5 +56,10 @@ public class SubjectEditActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Subscribe
+    public void onEvent(ThemeColorChangedEvent event){
+        colorizeToolbar(event.getColor());
     }
 }

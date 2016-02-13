@@ -11,12 +11,15 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.activities.SubjectCardsActivity;
 import com.fluidminds.android.studiosity.activities.SubjectEditActivity;
 import com.fluidminds.android.studiosity.adapters.SubjectAdapter;
 import com.fluidminds.android.studiosity.data.DataContract;
+import com.fluidminds.android.studiosity.models.SubjectModel;
 
 /**
  * A fragment representing the list of school Subjects.
@@ -31,12 +34,14 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
 
     private static final String[] SUBJECT_COLUMNS = {
             DataContract.SubjectEntry.TABLE_NAME + "." + DataContract.SubjectEntry._ID,
-            DataContract.SubjectEntry.COLUMN_SUBJECT
+            DataContract.SubjectEntry.COLUMN_SUBJECT,
+            DataContract.SubjectEntry.COLUMN_COLOR
     };
 
     // These indices are tied to SUBJECT_COLUMNS.
-    static final int COL_ID = 0;
+    public static final int COL_ID = 0;
     public static final int COL_SUBJECT = 1;
+    public static final int COL_COLOR = 2;
 
     public SubjectListFragment() {
         // Required empty public constructor
@@ -55,10 +60,27 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
         mGridSubjects = (GridView) view.findViewById(R.id.gridSubjects);
         mGridSubjects.setAdapter(mSubjectAdapter);
 
+        mGridSubjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Intent intent = new Intent(getContext(), SubjectCardsActivity.class);
+
+                SubjectModel model = mSubjectAdapter.get(position);
+                intent.putExtra("id", model.getId());
+                intent.putExtra("name", model.getSubject());
+                intent.putExtra("color", model.getColorInt());
+
+                startActivity(intent);
+            }
+        });
+
         FloatingActionButton fabAdd = (FloatingActionButton) view.findViewById(R.id.fabAdd);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), SubjectEditActivity.class));
+                Intent intent = new Intent(getContext(), SubjectEditActivity.class);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // open activity without save into the stack
+
+                startActivity(intent);
             }
         });
 

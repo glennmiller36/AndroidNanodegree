@@ -1,6 +1,5 @@
 package com.fluidminds.android.studiosity.fragments;
 
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -12,6 +11,9 @@ import android.widget.GridView;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.adapters.ColorPickerAdapter;
+import com.fluidminds.android.studiosity.utils.ThemeColor;
+
+import java.util.LinkedHashMap;
 
 /**
  * A Color Picker dialog.
@@ -31,13 +33,14 @@ public class ColorPickerDialogFragment extends DialogFragment implements GridVie
         View rootView = inflater.inflate(R.layout.fragment_colorpicker_dialog, container, false);
         getDialog().setTitle(R.string.select_color);
 
-        // convert supported colors TypedArray to Integer[]
-        TypedArray ta = getResources().obtainTypedArray(R.array.color500);
-        Integer[] colors = new Integer[ta.length()];
-        for (int i = 0; i < ta.length(); i++) {
-            colors[i] = ta.getColor(i, 0);
+        LinkedHashMap<Integer, String> colorList = ThemeColor.getColor500List();
+        Integer[] colors = new Integer[colorList.size()];
+        int i = 0;
+        for (Integer key : colorList.keySet()) {
+            colors[i] = key;
+            i++;
         }
-        ta.recycle();
+
 
         Integer intvalue = Color.parseColor("#009688");
         mAdapter = new ColorPickerAdapter(this.getActivity(),
