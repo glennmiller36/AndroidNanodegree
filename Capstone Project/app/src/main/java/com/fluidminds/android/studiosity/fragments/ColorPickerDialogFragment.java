@@ -1,6 +1,5 @@
 package com.fluidminds.android.studiosity.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -20,11 +19,15 @@ import java.util.LinkedHashMap;
  */
 public class ColorPickerDialogFragment extends DialogFragment implements GridView.OnItemClickListener {
 
+    private Integer mInitialColor;
     private ColorPickerAdapter mAdapter;
-    private OnColorPickerDialogListener mCallback;
 
     public interface OnColorPickerDialogListener {
         public void onColorSelected(int color);
+    }
+
+    public void setInitialColor(Integer color) {
+        mInitialColor = color;
     }
 
     @Override
@@ -41,10 +44,8 @@ public class ColorPickerDialogFragment extends DialogFragment implements GridVie
             i++;
         }
 
-
-        Integer intvalue = Color.parseColor("#009688");
         mAdapter = new ColorPickerAdapter(this.getActivity(),
-                R.layout.grid_item_color, colors, intvalue);
+                R.layout.grid_item_color, colors, mInitialColor);
 
         GridView gridView = (GridView) rootView.findViewById(R.id.gridColors);
         gridView.setAdapter( mAdapter);
