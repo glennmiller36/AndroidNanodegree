@@ -6,7 +6,6 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
@@ -62,14 +61,17 @@ public class SubjectAdapter extends CursorAdapter {
         return VIEW_TYPE_COUNT;
     }
 
+    /**
+     * Return strongly typed business object for the cursor.
+     */
     public SubjectModel get(int position) {
         Cursor cursor = getCursor();
 
-        SubjectModel model = new SubjectModel();
-        model.setId(cursor.getLong(SubjectListFragment.COL_ID));
-        model.setSubject(cursor.getString(SubjectListFragment.COL_SUBJECT));
-        model.setColorInt(cursor.getInt(SubjectListFragment.COL_COLOR));
-        model.MarkAsOld();
+        SubjectModel model = new SubjectModel(
+            cursor.getLong(SubjectListFragment.COL_ID),
+            cursor.getString(SubjectListFragment.COL_SUBJECT),
+            cursor.getInt(SubjectListFragment.COL_COLOR)
+        );
 
         return model;
     }

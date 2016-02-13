@@ -5,6 +5,8 @@
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="select_color">Select a Color</string>
+    <string name="required">Required</string>
+    <string name="duplicate_name">Duplicate Name</string>
 
     <!-- Subjects -->
     <string name="subjects">Subjects</string>
@@ -12,4 +14,5 @@
     <string name="subject_name">Subject Name</string>
     <string name="subject">Subject</string>
     <string name="theme_color">Theme Color</string>
+    <string name="title_activity_subject_cards">SubjectCardsActivity</string>
 </resources>

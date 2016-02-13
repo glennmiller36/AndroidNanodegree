@@ -1,53 +1,111 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activities.SubjectEditFragment">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="viewModel" type="com.fluidminds.android.studiosity.viewmodels.SubjectViewModel"/>
+    </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal|top">
+        android:orientation="vertical">
 
-        <EditText
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/content_spacer_height"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_margin_left"
+            android:layout_marginLeft="@dimen/content_margin_left"
+            android:layout_marginEnd="@dimen/screen_edge_margin"
+            android:layout_marginRight="@dimen/screen_edge_margin"
+            android:text="@string/subject_name"
+            android:textAppearance="?android:attr/textAppearance"
+            android:textAllCaps="true"
+            android:textColor="@color/textColorSecondary"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:layout_gravity="center_horizontal"
-            android:hint="Subject" />
+            android:layout_marginStart="@dimen/edittext_margin_left"
+            android:layout_marginLeft="@dimen/edittext_margin_left"
+            android:layout_marginEnd="@dimen/screen_edge_margin"
+            android:layout_marginRight="@dimen/screen_edge_margin" >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:addTextChangedListener="@{viewModel.onSubjectChanged}"
+                android:ellipsize="end"
+                android:hint="@string/subject"
+                android:singleLine="true"
+                android:text="@{viewModel.Model.Subject}"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
 
-        <EditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_margin_left"
+            android:layout_marginLeft="@dimen/content_margin_left"
+            android:layout_marginEnd="@dimen/screen_edge_margin"
+            android:layout_marginRight="@dimen/screen_edge_margin"
+            android:text="@{viewModel.SubjectError}"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/red500" />
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText1"
-            android:layout_gravity="center_horizontal"
-            android:hint="Subject" />
+            android:layout_height="@dimen/space_between_fields"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button"
-            android:src="@drawable/circle"/>
+        <LinearLayout
+            android:id="@+id/themeColor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_item_height"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/screen_edge_margin"
+            android:layout_marginRight="@dimen/screen_edge_margin"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/screen_edge_margin"
+            android:paddingLeft="@dimen/screen_edge_margin" >
 
-        <ImageButton
-            android:id="@+id/circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/circle"
-            android:clickable="false" />
+            <View
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/avatar_margin"
+                android:layout_marginLeft="@dimen/avatar_margin"
+                android:layout_marginEnd="@dimen/avatar_margin"
+                android:layout_marginRight="@dimen/avatar_margin"
+                android:background="@{viewModel.ColorInt}"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_add_white_24dp" />
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/screen_edge_margin"
+                android:layout_marginStart="@dimen/screen_edge_margin"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/textview_label_padding_bottom"
+                    android:text="@string/theme_color"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/textColorSecondary" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:text="@{viewModel.ColorName}"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:singleLine="true" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
-</FrameLayout>
+</layout>
