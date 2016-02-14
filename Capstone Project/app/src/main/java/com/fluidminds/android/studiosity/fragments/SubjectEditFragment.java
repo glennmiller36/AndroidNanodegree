@@ -1,14 +1,11 @@
 package com.fluidminds.android.studiosity.fragments;
 
-import android.database.Cursor;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +13,6 @@ import android.widget.LinearLayout;
 
 import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
-import com.fluidminds.android.studiosity.data.DataContract;
 import com.fluidminds.android.studiosity.eventbus.ThemeColorChangedEvent;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 import com.fluidminds.android.studiosity.viewmodels.SubjectViewModel;
@@ -26,7 +22,7 @@ import org.greenrobot.eventbus.EventBus;
 /**
  * A fragment to Add or Edit an individual school Subject.
  */
-public class SubjectEditFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, ColorPickerDialogFragment.OnColorPickerDialogListener {
+public class SubjectEditFragment extends Fragment implements ColorPickerDialogFragment.OnColorPickerDialogListener {
 
     private ViewDataBinding mBinding;
     private SubjectViewModel mViewModel;
@@ -52,7 +48,11 @@ public class SubjectEditFragment extends Fragment implements LoaderManager.Loade
 
         // mViewModel not null on orientation change
         if (mViewModel == null) {
-            mViewModel = new SubjectViewModel(new SubjectModel());
+            Intent intent = getActivity().getIntent();
+
+            SubjectModel model = intent.getParcelableExtra("subjectmodel");
+
+            mViewModel = new SubjectViewModel(model);
         }
 
         mBinding.setVariable(BR.viewModel, mViewModel);
@@ -78,55 +78,8 @@ public class SubjectEditFragment extends Fragment implements LoaderManager.Loade
     }
 
     /**
-     * Called when a new Loader needs to be created.
+     * ColorPickerDialogFragment.OnColorPickerDialogListener
      */
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-
-        // Define the columns to retrieve
-        String[] projectionFields = new String[] {
-                DataContract.SubjectEntry.TABLE_NAME + "." + DataContract.SubjectEntry._ID,
-                DataContract.SubjectEntry.COLUMN_SUBJECT,
-                DataContract.SubjectEntry.COLUMN_COLOR
-        };
-
-        return new CursorLoader(getActivity(),
-                DataContract.SubjectEntry.buildItemUri(1),  // URI
-                projectionFields,   // projection fields
-                null,   // the selection criteria
-                null,   // the selection args
-                null    // the sort order
-        );
-    }
-
-    /**
-     * Fetch existing Subject record.
-     */
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if (data != null) {
-            data.moveToFirst();
-
-            SubjectModel model = new SubjectModel(
-                data.getLong(0),
-                data.getString(1),
-                data.getInt(2)
-            );
-
-            mViewModel.setModel(model);
-            mBinding.invalidateAll(); // refresh View
-        }
-    }
-
-    /**
-     * This is called when the last Cursor provided to onLoadFinished()
-     * above is about to be closed.  We need to make sure we are no
-     * longer using it.
-     */
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-    }
-
     @Override
     public void onColorSelected(int color) {
         mViewModel.setColorInt(color);
@@ -134,5 +87,12 @@ public class SubjectEditFragment extends Fragment implements LoaderManager.Loade
         // Post the event
         EventBus bus = EventBus.getDefault();
         bus.post(new ThemeColorChangedEvent(color));
+    }
+
+    /**
+     * Called from the Activity when user clicks Done button.
+     */
+    public SubjectModel Save() {
+        return mViewModel.getModel().Save();
     }
 }

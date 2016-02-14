@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.eventbus.ThemeColorChangedEvent;
+import com.fluidminds.android.studiosity.models.SubjectModel;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -16,11 +17,16 @@ import org.greenrobot.eventbus.Subscribe;
  */
 public class SubjectCardsActivity extends BaseActivity {
 
+    private SubjectModel mSubjectModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_subject_cards);
+
+        Intent intent = getIntent();
+        mSubjectModel = intent.getParcelableExtra("subjectmodel");
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
@@ -28,9 +34,7 @@ public class SubjectCardsActivity extends BaseActivity {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            Intent intent = getIntent();
-            String subject = intent.getStringExtra("name");
-            getSupportActionBar().setTitle(subject);
+            getSupportActionBar().setTitle(mSubjectModel.getSubject());
         }
 
         // Register as a subscriber
@@ -59,6 +63,12 @@ public class SubjectCardsActivity extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                return true;
+            case android.R.id.edit:
+                Intent intent = new Intent(this, SubjectEditActivity.class);
+                intent.putExtra("subjectmodel", mSubjectModel);
+
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

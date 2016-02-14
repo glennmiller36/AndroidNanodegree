@@ -21,6 +21,8 @@ import com.fluidminds.android.studiosity.adapters.SubjectAdapter;
 import com.fluidminds.android.studiosity.data.DataContract;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 
+import javax.security.auth.Subject;
+
 /**
  * A fragment representing the list of school Subjects.
  */
@@ -66,9 +68,7 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
                 Intent intent = new Intent(getContext(), SubjectCardsActivity.class);
 
                 SubjectModel model = mSubjectAdapter.get(position);
-                intent.putExtra("id", model.getId());
-                intent.putExtra("name", model.getSubject());
-                intent.putExtra("color", model.getColorInt());
+                intent.putExtra("subjectmodel", model);
 
                 startActivity(intent);
             }
@@ -79,6 +79,7 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SubjectEditActivity.class);
                 intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // open activity without save into the stack
+                intent.putExtra("subjectmodel", new SubjectModel());
 
                 startActivity(intent);
             }

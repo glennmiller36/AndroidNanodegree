@@ -1,27 +1,12 @@
 package com.fluidminds.android.studiosity.fragments;
 
-import android.database.Cursor;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
-import com.fluidminds.android.studiosity.data.DataContract;
-import com.fluidminds.android.studiosity.eventbus.ThemeColorChangedEvent;
-import com.fluidminds.android.studiosity.models.SubjectModel;
-import com.fluidminds.android.studiosity.viewmodels.SubjectViewModel;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * A fragment to display Flashcards for the requested Subject.
