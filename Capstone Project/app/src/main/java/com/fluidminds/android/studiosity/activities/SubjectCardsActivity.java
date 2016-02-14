@@ -1,5 +1,7 @@
 package com.fluidminds.android.studiosity.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -69,6 +71,29 @@ public class SubjectCardsActivity extends BaseActivity {
                 intent.putExtra("subjectmodel", mSubjectModel);
 
                 startActivity(intent);
+                return true;
+            case R.id.action_delete:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.alert_delete_title)
+                        .setMessage(String.format(getString(R.string.delete_subject), mSubjectModel.getSubject()))
+                        .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                int rowsDeleted = mSubjectModel.delete();
+                                if (rowsDeleted == 1)
+                                    finish();
+                                else {
+                                    dialogInterface.dismiss();
+                                }
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                builder.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -10,6 +10,8 @@ import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.data.DataContract;
 import com.fluidminds.android.studiosity.utils.ThemeColor;
 
+import java.security.Provider;
+
 /**
  * A POJO Model representing a Subject.
  */
@@ -79,7 +81,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
     /**
      * Commit the changes to the database.
      */
-    public SubjectModel Save() {
+    public SubjectModel save() {
 
         if (!isValid())
             return null;
@@ -125,7 +127,28 @@ public class SubjectModel extends BaseModel implements Parcelable {
         return null;
     }
 
-    /** Used to give additional hints on how to process the received parcel.*/
+    /**
+     * Delete the Subject and child Cards from the database.
+     */
+    public int delete() {
+        try {
+            return StudiosityApp.getInstance().getContentResolver().delete(DataContract.SubjectEntry.buildItemUri(getId()), DataContract.SubjectEntry._ID + " = " + mId, null);
+        } catch (Exception e) {
+            //for (BusinessRule rule: getBusinessRules()) {
+            //    if (rule.getRuleName().equals("noduplicate")) {
+            //        // the rule is broken
+            //        if (!getBrokenRules().contains(rule)) {
+            //           getBrokenRules().add(rule);
+            //           notifyListeners(this, "subject", "", rule.getErrorMessage());
+            //       }
+            //   }
+            //}
+            // ELSE generic fail msg
+        }
+        return 0;
+    }
+
+        /** Used to give additional hints on how to process the received parcel.*/
     @Override
     public int describeContents() {
         return 0;
