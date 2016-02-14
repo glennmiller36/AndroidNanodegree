@@ -3,6 +3,7 @@ package com.fluidminds.android.studiosity.utils;
 import android.support.v4.graphics.ColorUtils;
 
 import java.util.LinkedHashMap;
+import java.util.Random;
 
 /**
  * The ThemeColor class defines methods for showing available colors and converting color ints to literal name.
@@ -30,6 +31,8 @@ public class ThemeColor {
     public static final int BLUEGREY    = 0xFF607D8B;
 
     private static final LinkedHashMap<Integer, String> sColorNameMap;
+
+    private static Random sRandom  = new Random();
 
     static {
         sColorNameMap = new LinkedHashMap<>();
@@ -76,5 +79,17 @@ public class ThemeColor {
             return false; // use black
         else
             return true;  // use white
+    }
+
+    /**
+     * Generate a random color for a new SubjectModel.
+     */
+    public static Integer generateRandomColor() {
+        int min = 0;
+        int max = getColor500List().size();
+
+        int random = sRandom.nextInt(max - min) + min;
+
+        return (Integer) sColorNameMap.keySet().toArray()[random];
     }
 }

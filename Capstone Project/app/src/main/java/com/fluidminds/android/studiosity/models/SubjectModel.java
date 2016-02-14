@@ -20,6 +20,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
     private Integer mColorInt = 0;
 
     public SubjectModel() {
+        mColorInt = ThemeColor.generateRandomColor();
         markAsNew();
     }
 
@@ -109,8 +110,6 @@ public class SubjectModel extends BaseModel implements Parcelable {
                 return (rowsUpdated == 1) ? this : null;
             }
         } catch (SQLiteConstraintException e) {
-
-            String glenn = e.getMessage();
             //for (BusinessRule rule: getBusinessRules()) {
             //    if (rule.getRuleName().equals("noduplicate")) {
             //        // the rule is broken
@@ -120,6 +119,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
              //       }
              //   }
             //}
+            // ELSE generic fail msg
         }
 
         return null;
@@ -136,6 +136,10 @@ public class SubjectModel extends BaseModel implements Parcelable {
         parcel.writeLong(getId());
         parcel.writeString(getSubject());
         parcel.writeInt(getColorInt());
+
+        // base fields
+        parcel.writeByte((byte) (getIsDirty() ? 1 : 0));   //if mIsDirty == true, byte == 1
+        parcel.writeByte((byte) (getIsNew() ? 1 : 0));     //if mIsNew == true, byte == 1
     }
 
     /** Static field used to regenerate object, individually or as arrays */
@@ -154,6 +158,10 @@ public class SubjectModel extends BaseModel implements Parcelable {
         mSubject = parcel.readString();
         mColorInt = parcel.readInt();
 
-        markAsOld();
+        // base fields
+        if (parcel.readByte() != 0)
+             markDirty();   //mIsDirty == true if byte != 0
+        if (parcel.readByte() != 0)
+            markAsNew();    //mIsNew == true if byte != 0
     }
 }

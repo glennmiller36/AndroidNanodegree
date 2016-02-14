@@ -1,6 +1,7 @@
 package com.fluidminds.android.studiosity.data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -123,18 +124,24 @@ public class StudiosityProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         final SQLiteDatabase db = mDatabase.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
-        Uri returnUri = null;
+        long rowID = 0;
 
         switch (match) {
             case SUBJECT_ID: {
-                db.insertOrThrow(DataContract.SubjectEntry.TABLE_NAME, null, values);
+                rowID = db.insertOrThrow(DataContract.SubjectEntry.TABLE_NAME, null, values);
                 break;
             }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
-        getContext().getContentResolver().notifyChange(returnUri, null);
-        return returnUri;
+
+        if (rowID > 0)
+        {
+            Uri returnUri = ContentUris.withAppendedId(DataContract.SubjectEntry.CONTENT_URI, rowID);
+            getContext().getContentResolver().notifyChange(returnUri, null);
+            return returnUri;
+        }
+        return null;
     }
 
     /**
