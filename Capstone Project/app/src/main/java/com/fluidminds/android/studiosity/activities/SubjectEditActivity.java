@@ -8,11 +8,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.fluidminds.android.studiosity.R;
-import com.fluidminds.android.studiosity.eventbus.ThemeColorChangedEvent;
 import com.fluidminds.android.studiosity.fragments.SubjectEditFragment;
 import com.fluidminds.android.studiosity.models.SubjectModel;
-
-import org.greenrobot.eventbus.Subscribe;
 
 /**
  * An activity to Add or Edit an individual school Subject.
@@ -62,16 +59,6 @@ public class SubjectEditActivity extends BaseActivity {
                 }
             }
         });
-
-        // Register as a subscriber
-        mEventBus.register(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        // Unregister
-        mEventBus.unregister(this);
-        super.onDestroy();
     }
 
     @Override
@@ -83,10 +70,5 @@ public class SubjectEditActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Subscribe
-    public void onEvent(ThemeColorChangedEvent event){
-        colorizeToolbar(event.getColor());
     }
 }

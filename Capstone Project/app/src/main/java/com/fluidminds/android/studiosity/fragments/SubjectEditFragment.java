@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.activities.BaseActivity;
 import com.fluidminds.android.studiosity.eventbus.ThemeColorChangedEvent;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 import com.fluidminds.android.studiosity.viewmodels.SubjectViewModel;
@@ -35,6 +38,10 @@ public class SubjectEditFragment extends Fragment implements ColorPickerDialogFr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // This fragment really doesn't have a fragment menu but it's an
+        // opportunity to color the toolbar after the Activity menu is loaded
+        setHasOptionsMenu(true);
 
         // retain this fragment
         setRetainInstance(true);
@@ -77,6 +84,15 @@ public class SubjectEditFragment extends Fragment implements ColorPickerDialogFr
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        // color toolbar based on model Theme Color
+        if(mViewModel != null)
+            ((BaseActivity) getActivity()).colorizeToolbar(mViewModel.getColorInt());
+    }
+
     /**
      * ColorPickerDialogFragment.OnColorPickerDialogListener
      */
@@ -84,15 +100,21 @@ public class SubjectEditFragment extends Fragment implements ColorPickerDialogFr
     public void onColorSelected(int color) {
         mViewModel.setColorInt(color);
 
-        // Post the event
-        EventBus bus = EventBus.getDefault();
-        bus.post(new ThemeColorChangedEvent(color));
+        // color toolbar based on model Theme Color
+        ((BaseActivity) getActivity()).colorizeToolbar(color);
     }
 
     /**
      * Called from the Activity when user clicks Done button.
      */
     public SubjectModel Save() {
-        return mViewModel.getModel().save();
+        SubjectModel model = mViewModel.getModel().save();
+        if (model != null) {
+            // Post the event
+            EventBus bus = EventBus.getDefault();
+            bus.post(new ThemeColorChangedEvent(model.getColorInt()));
+        }
+
+        return model;
     }
 }

@@ -48,7 +48,8 @@ public class CustomizeToolbarHelper {
         setOverflowButtonColor(activity, colorFilter);
 
         // change the color of the non-Overflow icons
-        setMenuItemColor(menu, toolbarIconsColor);
+        if (menu != null)
+            setMenuItemColor(menu, toolbarIconsColor);
     }
 
     /**

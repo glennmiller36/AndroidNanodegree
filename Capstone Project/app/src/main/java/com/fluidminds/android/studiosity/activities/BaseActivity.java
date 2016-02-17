@@ -16,7 +16,7 @@ public class BaseActivity extends AppCompatActivity {
     protected Menu mMenu;
     protected EventBus mEventBus = EventBus.getDefault();
 
-    protected void colorizeToolbar(Integer color) {
+    public void colorizeToolbar(Integer color) {
         CustomizeToolbarHelper.colorizeToolbar(this, mToolbar, mMenu, color);
     }
 }

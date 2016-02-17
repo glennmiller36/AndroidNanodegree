@@ -5,7 +5,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!-- Detail View -->
-    <dimen name="content_spacer_height">72dp</dimen>
+    <dimen name="content_spacer_height">48dp</dimen>
     <dimen name="content_margin_left">72dp</dimen>
     <dimen name="screen_edge_margin">16dp</dimen>
     <dimen name="edittext_margin_left">68dp</dimen>

@@ -55,7 +55,8 @@ public class SubjectCardsActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.menu_subject_cards, menu);
         mMenu = menu;
 
-        colorizeToolbar(getIntent().getIntExtra("color", 0));
+        // color toolbar based on model Theme Color
+        colorizeToolbar(mSubjectModel.getColorInt());
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -73,6 +74,8 @@ public class SubjectCardsActivity extends BaseActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_delete:
+                String g = String.format(getString(R.string.delete_subject), mSubjectModel.getSubject());
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.alert_delete_title)
                         .setMessage(String.format(getString(R.string.delete_subject), mSubjectModel.getSubject()))
