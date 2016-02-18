@@ -45,7 +45,7 @@ public class SubjectEditActivity extends BaseActivity {
                 if(null != editFragment && editFragment.isInLayout())
                 {
                     SubjectModel model = editFragment.Save();
-                    if (model != null) {    // model is NULL if errors exist
+                    if (model.getBrokenRules().isEmpty()) {
                         if (model.getIsNew()) {
                             Intent intent = new Intent(that, SubjectCardsActivity.class);
                             intent.putExtra("subjectmodel", model);

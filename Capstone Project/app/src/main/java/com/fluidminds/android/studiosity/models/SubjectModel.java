@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.data.DataContract;
 import com.fluidminds.android.studiosity.utils.ThemeColor;
@@ -75,7 +76,12 @@ public class SubjectModel extends BaseModel implements Parcelable {
     }
 
     private boolean isValid() {
-        return getSubject().length() > 0;
+        getBrokenRules().clear();
+
+        if (getSubject().length() == 0)
+            getBrokenRules().put("subject", StudiosityApp.getInstance().getString(R.string.required));
+
+        return getBrokenRules().isEmpty();
     }
 
     /**
@@ -104,27 +110,16 @@ public class SubjectModel extends BaseModel implements Parcelable {
                     mId = Long.parseLong(insertedUri.getLastPathSegment());
                     return this;
                 }
-                else
-                    return null;
             }
             else {  // update
                 int rowsUpdated = StudiosityApp.getInstance().getContentResolver().update(DataContract.SubjectEntry.buildItemUri(getId()), values, null, null);
                 return (rowsUpdated == 1) ? this : null;
             }
         } catch (SQLiteConstraintException e) {
-            //for (BusinessRule rule: getBusinessRules()) {
-            //    if (rule.getRuleName().equals("noduplicate")) {
-            //        // the rule is broken
-            //        if (!getBrokenRules().contains(rule)) {
-             //           getBrokenRules().add(rule);
-             //           notifyListeners(this, "subject", "", rule.getErrorMessage());
-             //       }
-             //   }
-            //}
-            // ELSE generic fail msg
+            getBrokenRules().put("subject", StudiosityApp.getInstance().getString(R.string.duplicate_name));
         }
 
-        return null;
+        return this;
     }
 
     /**

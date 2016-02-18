@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Create a table to hold Subjects.
         final String SQL_CREATE_SUBJECT_TABLE = "CREATE TABLE " + SubjectEntry.TABLE_NAME + " (" +
                 SubjectEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                SubjectEntry.COLUMN_SUBJECT + " TEXT NOT NULL UNIQUE, " +
+                SubjectEntry.COLUMN_SUBJECT + " TEXT NOT NULL UNIQUE COLLATE NOCASE, " +
                 SubjectEntry.COLUMN_COLOR + " INTEGER NOT NULL " +
                 " );";
         sqLiteDatabase.execSQL(SQL_CREATE_SUBJECT_TABLE);
