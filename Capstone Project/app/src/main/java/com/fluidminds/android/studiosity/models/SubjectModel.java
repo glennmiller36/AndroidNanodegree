@@ -90,7 +90,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
     public SubjectModel save() {
 
         if (!isValid())
-            return null;
+            return this;
 
         if (!getIsNew() && !getIsDirty()) {
             return this;  // no changes
