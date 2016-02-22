@@ -2,10 +2,12 @@ package com.fluidminds.android.studiosity.models;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteConstraintException;
+import android.databinding.Bindable;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.data.DataContract;
@@ -46,6 +48,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
     /**
      * Subject
      */
+    @Bindable
     public String getSubject() {
         return mSubject;
     }
@@ -60,6 +63,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
     /**
      * Color
      */
+    @Bindable
     public Integer getColorInt() {
         return mColorInt;
     }
@@ -68,9 +72,12 @@ public class SubjectModel extends BaseModel implements Parcelable {
         if (!this.mColorInt.equals(color)) {
             this.mColorInt = color;
             markDirty();
+            notifyPropertyChanged(BR.colorInt);
+            notifyPropertyChanged(BR.colorName);
         }
     }
 
+    @Bindable
     public String getColorName() {
         return ThemeColor.getColorName(mColorInt);
     }

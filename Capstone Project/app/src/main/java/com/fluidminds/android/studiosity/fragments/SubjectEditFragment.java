@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
@@ -25,7 +24,7 @@ import org.greenrobot.eventbus.EventBus;
 /**
  * A fragment to Add or Edit an individual school Subject.
  */
-public class SubjectEditFragment extends Fragment implements ColorPickerDialogFragment.OnColorPickerDialogListener {
+public class SubjectEditFragment extends Fragment implements ColorPickerDialogFragment.OnColorPickerDialogListener, DataBindingHandler {
 
     private ViewDataBinding mBinding;
     private SubjectViewModel mViewModel;
@@ -63,23 +62,10 @@ public class SubjectEditFragment extends Fragment implements ColorPickerDialogFr
         }
 
         mBinding.setVariable(BR.viewModel, mViewModel);
+        mBinding.setVariable(BR.handler, this);
 
         // Inflate the layout for this fragment
         View view = mBinding.getRoot();
-
-        final Fragment targetFragment = this;
-
-        LinearLayout button = (LinearLayout) view.findViewById(R.id.themeColor);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-
-                ColorPickerDialogFragment dialogFragment = new ColorPickerDialogFragment();
-                dialogFragment.setTargetFragment(targetFragment, 0);
-                dialogFragment.setInitialColor(mViewModel.getModel().getColorInt());
-                dialogFragment.show(fm, "SubjectEditFragment");
-            }
-        });
 
         return view;
     }
@@ -90,18 +76,20 @@ public class SubjectEditFragment extends Fragment implements ColorPickerDialogFr
 
         // color toolbar based on model Theme Color
         if(mViewModel != null)
-            ((BaseActivity) getActivity()).colorizeToolbar(mViewModel.getColorInt());
+            ((BaseActivity) getActivity()).colorizeToolbar(mViewModel.getModel().getColorInt());
     }
 
     /**
-     * ColorPickerDialogFragment.OnColorPickerDialogListener
+     * Data binding listeners.
      */
     @Override
-    public void onColorSelected(int color) {
-        mViewModel.setColorInt(color);
+    public void onClick(View view) {
+        FragmentManager fm = getFragmentManager();
 
-        // color toolbar based on model Theme Color
-        ((BaseActivity) getActivity()).colorizeToolbar(color);
+        ColorPickerDialogFragment dialogFragment = new ColorPickerDialogFragment();
+        dialogFragment.setTargetFragment(this, 0);
+        dialogFragment.setInitialColor(mViewModel.getModel().getColorInt());
+        dialogFragment.show(fm, "SubjectEditFragment");
     }
 
     /**
@@ -115,5 +103,16 @@ public class SubjectEditFragment extends Fragment implements ColorPickerDialogFr
         }
 
         return mViewModel.getModel();
+    }
+
+    /**
+     * ColorPickerDialogFragment.OnColorPickerDialogListener
+     */
+    @Override
+    public void onColorSelected(int color) {
+        mViewModel.getModel().setColorInt(color);
+
+        // color toolbar based on model Theme Color
+        ((BaseActivity) getActivity()).colorizeToolbar(color);
     }
 }

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="viewModel" type="com.fluidminds.android.studiosity.viewmodels.SubjectViewModel"/>
+        <variable name="handler" type="com.fluidminds.android.studiosity.fragments.DataBindingHandler"/>
     </data>
 
     <LinearLayout
@@ -71,7 +72,8 @@
             android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:paddingStart="@dimen/screen_edge_margin"
-            android:paddingLeft="@dimen/screen_edge_margin" >
+            android:paddingLeft="@dimen/screen_edge_margin"
+            android:onClick="@{handler.onClick}">
 
             <View
                 android:layout_width="@dimen/avatar_size"
@@ -81,7 +83,7 @@
                 android:layout_marginLeft="@dimen/avatar_margin"
                 android:layout_marginEnd="@dimen/avatar_margin"
                 android:layout_marginRight="@dimen/avatar_margin"
-                android:background="@{viewModel.ColorInt}"/>
+                android:background="@{viewModel.Model.ColorInt}"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -102,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:text="@{viewModel.ColorName}"
+                    android:text="@{viewModel.Model.ColorName}"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:singleLine="true" />
             </LinearLayout>

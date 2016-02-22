@@ -1,11 +1,13 @@
 package com.fluidminds.android.studiosity.models;
 
+import android.databinding.BaseObservable;
+
 import java.util.LinkedHashMap;
 
 /**
  * Properties and Methods common to all Models.
  */
-public class BaseModel {
+public class BaseModel extends BaseObservable {
 
     private Boolean mIsDirty = false;
     private Boolean mIsNew = false;
