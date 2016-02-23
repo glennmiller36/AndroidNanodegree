@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.activities.BaseActivity;
-import com.fluidminds.android.studiosity.eventbus.ThemeColorChangedEvent;
+import com.fluidminds.android.studiosity.eventbus.SubjectChangedEvent;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 import com.fluidminds.android.studiosity.viewmodels.SubjectViewModel;
 
@@ -99,7 +99,7 @@ public class SubjectEditFragment extends Fragment implements ColorPickerDialogFr
         if (mViewModel.save()) {
             // Post the event
             EventBus bus = EventBus.getDefault();
-            bus.post(new ThemeColorChangedEvent(mViewModel.getModel().getColorInt()));
+            bus.post(new SubjectChangedEvent(mViewModel.getModel()));
         }
 
         return mViewModel.getModel();

@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fluidminds.android.studiosity.R;
-import com.fluidminds.android.studiosity.eventbus.ThemeColorChangedEvent;
+import com.fluidminds.android.studiosity.eventbus.SubjectChangedEvent;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -104,7 +104,11 @@ public class SubjectCardsActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void onEvent(ThemeColorChangedEvent event){
-        colorizeToolbar(event.getColor());
+    public void onEvent(SubjectChangedEvent event){
+        mSubjectModel = event.getModel();
+
+        colorizeToolbar(mSubjectModel.getColorInt());
+
+        getSupportActionBar().setTitle(mSubjectModel.getSubject());
     }
 }
