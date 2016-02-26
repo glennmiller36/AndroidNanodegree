@@ -95,14 +95,15 @@ public class SubjectEditFragment extends Fragment implements ColorPickerDialogFr
     /**
      * Called from the Activity when user clicks Done button.
      */
-    public SubjectModel Save() {
-        if (mViewModel.save()) {
+    public SubjectModel save() {
+        SubjectModel model = mViewModel.getModel().save();
+        if (model != null) {
             // Post the event
             EventBus bus = EventBus.getDefault();
             bus.post(new SubjectChangedEvent(mViewModel.getModel()));
         }
 
-        return mViewModel.getModel();
+        return model;
     }
 
     /**

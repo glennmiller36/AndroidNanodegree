@@ -44,8 +44,8 @@ public class SubjectEditActivity extends BaseActivity {
                 SubjectEditFragment editFragment = (SubjectEditFragment)getSupportFragmentManager().findFragmentById(R.id.fragSubjectEdit);
                 if(null != editFragment && editFragment.isInLayout())
                 {
-                    SubjectModel model = editFragment.Save();
-                    if (model.getBrokenRules().isEmpty()) {
+                    SubjectModel model = editFragment.save();
+                    if (model != null) {
                         if (model.getIsNew()) {
                             Intent intent = new Intent(that, SubjectCardsActivity.class);
                             intent.putExtra("subjectmodel", model);

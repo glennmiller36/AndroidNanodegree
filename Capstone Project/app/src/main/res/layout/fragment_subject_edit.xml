@@ -53,7 +53,7 @@
             android:layout_marginLeft="@dimen/content_margin_left"
             android:layout_marginEnd="@dimen/screen_edge_margin"
             android:layout_marginRight="@dimen/screen_edge_margin"
-            android:text="@{viewModel.SubjectError}"
+            android:text="@{viewModel.Model.BrokenRules[&quot;Subject&quot;]}"
             android:textAllCaps="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/red500" />

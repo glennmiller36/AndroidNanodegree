@@ -13,36 +13,57 @@ import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.data.DataContract;
 import com.fluidminds.android.studiosity.utils.ThemeColor;
 
-import java.security.Provider;
-
 /**
- * A POJO Model representing a Subject.
+ * A rich Model representing a Subject, where the object encapsulates actual behavior (business and validation).
  */
 public class SubjectModel extends BaseModel implements Parcelable {
 
-    private Long mId = 0L;
-    private String mSubject = "";
-    private Integer mColorInt = 0;
+    // Field Names
+    public static final String sID = "Id";
+    public static final String sSUBJECT = "Subject";
+    public static final String sCOLORINT = "ColorInt";
 
     public SubjectModel() {
-        mColorInt = ThemeColor.generateRandomColor();
+        super();
+
+        initializeFieldData(0L, "", ThemeColor.generateRandomColor());
+
         markAsNew();
     }
 
     public SubjectModel(Long id, String subject, Integer colorInt) {
-        /* Initially load properties without dirtying the model */
-        mId = id;
-        mSubject = subject.trim();
-        mColorInt = colorInt;
+        super();
+
+        initializeFieldData(id, subject, colorInt);
 
         markAsOld();
+    }
+
+    @Override
+    protected void addBusinessRules() {
+        // Subject is required
+        mBusinessRules.addRule(new RequiredRule(sSUBJECT, StudiosityApp.getInstance().getString(R.string.required)));
+    }
+
+    /**
+     * Put the initial field key/value into the FieldDataList.
+     */
+    private void initializeFieldData(Long id, String subject, Integer colorInt) {
+        /* Initially load properties without dirtying the model */
+        loadFieldData(sID, id);
+        loadFieldData(sSUBJECT, subject);
+        loadFieldData(sCOLORINT, colorInt);
     }
 
     /**
      * Id
      */
-    public Long getId() {
-        return mId;
+    public Long getId() { return getFieldData().getLong(sID); }
+
+    public void setId(Long id) {
+        if (!getId().equals(id)) {
+            setFieldData(sID, id);
+        }
     }
 
     /**
@@ -50,13 +71,12 @@ public class SubjectModel extends BaseModel implements Parcelable {
      */
     @Bindable
     public String getSubject() {
-        return mSubject;
+        return getFieldData().getString(sSUBJECT);
     }
 
     public void setSubject(String subject) {
-        if (!this.mSubject.equals(subject)) {
-            this.mSubject = subject.trim();
-            markDirty();
+        if (!getSubject().equals(subject)) {
+            setFieldData(sSUBJECT, subject.trim());
         }
     }
 
@@ -65,13 +85,13 @@ public class SubjectModel extends BaseModel implements Parcelable {
      */
     @Bindable
     public Integer getColorInt() {
-        return mColorInt;
+        return getFieldData().getInteger(sCOLORINT);
     }
 
     public void setColorInt(Integer color) {
-        if (!this.mColorInt.equals(color)) {
-            this.mColorInt = color;
-            markDirty();
+        if (!getColorInt().equals(color)) {
+            setFieldData(sCOLORINT, color);
+
             notifyPropertyChanged(BR.colorInt);
             notifyPropertyChanged(BR.colorName);
         }
@@ -79,25 +99,18 @@ public class SubjectModel extends BaseModel implements Parcelable {
 
     @Bindable
     public String getColorName() {
-        return ThemeColor.getColorName(mColorInt);
-    }
-
-    private boolean isValid() {
-        getBrokenRules().clear();
-
-        if (getSubject().length() == 0)
-            getBrokenRules().put("subject", StudiosityApp.getInstance().getString(R.string.required));
-
-        return getBrokenRules().isEmpty();
+        return ThemeColor.getColorName(getColorInt());
     }
 
     /**
-     * Commit the changes to the database.
+     * Saves the object to the database.
      */
     public SubjectModel save() {
 
-        if (!isValid())
-            return this;
+        if (!mBusinessRules.checkRules()) {
+            notifyPropertyChanged(BR.brokenRules);
+            return null;
+        }
 
         if (!getIsNew() && !getIsDirty()) {
             return this;  // no changes
@@ -114,7 +127,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
             if (getId() == 0) { // insert
                 Uri insertedUri = StudiosityApp.getInstance().getContentResolver().insert(DataContract.SubjectEntry.buildItemUri(getId()), values);
                 if (insertedUri != null && Integer.parseInt(insertedUri.getLastPathSegment()) > 0) {
-                    mId = Long.parseLong(insertedUri.getLastPathSegment());
+                    setId(Long.parseLong(insertedUri.getLastPathSegment()));
                     return this;
                 }
             }
@@ -123,10 +136,11 @@ public class SubjectModel extends BaseModel implements Parcelable {
                 return (rowsUpdated == 1) ? this : null;
             }
         } catch (SQLiteConstraintException e) {
-            getBrokenRules().put("subject", StudiosityApp.getInstance().getString(R.string.duplicate_name));
+            getBrokenRules().put(sSUBJECT, StudiosityApp.getInstance().getString(R.string.duplicate_name));
+            notifyPropertyChanged(BR.brokenRules);
         }
 
-        return this;
+        return null;
     }
 
     /**
@@ -134,7 +148,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
      */
     public int delete() {
         try {
-            return StudiosityApp.getInstance().getContentResolver().delete(DataContract.SubjectEntry.buildItemUri(getId()), DataContract.SubjectEntry._ID + " = " + mId, null);
+            return StudiosityApp.getInstance().getContentResolver().delete(DataContract.SubjectEntry.buildItemUri(getId()), DataContract.SubjectEntry._ID + " = " + getId(), null);
         } catch (Exception e) {
             //for (BusinessRule rule: getBusinessRules()) {
             //    if (rule.getRuleName().equals("noduplicate")) {
@@ -150,7 +164,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
         return 0;
     }
 
-        /** Used to give additional hints on how to process the received parcel.*/
+    /** Used to give additional hints on how to process the received parcel.*/
     @Override
     public int describeContents() {
         return 0;
@@ -179,9 +193,9 @@ public class SubjectModel extends BaseModel implements Parcelable {
 
     /** Ctor from Parcel, reads back fields IN THE ORDER they were written */
     public SubjectModel(Parcel parcel){
-        mId = parcel.readLong();
-        mSubject = parcel.readString();
-        mColorInt = parcel.readInt();
+        super();
+
+        initializeFieldData(parcel.readLong(), parcel.readString(), parcel.readInt());
 
         // base fields
         if (parcel.readByte() != 0)

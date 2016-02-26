@@ -1,17 +1,21 @@
 package com.fluidminds.android.studiosity.models;
 
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
+
+import com.fluidminds.android.studiosity.BR;
 
 /**
  * Properties and Methods common to all Models.
  */
-public class BaseModel extends BaseObservable {
+public abstract class BaseModel extends BaseObservable {
 
     private Boolean mIsDirty = false;
     private Boolean mIsNew = false;
-    private LinkedHashMap<String, String> mBrokenRules = new LinkedHashMap<>();
+    private FieldDataList mFieldData = new FieldDataList();
+    protected BusinessRules mBusinessRules = new BusinessRules(mFieldData);
 
     public Boolean getIsDirty() {
         return mIsDirty;
@@ -21,7 +25,11 @@ public class BaseModel extends BaseObservable {
         return mIsNew;
     }
 
-    public LinkedHashMap<String, String> getBrokenRules() { return mBrokenRules; }
+    public FieldDataList getFieldData() { return mFieldData; }
+
+    public BaseModel() {
+        addBusinessRules();
+    }
 
     public void markDirty() {
         this.mIsDirty = true;
@@ -35,18 +43,35 @@ public class BaseModel extends BaseObservable {
     {
         this.mIsNew = false;
         this.mIsDirty = false;
-        mBrokenRules.clear();
+    }
+
+    abstract protected void addBusinessRules();
+
+    /**
+     * Sets the value for a specific field.
+     */
+    public void setFieldData(String field, Object value) {
+        mFieldData.setValue(field, value);
+
+        if (mBusinessRules.checkRulesForField(field)) {
+            notifyPropertyChanged(BR.brokenRules);
+        }
+
+        markDirty();
     }
 
     /**
-     * Returns the first broken rule for the requested property.
+     * Sets the value for a specific field without marking the field as dirty.
      */
-    public String getBrokenRule(String propertyName) {
-        for (String key : mBrokenRules.keySet()) {
-            if (key.equals(propertyName))
-                return mBrokenRules.get(key);
-        }
+    public void loadFieldData(String key, Object value) {
+        mFieldData.setValue(key, value);
+    }
 
-        return "";
+    /**
+     * Returns the first broken rule for the requested field.
+     */
+    @Bindable
+    public HashMap<String, String> getBrokenRules() {
+        return mBusinessRules.getBrokenRules();
     }
 }
