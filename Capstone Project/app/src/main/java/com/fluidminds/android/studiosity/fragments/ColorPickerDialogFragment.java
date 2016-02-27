@@ -33,6 +33,10 @@ public class ColorPickerDialogFragment extends DialogFragment implements GridVie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        // savedInstanceState not null on orientation change
+        if (savedInstanceState != null)
+            mInitialColor = savedInstanceState.getInt("InitialColor", 0);
+
         View rootView = inflater.inflate(R.layout.fragment_colorpicker_dialog, container, false);
         getDialog().setTitle(R.string.select_color);
 
@@ -48,10 +52,17 @@ public class ColorPickerDialogFragment extends DialogFragment implements GridVie
                 R.layout.grid_item_color, colors, mInitialColor);
 
         GridView gridView = (GridView) rootView.findViewById(R.id.gridColors);
-        gridView.setAdapter( mAdapter);
+        gridView.setAdapter(mAdapter);
         gridView.setOnItemClickListener(this);
 
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("InitialColor", mInitialColor);
     }
 
     /**
