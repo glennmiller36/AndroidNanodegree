@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.eventbus.SubjectChangedEvent;
@@ -82,10 +83,11 @@ public class SubjectCardsActivity extends BaseActivity {
                         .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                int rowsDeleted = mSubjectModel.delete();
-                                if (rowsDeleted == 1)
+                                String error = mSubjectModel.delete();
+                                if (error.isEmpty())
                                     finish();
                                 else {
+                                    Toast.makeText(SubjectCardsActivity.this, "R.string.alert_delete_title", Toast.LENGTH_SHORT).show();
                                     dialogInterface.dismiss();
                                 }
                             }

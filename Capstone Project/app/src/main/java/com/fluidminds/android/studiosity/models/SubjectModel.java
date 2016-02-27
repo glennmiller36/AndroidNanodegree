@@ -146,22 +146,13 @@ public class SubjectModel extends BaseModel implements Parcelable {
     /**
      * Delete the Subject and child Cards from the database.
      */
-    public int delete() {
+    public String delete() {
         try {
-            return StudiosityApp.getInstance().getContentResolver().delete(DataContract.SubjectEntry.buildItemUri(getId()), DataContract.SubjectEntry._ID + " = " + getId(), null);
+            StudiosityApp.getInstance().getContentResolver().delete(DataContract.SubjectEntry.buildItemUri(getId()), DataContract.SubjectEntry._ID + " = " + getId(), null);
+            return "";
         } catch (Exception e) {
-            //for (BusinessRule rule: getBusinessRules()) {
-            //    if (rule.getRuleName().equals("noduplicate")) {
-            //        // the rule is broken
-            //        if (!getBrokenRules().contains(rule)) {
-            //           getBrokenRules().add(rule);
-            //           notifyListeners(this, "subject", "", rule.getErrorMessage());
-            //       }
-            //   }
-            //}
-            // ELSE generic fail msg
+            return e.getMessage();
         }
-        return 0;
     }
 
     /** Used to give additional hints on how to process the received parcel.*/
