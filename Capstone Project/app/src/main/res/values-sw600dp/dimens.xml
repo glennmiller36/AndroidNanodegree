@@ -5,6 +5,9 @@
     <dimen name="activity_horizontal_margin">64dp</dimen>
     <dimen name="fab_margin">0dp</dimen>
 
+    <!-- Subject List -->
+    <dimen name="content_square">200dp</dimen>
+
     <!-- Detail View -->
     <dimen name="content_margin_left">104dp</dimen>
     <dimen name="screen_edge_margin">24dp</dimen>

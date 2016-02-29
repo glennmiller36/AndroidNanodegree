@@ -4,6 +4,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <!-- Subject List -->
+    <dimen name="content_square">150dp</dimen>
+
     <!-- Detail View -->
     <dimen name="content_spacer_height">48dp</dimen>
     <dimen name="content_margin_left">72dp</dimen>

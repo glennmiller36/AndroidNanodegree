@@ -2,6 +2,7 @@ package com.fluidminds.android.studiosity.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,14 @@ import android.widget.TextView;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.fragments.SubjectListFragment;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+import com.fluidminds.android.studiosity.utils.ThemeColor;
+import com.fluidminds.android.studiosity.views.SquareView;
 
 /**
- * SubjectAdapter exposes a list of school subjects
+ * SubjectListAdapter exposes a list of school subjects
  * from a {@link Cursor} to a {@link android.widget.GridView}.
  */
-public class SubjectAdapter extends CursorAdapter {
+public class SubjectListAdapter extends CursorAdapter {
 
     private static final int VIEW_TYPE_COUNT = 2;
     private static final int VIEW_TYPE_TODAY = 0;
@@ -26,14 +29,16 @@ public class SubjectAdapter extends CursorAdapter {
      * Cache of the children views for a subject grid item.
      */
     public static class ViewHolder {
-        public final TextView textSubject;
+        public final SquareView mContainer;
+        public final TextView mSubject;
 
         public ViewHolder(View view) {
-            textSubject = (TextView) view.findViewById(R.id.textSubject);
+            mContainer = (SquareView) view.findViewById(R.id.container);
+            mSubject = (TextView) view.findViewById(R.id.textSubject);
         }
     }
 
-    public SubjectAdapter(Context context, Cursor c, int flags) {
+    public SubjectListAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
 
@@ -53,7 +58,14 @@ public class SubjectAdapter extends CursorAdapter {
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         // Read data from cursor
-        viewHolder.textSubject.setText(cursor.getString(SubjectListFragment.COL_SUBJECT));
+        Integer color = cursor.getInt(SubjectListFragment.COL_COLOR);
+        viewHolder.mContainer.setBackgroundColor(color);
+        viewHolder.mSubject.setText(cursor.getString(SubjectListFragment.COL_SUBJECT));
+
+        if (ThemeColor.isWhiteContrastColor(color))
+            viewHolder.mSubject.setTextColor(Color.WHITE);
+        else
+            viewHolder.mSubject.setTextColor(Color.BLACK);
     }
 
     @Override

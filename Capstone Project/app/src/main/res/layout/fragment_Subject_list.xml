@@ -8,12 +8,11 @@
         android:id="@+id/gridSubjects"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="150dp"
+        android:columnWidth="@dimen/content_square"
         android:numColumns="auto_fit"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_margin="1dp" />
 
     <TextView
         android:id="@+id/textNoRecords"

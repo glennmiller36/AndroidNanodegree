@@ -17,18 +17,16 @@ import android.widget.GridView;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.activities.SubjectCardsActivity;
 import com.fluidminds.android.studiosity.activities.SubjectEditActivity;
-import com.fluidminds.android.studiosity.adapters.SubjectAdapter;
+import com.fluidminds.android.studiosity.adapters.SubjectListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract;
 import com.fluidminds.android.studiosity.models.SubjectModel;
-
-import javax.security.auth.Subject;
 
 /**
  * A fragment representing the list of school Subjects.
  */
 public class SubjectListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private SubjectAdapter mSubjectAdapter;
+    private SubjectListAdapter mSubjectAdapter;
 
     private GridView mGridSubjects;
 
@@ -53,7 +51,7 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mSubjectAdapter = new SubjectAdapter(getActivity(), null, 0);
+        mSubjectAdapter = new SubjectListAdapter(getActivity(), null, 0);
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_subject_list, container, false);

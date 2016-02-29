@@ -3,11 +3,12 @@ package com.fluidminds.android.studiosity.views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 /**
  * A custom view that maintains itself as a square rectangle.
  */
-public class SquareView extends ImageView {
+public class SquareView extends LinearLayout {
     public SquareView(Context context) {
         super(context);
     }
