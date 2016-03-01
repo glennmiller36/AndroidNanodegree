@@ -17,4 +17,10 @@
     <dimen name="detail_item_height">72dp</dimen>
     <dimen name="space_between_fields">16dp</dimen>
     <dimen name="textview_label_padding_bottom">4dp</dimen>
+
+    <!-- Color Picker dialog -->
+    <dimen name="colorpicker_grid_width">50dp</dimen>
+    <dimen name="circle_size">40dp</dimen>
+    <dimen name="circle_margin">10dp</dimen>
+    <dimen name="active_checkmark_margin">5dp</dimen>
 </resources>

@@ -2,13 +2,15 @@ package com.fluidminds.android.studiosity.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.support.design.widget.FloatingActionButton;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.utils.ThemeColor;
 
@@ -27,7 +29,8 @@ public class ColorPickerAdapter extends ArrayAdapter<Integer> {
      * Cache of the children views for a color grid item.
      */
     public static class ViewHolder {
-        public FloatingActionButton fabColor = null;
+        public GradientDrawable mCircleDrawable;
+        public ImageView mActiveCheckmark;
     }
 
     public ColorPickerAdapter(Context context, int layoutResourceId, Integer[] data, int selectedColor) {
@@ -52,15 +55,19 @@ public class ColorPickerAdapter extends ArrayAdapter<Integer> {
             row = inflater.inflate(mLayoutResourceId, parent, false);
 
             viewHolder = new ViewHolder();
-            viewHolder.fabColor = (FloatingActionButton)row.findViewById(R.id.fabColor);
+            LinearLayout circle = (LinearLayout)row.findViewById(R.id.colorCircle);
 
-            // forward FAB click to parent GridView
-            viewHolder.fabColor.setOnClickListener(new View.OnClickListener() {
+            // forward click to parent GridView
+            circle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((GridView) aparent).performItemClick(v, aposition, 0); // Let the event be handled in onItemClick()
+                ((GridView) aparent).performItemClick(v, aposition, 0); // Let the event be handled in onItemClick()
                 }
             });
+
+            viewHolder.mCircleDrawable = (GradientDrawable)circle.getBackground();
+            viewHolder.mActiveCheckmark = (ImageView)row.findViewById(R.id.activeCheckmark);
+
             row.setTag(viewHolder);
         }
         else
@@ -70,18 +77,18 @@ public class ColorPickerAdapter extends ArrayAdapter<Integer> {
 
         int color = m500Colors[position];
 
-        viewHolder.fabColor.setBackgroundTintList(ColorStateList.valueOf(color));
+        viewHolder.mCircleDrawable.setColor(color);
 
         if (mSelectedColor == color) {
             // determine the appropriate checkmark color to show that contrasts the color
             if (ThemeColor.isWhiteContrastColor(color)) {
-                viewHolder.fabColor.setImageResource(R.drawable.ic_check_white_24dp);
+                viewHolder.mActiveCheckmark.setImageResource(R.drawable.ic_check_white_24dp);
             } else {
-                viewHolder.fabColor.setImageResource(R.drawable.ic_check_black_24dp);
+                viewHolder.mActiveCheckmark.setImageResource(R.drawable.ic_check_black_24dp);
             }
         }
         else
-            viewHolder.fabColor.setImageResource(0);
+            viewHolder.mActiveCheckmark.setImageResource(0);
 
         return row;
     }

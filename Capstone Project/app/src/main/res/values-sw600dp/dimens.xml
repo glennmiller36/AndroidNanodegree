@@ -15,4 +15,10 @@
     <dimen name="textview_label_padding_bottom">8dp</dimen>
     <dimen name="avatar_margin">8dp</dimen>
 
+    <!-- Color Picker dialog -->
+    <dimen name="colorpicker_grid_width">72dp</dimen>
+    <dimen name="circle_size">50dp</dimen>
+    <dimen name="circle_margin">10dp</dimen>
+    <dimen name="active_checkmark_margin">10dp</dimen>
+
 </resources>
