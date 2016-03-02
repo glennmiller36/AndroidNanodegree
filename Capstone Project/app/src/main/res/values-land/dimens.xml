@@ -1,0 +1,4 @@
+<resources>
+    <!-- Subject List -->
+    <dimen name="content_square">160dp</dimen>
+</resources>

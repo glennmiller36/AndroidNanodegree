@@ -5,7 +5,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!-- Subject List -->
-    <dimen name="content_square">150dp</dimen>
+    <dimen name="content_square">125dp</dimen>
 
     <!-- Detail View -->
     <dimen name="content_spacer_height">48dp</dimen>
