@@ -11,6 +11,7 @@ import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.data.DataContract;
+import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 import com.fluidminds.android.studiosity.utils.ThemeColor;
 
 /**
@@ -120,19 +121,19 @@ public class SubjectModel extends BaseModel implements Parcelable {
 
         // Then add the data, along with the corresponding name of the data type,
         // so the content provider knows what kind of value is being inserted.
-        values.put(DataContract.SubjectEntry.COLUMN_SUBJECT, getSubject());
-        values.put(DataContract.SubjectEntry.COLUMN_COLOR, getColorInt());
+        values.put(SubjectEntry.COLUMN_NAME, getSubject());
+        values.put(SubjectEntry.COLUMN_COLOR, getColorInt());
 
         try {
             if (getId() == 0) { // insert
-                Uri insertedUri = StudiosityApp.getInstance().getContentResolver().insert(DataContract.SubjectEntry.buildItemUri(getId()), values);
+                Uri insertedUri = StudiosityApp.getInstance().getContentResolver().insert(SubjectEntry.buildItemUri(getId()), values);
                 if (insertedUri != null && Integer.parseInt(insertedUri.getLastPathSegment()) > 0) {
                     setId(Long.parseLong(insertedUri.getLastPathSegment()));
                     return this;
                 }
             }
             else {  // update
-                int rowsUpdated = StudiosityApp.getInstance().getContentResolver().update(DataContract.SubjectEntry.buildItemUri(getId()), values, null, null);
+                int rowsUpdated = StudiosityApp.getInstance().getContentResolver().update(SubjectEntry.buildItemUri(getId()), values, null, null);
                 return (rowsUpdated == 1) ? this : null;
             }
         } catch (SQLiteConstraintException e) {
@@ -144,11 +145,11 @@ public class SubjectModel extends BaseModel implements Parcelable {
     }
 
     /**
-     * Delete the Subject and child Cards from the database.
+     * Delete the Subject and child Decks from the database.
      */
     public String delete() {
         try {
-            StudiosityApp.getInstance().getContentResolver().delete(DataContract.SubjectEntry.buildItemUri(getId()), DataContract.SubjectEntry._ID + " = " + getId(), null);
+            StudiosityApp.getInstance().getContentResolver().delete(SubjectEntry.buildItemUri(getId()), SubjectEntry._ID + " = " + getId(), null);
             return "";
         } catch (Exception e) {
             return e.getMessage();

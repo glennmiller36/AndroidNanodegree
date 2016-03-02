@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import com.fluidminds.android.studiosity.R;
 
 /**
- * A fragment to display Flashcards for the requested Subject.
+ * A fragment to display Card Decks for the requested Subject.
  */
-public class SubjectCardsFragment extends Fragment {
+public class DeckListFragment extends Fragment {
 
-    public SubjectCardsFragment() {
+    public DeckListFragment() {
         // Required empty public constructor
     }
 
@@ -29,7 +29,7 @@ public class SubjectCardsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_subject_cards, container, false);
+        return inflater.inflate(R.layout.fragment_deck_list, container, false);
     }
 
     @Override

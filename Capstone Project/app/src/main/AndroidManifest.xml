@@ -42,8 +42,7 @@
             android:syncable="true" />
 
         <activity
-            android:name=".activities.SubjectCardsActivity"
-            android:label="@string/title_activity_subject_cards"
+            android:name=".activities.DeckListActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
-    tools:context=".activities.SubjectCardsActivity">
+    tools:context=".activities.DeckListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,8 +26,8 @@
         </android.support.design.widget.AppBarLayout>
 
         <fragment
-            android:name="com.fluidminds.android.studiosity.fragments.SubjectCardsFragment"
-            android:id="@+id/fragSubjectCards"
+            android:name="com.fluidminds.android.studiosity.fragments.DeckListFragment"
+            android:id="@+id/fragDeckList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

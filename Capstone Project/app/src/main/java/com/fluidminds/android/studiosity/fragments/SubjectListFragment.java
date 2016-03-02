@@ -2,7 +2,6 @@ package com.fluidminds.android.studiosity.fragments;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -17,11 +16,13 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
-import com.fluidminds.android.studiosity.activities.SubjectCardsActivity;
+import com.fluidminds.android.studiosity.activities.DeckListActivity;
 import com.fluidminds.android.studiosity.activities.SubjectEditActivity;
 import com.fluidminds.android.studiosity.adapters.SubjectListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract;
+import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+
 
 /**
  * A fragment representing the list of school Subjects.
@@ -36,9 +37,9 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
     private static final int SUBJECT_LOADER = 0;
 
     private static final String[] SUBJECT_COLUMNS = {
-            DataContract.SubjectEntry.TABLE_NAME + "." + DataContract.SubjectEntry._ID,
-            DataContract.SubjectEntry.COLUMN_SUBJECT,
-            DataContract.SubjectEntry.COLUMN_COLOR
+            SubjectEntry.TABLE_NAME + "." + SubjectEntry._ID,
+            SubjectEntry.COLUMN_NAME,
+            SubjectEntry.COLUMN_COLOR
     };
 
     // These indices are tied to SUBJECT_COLUMNS.
@@ -66,7 +67,7 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
         mGridSubjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Intent intent = new Intent(getContext(), SubjectCardsActivity.class);
+                Intent intent = new Intent(getContext(), DeckListActivity.class);
 
                 SubjectModel model = mSubjectAdapter.get(position);
                 intent.putExtra("subjectmodel", model);
@@ -103,10 +104,10 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Sort order:  Ascending, by subject name.
-        String sortOrder = DataContract.SubjectEntry.COLUMN_SUBJECT + " COLLATE NOCASE ASC";
+        String sortOrder = SubjectEntry.COLUMN_NAME + " COLLATE NOCASE ASC";
 
         return new CursorLoader(getActivity(),
-                DataContract.SubjectEntry.CONTENT_URI,
+                SubjectEntry.CONTENT_URI,
                 SUBJECT_COLUMNS,
                 null,
                 null,

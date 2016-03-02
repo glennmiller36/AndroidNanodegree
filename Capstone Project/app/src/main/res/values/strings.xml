@@ -19,5 +19,4 @@
     <string name="subject_name">Subject Name</string>
     <string name="subject">Subject</string>
     <string name="theme_color">Theme Color</string>
-    <string name="title_activity_subject_cards">SubjectCardsActivity</string>
 </resources>

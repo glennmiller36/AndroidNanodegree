@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
+import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
+
 /**
  * Share data with other applications using this content provider.
  */
@@ -60,13 +62,13 @@ public class StudiosityProvider extends ContentProvider {
              * Get all Subject records
              */
             case SUBJECTS:
-                return DataContract.SubjectEntry.CONTENT_LIST_TYPE;
+                return SubjectEntry.CONTENT_LIST_TYPE;
 
             /**
              * Get a particular Subject
              */
             case SUBJECT_ID:
-                return DataContract.SubjectEntry.CONTENT_ITEM_TYPE;
+                return SubjectEntry.CONTENT_ITEM_TYPE;
 
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -86,7 +88,7 @@ public class StudiosityProvider extends ContentProvider {
 
             case SUBJECTS: {
                 retCursor = mDatabase.getReadableDatabase().query(
-                        DataContract.SubjectEntry.TABLE_NAME,
+                        SubjectEntry.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -99,9 +101,9 @@ public class StudiosityProvider extends ContentProvider {
 
             case SUBJECT_ID: {
                 retCursor = mDatabase.getReadableDatabase().query(
-                        DataContract.SubjectEntry.TABLE_NAME,
+                        SubjectEntry.TABLE_NAME,
                         projection,
-                        DataContract.SubjectEntry._ID + " = " + uri.getLastPathSegment(),
+                        SubjectEntry._ID + " = " + uri.getLastPathSegment(),
                         selectionArgs,
                         null,
                         null,
@@ -128,7 +130,7 @@ public class StudiosityProvider extends ContentProvider {
 
         switch (match) {
             case SUBJECT_ID: {
-                rowID = db.insertOrThrow(DataContract.SubjectEntry.TABLE_NAME, null, values);
+                rowID = db.insertOrThrow(SubjectEntry.TABLE_NAME, null, values);
                 break;
             }
             default:
@@ -137,7 +139,7 @@ public class StudiosityProvider extends ContentProvider {
 
         if (rowID > 0)
         {
-            Uri returnUri = ContentUris.withAppendedId(DataContract.SubjectEntry.CONTENT_URI, rowID);
+            Uri returnUri = ContentUris.withAppendedId(SubjectEntry.CONTENT_URI, rowID);
             getContext().getContentResolver().notifyChange(returnUri, null);
             return returnUri;
         }
@@ -157,7 +159,7 @@ public class StudiosityProvider extends ContentProvider {
         switch (match) {
             case SUBJECT_ID:
                 rowsDeleted = db.delete(
-                        DataContract.SubjectEntry.TABLE_NAME, selection, selectionArgs);
+                        SubjectEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -180,7 +182,7 @@ public class StudiosityProvider extends ContentProvider {
 
         switch (match) {
             case SUBJECT_ID:
-                rowsUpdated = db.update(DataContract.SubjectEntry.TABLE_NAME, values, DataContract.SubjectEntry._ID + " = " + uri.getLastPathSegment(),
+                rowsUpdated = db.update(SubjectEntry.TABLE_NAME, values, SubjectEntry._ID + " = " + uri.getLastPathSegment(),
                         selectionArgs);
                 break;
             default:

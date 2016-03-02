@@ -16,9 +16,9 @@ import com.fluidminds.android.studiosity.models.SubjectModel;
 import org.greenrobot.eventbus.Subscribe;
 
 /**
- * An activity to display Flashcards for the requested Subject.
+ * An activity to display Card Decks for the requested Subject.
  */
-public class SubjectCardsActivity extends BaseActivity {
+public class DeckListActivity extends BaseActivity {
 
     private SubjectModel mSubjectModel;
 
@@ -26,7 +26,7 @@ public class SubjectCardsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_subject_cards);
+        setContentView(R.layout.activity_deck_list);
 
         Intent intent = getIntent();
         mSubjectModel = intent.getParcelableExtra("subjectmodel");
@@ -53,7 +53,7 @@ public class SubjectCardsActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_subject_cards, menu);
+        getMenuInflater().inflate(R.menu.menu_deck_list, menu);
         mMenu = menu;
 
         // color toolbar based on model Theme Color
@@ -87,7 +87,7 @@ public class SubjectCardsActivity extends BaseActivity {
                                 if (error.isEmpty())
                                     finish();
                                 else {
-                                    Toast.makeText(SubjectCardsActivity.this, "R.string.alert_delete_title", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(DeckListActivity.this, "R.string.alert_delete_title", Toast.LENGTH_SHORT).show();
                                     dialogInterface.dismiss();
                                 }
                             }
