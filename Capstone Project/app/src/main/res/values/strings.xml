@@ -15,7 +15,7 @@
 
     <!-- Subjects -->
     <string name="subjects">Subjects</string>
-    <string name="no_subjects">No Subjects. Click \'+\' to Add.</string>
+    <string name="no_subjects">No Subjects</string>
     <string name="subject_name">Subject Name</string>
     <string name="subject">Subject</string>
     <string name="theme_color">Theme Color</string>
