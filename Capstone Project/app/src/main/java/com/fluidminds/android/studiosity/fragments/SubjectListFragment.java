@@ -2,6 +2,7 @@ package com.fluidminds.android.studiosity.fragments;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.activities.SubjectCardsActivity;
@@ -29,6 +31,7 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
     private SubjectListAdapter mSubjectAdapter;
 
     private GridView mGridSubjects;
+    private TextView mNoRecords;
 
     private static final int SUBJECT_LOADER = 0;
 
@@ -72,6 +75,8 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
             }
         });
 
+        mNoRecords = (TextView) view.findViewById(R.id.textNoRecords);
+
         FloatingActionButton fabAdd = (FloatingActionButton) view.findViewById(R.id.fabAdd);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -111,6 +116,8 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mSubjectAdapter.swapCursor(data);
+
+        mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
