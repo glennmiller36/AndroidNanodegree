@@ -3,15 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.fluidminds.android.studiosity.views.SquareView
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:gravity="center"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp">
-
         <TextView
             android:id="@+id/textName"
             android:layout_width="match_parent"
@@ -22,5 +13,4 @@
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    </com.fluidminds.android.studiosity.views.SquareView>>
 </FrameLayout>

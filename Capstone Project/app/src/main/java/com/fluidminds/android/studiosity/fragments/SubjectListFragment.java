@@ -19,7 +19,6 @@ import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.activities.DeckListActivity;
 import com.fluidminds.android.studiosity.activities.SubjectEditActivity;
 import com.fluidminds.android.studiosity.adapters.SubjectListAdapter;
-import com.fluidminds.android.studiosity.data.DataContract;
 import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 
@@ -44,7 +43,7 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
 
     // These indices are tied to SUBJECT_COLUMNS.
     public static final int COL_ID = 0;
-    public static final int COL_SUBJECT = 1;
+    public static final int COL_NAME = 1;
     public static final int COL_COLOR = 2;
 
     public SubjectListFragment() {

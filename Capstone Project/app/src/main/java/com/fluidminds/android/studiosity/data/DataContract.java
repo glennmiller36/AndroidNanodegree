@@ -63,7 +63,9 @@ public class DataContract {
         public static final String TABLE_NAME = "deck";
 
         // Column names
+        public static final String COLUMN_SUBJECT_ID = "subjectid";
         public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_CREATE_DATE = "createdate";
 
         public static Uri buildItemUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

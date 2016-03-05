@@ -37,8 +37,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Create a table to hold Card Decks.
         final String SQL_CREATE_DECK_TABLE = "CREATE TABLE " + DeckEntry.TABLE_NAME + " (" +
-                SubjectEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                SubjectEntry.COLUMN_NAME + " TEXT NOT NULL UNIQUE COLLATE NOCASE " +
+                DeckEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                DeckEntry.COLUMN_SUBJECT_ID + " INTEGER NOT NULL, " +
+                DeckEntry.COLUMN_NAME + " TEXT NOT NULL UNIQUE COLLATE NOCASE, " +
+                DeckEntry.COLUMN_CREATE_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP " +
                 " );";
         sqLiteDatabase.execSQL(SQL_CREATE_DECK_TABLE);
 

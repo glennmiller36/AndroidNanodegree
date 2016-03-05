@@ -4,6 +4,22 @@
     android:layout_height="match_parent"
     tools:context=".activities.DeckListFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerDecks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
+
+    <TextView
+        android:id="@+id/textNoRecords"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/no_decks"
+        android:visibility="gone"
+        android:textAlignment="center"
+        android:gravity="center" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAdd"
         android:layout_width="wrap_content"

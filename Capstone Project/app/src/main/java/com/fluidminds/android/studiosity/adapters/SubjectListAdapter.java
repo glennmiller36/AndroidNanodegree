@@ -21,20 +21,18 @@ import com.fluidminds.android.studiosity.views.SquareView;
  */
 public class SubjectListAdapter extends CursorAdapter {
 
-    private static final int VIEW_TYPE_COUNT = 2;
-    private static final int VIEW_TYPE_TODAY = 0;
-    private static final int VIEW_TYPE_FUTURE_DAY = 1;
+    private static final int VIEW_TYPE_COUNT = 1;
 
     /**
      * Cache of the children views for a subject grid item.
      */
     public static class ViewHolder {
         public final SquareView mContainer;
-        public final TextView mSubject;
+        public final TextView mName;
 
         public ViewHolder(View view) {
             mContainer = (SquareView) view.findViewById(R.id.container);
-            mSubject = (TextView) view.findViewById(R.id.textSubject);
+            mName = (TextView) view.findViewById(R.id.textName);
         }
     }
 
@@ -60,12 +58,12 @@ public class SubjectListAdapter extends CursorAdapter {
         // Read data from cursor
         Integer color = cursor.getInt(SubjectListFragment.COL_COLOR);
         viewHolder.mContainer.setBackgroundColor(color);
-        viewHolder.mSubject.setText(cursor.getString(SubjectListFragment.COL_SUBJECT));
+        viewHolder.mName.setText(cursor.getString(SubjectListFragment.COL_NAME));
 
         if (ThemeColor.isWhiteContrastColor(color))
-            viewHolder.mSubject.setTextColor(Color.WHITE);
+            viewHolder.mName.setTextColor(Color.WHITE);
         else
-            viewHolder.mSubject.setTextColor(Color.BLACK);
+            viewHolder.mName.setTextColor(Color.BLACK);
     }
 
     @Override
@@ -81,7 +79,7 @@ public class SubjectListAdapter extends CursorAdapter {
 
         SubjectModel model = new SubjectModel(
             cursor.getLong(SubjectListFragment.COL_ID),
-            cursor.getString(SubjectListFragment.COL_SUBJECT),
+            cursor.getString(SubjectListFragment.COL_NAME),
             cursor.getInt(SubjectListFragment.COL_COLOR)
         );
 

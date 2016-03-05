@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
+import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
 import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 
 /**
@@ -23,6 +24,7 @@ public class StudiosityProvider extends ContentProvider {
 
     static final int SUBJECTS = 100;
     static final int SUBJECT_ID = 101;
+    static final int DECKS = 200;
 
     /**
      * UriMatcher will match each integer constants defined above.
@@ -35,6 +37,7 @@ public class StudiosityProvider extends ContentProvider {
         // For each type of URI you want to add, create a corresponding code.
         matcher.addURI(authority, DataContract.PATH_SUBJECT, SUBJECTS);
         matcher.addURI(authority, DataContract.PATH_SUBJECT + "/#", SUBJECT_ID);
+        matcher.addURI(authority, DataContract.PATH_DECK, DECKS);
 
         return matcher;
     }
@@ -70,6 +73,12 @@ public class StudiosityProvider extends ContentProvider {
             case SUBJECT_ID:
                 return SubjectEntry.CONTENT_ITEM_TYPE;
 
+            /**
+             * Get all Deck records for the requested Subjects
+             */
+            case DECKS:
+                return DeckEntry.CONTENT_LIST_TYPE;
+
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -104,6 +113,19 @@ public class StudiosityProvider extends ContentProvider {
                         SubjectEntry.TABLE_NAME,
                         projection,
                         SubjectEntry._ID + " = " + uri.getLastPathSegment(),
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+
+            case DECKS: {
+                retCursor = mDatabase.getReadableDatabase().query(
+                        DeckEntry.TABLE_NAME,
+                        projection,
+                        selection,
                         selectionArgs,
                         null,
                         null,
