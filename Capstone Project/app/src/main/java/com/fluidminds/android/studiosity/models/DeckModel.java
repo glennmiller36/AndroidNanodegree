@@ -10,8 +10,8 @@ import android.os.Parcelable;
 import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.app.StudiosityApp;
-import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
-import com.fluidminds.android.studiosity.utils.ThemeColor;
+import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
+import com.fluidminds.android.studiosity.utils.Converters;
 
 import java.util.Date;
 
@@ -26,10 +26,10 @@ public class DeckModel extends BaseModel implements Parcelable {
     public static final String sNAME = "Name";
     public static final String sCREATEDATE = "CreateDate";
 
-    public DeckModel() {
+    public DeckModel(Long subjectId) {
         super();
 
-        initializeFieldData(0L, 0L, "", null);
+        initializeFieldData(0L, subjectId, "", null);
 
         markAsNew();
     }
@@ -44,7 +44,7 @@ public class DeckModel extends BaseModel implements Parcelable {
 
     @Override
     protected void addBusinessRules() {
-        // Subject is required
+        // Name is required
         mBusinessRules.addRule(new RequiredRule(sNAME, StudiosityApp.getInstance().getString(R.string.required)));
     }
 
@@ -97,8 +97,8 @@ public class DeckModel extends BaseModel implements Parcelable {
      * CreateDate
      */
     @Bindable
-    public Integer getCreateDate() {
-        return getFieldData().getInteger(sCREATEDATE);
+    public Date getCreateDate() {
+        return getFieldData().getDate(sCREATEDATE);
     }
 
     public void setCreateDate(Date date) {
@@ -125,20 +125,21 @@ public class DeckModel extends BaseModel implements Parcelable {
 
         // Then add the data, along with the corresponding name of the data type,
         // so the content provider knows what kind of value is being inserted.
-
-        //values.put(SubjectEntry.COLUMN_NAME, getSubject());
-        //values.put(SubjectEntry.COLUMN_COLOR, getColorInt());
+        values.put(DeckEntry.COLUMN_SUBJECT_ID, getSubjectId());
+        values.put(DeckEntry.COLUMN_NAME, getName());
 
         try {
             if (getId() == 0) { // insert
-                Uri insertedUri = StudiosityApp.getInstance().getContentResolver().insert(SubjectEntry.buildItemUri(getId()), values);
+                Uri insertedUri = StudiosityApp.getInstance().getContentResolver().insert(DeckEntry.buildItemUri(getId()), values);
                 if (insertedUri != null && Integer.parseInt(insertedUri.getLastPathSegment()) > 0) {
                     setId(Long.parseLong(insertedUri.getLastPathSegment()));
                     return this;
                 }
             }
             else {  // update
-                int rowsUpdated = StudiosityApp.getInstance().getContentResolver().update(SubjectEntry.buildItemUri(getId()), values, null, null);
+                values.put(DeckEntry.COLUMN_CREATE_DATE, getCreateDate().toString());
+
+                int rowsUpdated = StudiosityApp.getInstance().getContentResolver().update(DeckEntry.buildItemUri(getId()), values, null, null);
                 return (rowsUpdated == 1) ? this : null;
             }
         } catch (SQLiteConstraintException e) {
@@ -154,7 +155,7 @@ public class DeckModel extends BaseModel implements Parcelable {
      */
     public String delete() {
         try {
-            StudiosityApp.getInstance().getContentResolver().delete(SubjectEntry.buildItemUri(getId()), SubjectEntry._ID + " = " + getId(), null);
+            StudiosityApp.getInstance().getContentResolver().delete(DeckEntry.buildItemUri(getId()), DeckEntry._ID + " = " + getId(), null);
             return "";
         } catch (Exception e) {
             return e.getMessage();
@@ -170,8 +171,9 @@ public class DeckModel extends BaseModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeLong(getId());
-        //parcel.writeString(getSubject());
-        //parcel.writeInt(getColorInt());
+        parcel.writeLong(getSubjectId());
+        parcel.writeString(getName());
+        parcel.writeString(getCreateDate() == null ? "" : getCreateDate().toString());
 
         // base fields
         parcel.writeByte((byte) (getIsDirty() ? 1 : 0));   //if mIsDirty == true, byte == 1
@@ -192,7 +194,7 @@ public class DeckModel extends BaseModel implements Parcelable {
     public DeckModel(Parcel parcel){
         super();
 
-        //initializeFieldData(parcel.readLong(), parcel.readString(), parcel.readInt());
+        initializeFieldData(parcel.readLong(), parcel.readLong(), parcel.readString(), Converters.stringToDate(parcel.readString()));
 
         // base fields
         if (parcel.readByte() != 0)

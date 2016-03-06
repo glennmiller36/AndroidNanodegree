@@ -72,6 +72,13 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    /**
+     * Return strongly typed business object for the cursor.
+     */
+    public DeckModel get(int position) {
+        return mDataSet.get(position);
+    }
+
     public interface MyClickListener {
         public void onItemClick(int position, View v);
     }

@@ -24,7 +24,8 @@ public class StudiosityProvider extends ContentProvider {
 
     static final int SUBJECTS = 100;
     static final int SUBJECT_ID = 101;
-    static final int DECK_SUBJECT_ID = 200;
+    static final int DECKS = 200;
+    static final int DECK_ID = 201;
 
     /**
      * UriMatcher will match each integer constants defined above.
@@ -37,7 +38,8 @@ public class StudiosityProvider extends ContentProvider {
         // For each type of URI you want to add, create a corresponding code.
         matcher.addURI(authority, DataContract.PATH_SUBJECT, SUBJECTS);
         matcher.addURI(authority, DataContract.PATH_SUBJECT + "/#", SUBJECT_ID);
-        matcher.addURI(authority, DataContract.PATH_DECK + "/#", DECK_SUBJECT_ID);
+        matcher.addURI(authority, DataContract.PATH_DECK, DECKS);
+        matcher.addURI(authority, DataContract.PATH_DECK + "/#", DECK_ID);
 
         return matcher;
     }
@@ -76,8 +78,14 @@ public class StudiosityProvider extends ContentProvider {
             /**
              * Get all Deck records for the requested Subjects
              */
-            case DECK_SUBJECT_ID:
+            case DECKS:
                 return DeckEntry.CONTENT_LIST_TYPE;
+
+            /**
+             * Get a particular Deck
+             */
+            case DECK_ID:
+                return DeckEntry.CONTENT_ITEM_TYPE;
 
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -121,11 +129,24 @@ public class StudiosityProvider extends ContentProvider {
                 break;
             }
 
-            case DECK_SUBJECT_ID: {
+            case DECKS: {
                 retCursor = mDatabase.getReadableDatabase().query(
                         DeckEntry.TABLE_NAME,
                         projection,
-                        DeckEntry.COLUMN_SUBJECT_ID + " = " + uri.getLastPathSegment(),
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+
+            case DECK_ID: {
+                retCursor = mDatabase.getReadableDatabase().query(
+                        DeckEntry.TABLE_NAME,
+                        projection,
+                        DeckEntry._ID + " = " + uri.getLastPathSegment(),
                         selectionArgs,
                         null,
                         null,
@@ -153,18 +174,28 @@ public class StudiosityProvider extends ContentProvider {
         switch (match) {
             case SUBJECT_ID: {
                 rowID = db.insertOrThrow(SubjectEntry.TABLE_NAME, null, values);
+                if (rowID > 0)
+                {
+                    Uri returnUri = ContentUris.withAppendedId(SubjectEntry.CONTENT_URI, rowID);
+                    getContext().getContentResolver().notifyChange(returnUri, null);
+                    return returnUri;
+                }
+                break;
+            }
+            case DECK_ID: {
+                rowID = db.insertOrThrow(DeckEntry.TABLE_NAME, null, values);
+                if (rowID > 0)
+                {
+                    Uri returnUri = ContentUris.withAppendedId(DeckEntry.CONTENT_URI, rowID);
+                    getContext().getContentResolver().notifyChange(returnUri, null);
+                    return returnUri;
+                }
                 break;
             }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        if (rowID > 0)
-        {
-            Uri returnUri = ContentUris.withAppendedId(SubjectEntry.CONTENT_URI, rowID);
-            getContext().getContentResolver().notifyChange(returnUri, null);
-            return returnUri;
-        }
         return null;
     }
 
@@ -182,6 +213,10 @@ public class StudiosityProvider extends ContentProvider {
             case SUBJECT_ID:
                 rowsDeleted = db.delete(
                         SubjectEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            case DECK_ID:
+                rowsDeleted = db.delete(
+                        DeckEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -205,6 +240,10 @@ public class StudiosityProvider extends ContentProvider {
         switch (match) {
             case SUBJECT_ID:
                 rowsUpdated = db.update(SubjectEntry.TABLE_NAME, values, SubjectEntry._ID + " = " + uri.getLastPathSegment(),
+                        selectionArgs);
+                break;
+            case DECK_ID:
+                rowsUpdated = db.update(DeckEntry.TABLE_NAME, values, DeckEntry._ID + " = " + uri.getLastPathSegment(),
                         selectionArgs);
                 break;
             default:

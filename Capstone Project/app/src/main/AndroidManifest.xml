@@ -34,6 +34,13 @@
             android:name=".activities.SubjectEditActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".activities.DeckListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.DeckEditActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <provider
             android:name=".data.StudiosityProvider"
@@ -41,9 +48,6 @@
             android:exported="false"
             android:syncable="true" />
 
-        <activity
-            android:name=".activities.DeckListActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

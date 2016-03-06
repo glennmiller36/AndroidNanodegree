@@ -1,5 +1,6 @@
 package com.fluidminds.android.studiosity.models;
 
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -36,5 +37,12 @@ public class FieldDataList {
      */
     public Long getLong(String field) {
         return (Long) mFieldData.get(field);
+    }
+
+    /**
+     * Returns the value of the requested field as an Date.
+     */
+    public Date getDate(String field) {
+        return (Date) mFieldData.get(field);
     }
 }
