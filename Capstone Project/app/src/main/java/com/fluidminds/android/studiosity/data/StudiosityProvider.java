@@ -24,7 +24,7 @@ public class StudiosityProvider extends ContentProvider {
 
     static final int SUBJECTS = 100;
     static final int SUBJECT_ID = 101;
-    static final int DECKS = 200;
+    static final int DECK_SUBJECT_ID = 200;
 
     /**
      * UriMatcher will match each integer constants defined above.
@@ -37,7 +37,7 @@ public class StudiosityProvider extends ContentProvider {
         // For each type of URI you want to add, create a corresponding code.
         matcher.addURI(authority, DataContract.PATH_SUBJECT, SUBJECTS);
         matcher.addURI(authority, DataContract.PATH_SUBJECT + "/#", SUBJECT_ID);
-        matcher.addURI(authority, DataContract.PATH_DECK, DECKS);
+        matcher.addURI(authority, DataContract.PATH_DECK + "/#", DECK_SUBJECT_ID);
 
         return matcher;
     }
@@ -76,7 +76,7 @@ public class StudiosityProvider extends ContentProvider {
             /**
              * Get all Deck records for the requested Subjects
              */
-            case DECKS:
+            case DECK_SUBJECT_ID:
                 return DeckEntry.CONTENT_LIST_TYPE;
 
             default:
@@ -121,11 +121,11 @@ public class StudiosityProvider extends ContentProvider {
                 break;
             }
 
-            case DECKS: {
+            case DECK_SUBJECT_ID: {
                 retCursor = mDatabase.getReadableDatabase().query(
                         DeckEntry.TABLE_NAME,
                         projection,
-                        selection,
+                        DeckEntry.COLUMN_SUBJECT_ID + " = " + uri.getLastPathSegment(),
                         selectionArgs,
                         null,
                         null,

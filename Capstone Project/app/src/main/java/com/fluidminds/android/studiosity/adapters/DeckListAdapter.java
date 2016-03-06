@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * from a {@link Cursor} to a {@link android.support.v7.widget.RecyclerView}.
  */
 public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHolder> {
-    private ArrayList<DeckModel> mDataset = new ArrayList<>();
+    private ArrayList<DeckModel> mDataSet = new ArrayList<>();
     private static MyClickListener myClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -39,10 +39,6 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
         this.myClickListener = myClickListener;
     }
 
-    public DeckListAdapter(/*ArrayList<DeckModel> myDataset*/) {
-        //mDataset = myDataset;
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -53,22 +49,27 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mName.setText(mDataset.get(position).getSubject());
+        holder.mName.setText(mDataSet.get(position).getName());
     }
 
     public void addItem(DeckModel dataObj, int index) {
-        mDataset.add(dataObj);
+        mDataSet.add(dataObj);
         notifyItemInserted(index);
     }
 
     public void deleteItem(int index) {
-        mDataset.remove(index);
+        mDataSet.remove(index);
         notifyItemRemoved(index);
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return mDataSet.size();
+    }
+
+    public void swapData(ArrayList<DeckModel> dataset) {
+        mDataSet = dataset;
+        notifyDataSetChanged();
     }
 
     public interface MyClickListener {

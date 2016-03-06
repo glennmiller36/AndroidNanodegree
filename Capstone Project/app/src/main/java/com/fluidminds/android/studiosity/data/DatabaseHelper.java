@@ -59,5 +59,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color) VALUES ('Social Studies', -10011977)");
         sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color) VALUES ('U.S. Geography', -12627531)");
         sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color) VALUES ('abcdefghijklmnopqrstuvwxyz', -14575885)");
+
+        // Decks
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (1, 'Computers - Test1', '2014-03-01 13:01:01.126')");
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (1, 'Computers - Test2', '2014-02-01 13:02:01.126')");
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (1, 'Computers - Test3', '2014-01-01 13:03:01.126')");
+
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (2, 'Chemistry - Test1', '2014-03-01 13:01:01.126')");
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (2, 'Chemistry - Test2', '2014-02-01 13:02:01.126')");
     }
 }

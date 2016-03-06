@@ -1,5 +1,6 @@
 package com.fluidminds.android.studiosity.fragments;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,13 @@ import android.widget.TextView;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.adapters.DeckListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
+import com.fluidminds.android.studiosity.models.DeckModel;
+import com.fluidminds.android.studiosity.models.SubjectModel;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A fragment to display Card Decks for the requested Subject.
@@ -31,9 +39,10 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
     private static final int DECK_LOADER = 0;
 
     private static final String[] DECK_COLUMNS = {
-            DeckEntry.TABLE_NAME + "." + DeckEntry._ID,
-            DeckEntry.COLUMN_NAME,
-            DeckEntry.COLUMN_CREATE_DATE
+        DeckEntry.TABLE_NAME + "." + DeckEntry._ID,
+        DeckEntry.COLUMN_SUBJECT_ID,
+        DeckEntry.COLUMN_NAME,
+        DeckEntry.COLUMN_CREATE_DATE
     };
 
     // These indices are tied to DECK_COLUMNS.
@@ -102,8 +111,11 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
         // Sort order:  Ascending, by create_date, name.
         String sortOrder = DeckEntry.COLUMN_CREATE_DATE + ", " + DeckEntry.COLUMN_NAME + " COLLATE NOCASE ASC";
 
+        Intent intent = getActivity().getIntent();
+        SubjectModel subjectModel = intent.getParcelableExtra("subjectmodel");
+
         return new CursorLoader(getActivity(),
-                DeckEntry.CONTENT_URI,
+                DeckEntry.buildItemUri(subjectModel.getId()),
                 DECK_COLUMNS,
                 null,
                 null,
@@ -112,13 +124,28 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        //mDeckAdapter.swapCursor(data);
+        ArrayList<DeckModel> decks = new ArrayList<>();
+        try {
+            while (data.moveToNext()) {
+                String gl = data.getString(3);
+                Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(gl);
+
+                DeckModel model = new DeckModel(data.getLong(0), data.getLong(1), data.getString(2), date);
+                decks.add(model);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } finally {
+            data.close();
+        }
+
+        mDeckAdapter.swapData(decks);
 
         mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        /*mDeckAdapter.swapCursor(null);*/
+        mDeckAdapter.swapData(null);
     }
 }

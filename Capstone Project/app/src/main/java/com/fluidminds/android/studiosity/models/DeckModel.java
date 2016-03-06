@@ -13,6 +13,8 @@ import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 import com.fluidminds.android.studiosity.utils.ThemeColor;
 
+import java.util.Date;
+
 /**
  * A rich Model representing a Deck, where the object encapsulates actual behavior (business and validation).
  */
@@ -20,21 +22,22 @@ public class DeckModel extends BaseModel implements Parcelable {
 
     // Field Names
     public static final String sID = "Id";
-    public static final String sSUBJECT = "Subject";
-    public static final String sCOLORINT = "ColorInt";
+    public static final String sSUBJECTID = "SubjectId";
+    public static final String sNAME = "Name";
+    public static final String sCREATEDATE = "CreateDate";
 
     public DeckModel() {
         super();
 
-        initializeFieldData(0L, "", ThemeColor.generateRandomColor());
+        initializeFieldData(0L, 0L, "", null);
 
         markAsNew();
     }
 
-    public DeckModel(Long id, String subject, Integer colorInt) {
+    public DeckModel(Long id, Long subjectId, String name, Date createDate) {
         super();
 
-        initializeFieldData(id, subject, colorInt);
+        initializeFieldData(id, subjectId, name, createDate);
 
         markAsOld();
     }
@@ -42,17 +45,18 @@ public class DeckModel extends BaseModel implements Parcelable {
     @Override
     protected void addBusinessRules() {
         // Subject is required
-        mBusinessRules.addRule(new RequiredRule(sSUBJECT, StudiosityApp.getInstance().getString(R.string.required)));
+        mBusinessRules.addRule(new RequiredRule(sNAME, StudiosityApp.getInstance().getString(R.string.required)));
     }
 
     /**
      * Put the initial field key/value into the FieldDataList.
      */
-    private void initializeFieldData(Long id, String subject, Integer colorInt) {
+    private void initializeFieldData(Long id, Long subjectId, String name, Date createDate) {
         /* Initially load properties without dirtying the model */
         loadFieldData(sID, id);
-        loadFieldData(sSUBJECT, subject);
-        loadFieldData(sCOLORINT, colorInt);
+        loadFieldData(sSUBJECTID, subjectId);
+        loadFieldData(sNAME, name);
+        loadFieldData(sCREATEDATE, createDate);
     }
 
     /**
@@ -67,39 +71,40 @@ public class DeckModel extends BaseModel implements Parcelable {
     }
 
     /**
-     * Subject
+     * SubjectId
      */
-    @Bindable
-    public String getSubject() {
-        return getFieldData().getString(sSUBJECT);
-    }
+    public Long getSubjectId() { return getFieldData().getLong(sSUBJECTID); }
 
-    public void setSubject(String subject) {
-        if (!getSubject().equals(subject)) {
-            setFieldData(sSUBJECT, subject.trim());
+    public void setSubjectId(Long id) {
+        if (!getSubjectId().equals(id)) {
+            setFieldData(sSUBJECTID, id);
         }
     }
 
     /**
-     * Color
+     * Name
      */
     @Bindable
-    public Integer getColorInt() {
-        return getFieldData().getInteger(sCOLORINT);
-    }
+    public String getName() { return getFieldData().getString(sNAME); }
 
-    public void setColorInt(Integer color) {
-        if (!getColorInt().equals(color)) {
-            setFieldData(sCOLORINT, color);
-
-            notifyPropertyChanged(BR.colorInt);
-            notifyPropertyChanged(BR.colorName);
+    public void setName(String name) {
+        if (!getName().equals(name)) {
+            setFieldData(sNAME, name.trim());
         }
     }
 
+    /**
+     * CreateDate
+     */
     @Bindable
-    public String getColorName() {
-        return ThemeColor.getColorName(getColorInt());
+    public Integer getCreateDate() {
+        return getFieldData().getInteger(sCREATEDATE);
+    }
+
+    public void setCreateDate(Date date) {
+        if (!getCreateDate().equals(date)) {
+            setFieldData(sCREATEDATE, date);
+        }
     }
 
     /**
@@ -120,8 +125,9 @@ public class DeckModel extends BaseModel implements Parcelable {
 
         // Then add the data, along with the corresponding name of the data type,
         // so the content provider knows what kind of value is being inserted.
-        values.put(SubjectEntry.COLUMN_NAME, getSubject());
-        values.put(SubjectEntry.COLUMN_COLOR, getColorInt());
+
+        //values.put(SubjectEntry.COLUMN_NAME, getSubject());
+        //values.put(SubjectEntry.COLUMN_COLOR, getColorInt());
 
         try {
             if (getId() == 0) { // insert
@@ -136,7 +142,7 @@ public class DeckModel extends BaseModel implements Parcelable {
                 return (rowsUpdated == 1) ? this : null;
             }
         } catch (SQLiteConstraintException e) {
-            getBrokenRules().put(sSUBJECT, StudiosityApp.getInstance().getString(R.string.duplicate_name));
+            getBrokenRules().put(sNAME, StudiosityApp.getInstance().getString(R.string.duplicate_name));
             notifyPropertyChanged(BR.brokenRules);
         }
 
@@ -164,8 +170,8 @@ public class DeckModel extends BaseModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeLong(getId());
-        parcel.writeString(getSubject());
-        parcel.writeInt(getColorInt());
+        //parcel.writeString(getSubject());
+        //parcel.writeInt(getColorInt());
 
         // base fields
         parcel.writeByte((byte) (getIsDirty() ? 1 : 0));   //if mIsDirty == true, byte == 1
@@ -186,7 +192,7 @@ public class DeckModel extends BaseModel implements Parcelable {
     public DeckModel(Parcel parcel){
         super();
 
-        initializeFieldData(parcel.readLong(), parcel.readString(), parcel.readInt());
+        //initializeFieldData(parcel.readLong(), parcel.readString(), parcel.readInt());
 
         // base fields
         if (parcel.readByte() != 0)
