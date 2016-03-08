@@ -1,5 +1,6 @@
 package com.fluidminds.android.studiosity.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,25 +17,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
-import com.fluidminds.android.studiosity.activities.CardListActivity;
 import com.fluidminds.android.studiosity.activities.DeckEditActivity;
+import com.fluidminds.android.studiosity.activities.DeckListActivity;
 import com.fluidminds.android.studiosity.adapters.DeckListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 import com.fluidminds.android.studiosity.utils.Converters;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
- * A fragment to display Card Decks for the requested Subject.
+ * A fragment to display Cards for the requested Deck.
  */
-public class DeckListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class CardListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private DeckListAdapter mDeckAdapter;
+    //private DeckListAdapter mDeckAdapter;
 
-    private RecyclerView mRecyclerDecks;
+    //private RecyclerView mRecyclerDecks;
     private TextView mNoRecords;
 
     private SubjectModel mSubjectModel;
@@ -53,7 +53,7 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
     public static final int COL_NAME = 1;
     public static final int COL_CREATE_DATE = 2;
 
-    public DeckListFragment() {
+    public CardListFragment() {
         // Required empty public constructor
     }
 
@@ -61,32 +61,32 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mDeckAdapter = new DeckListAdapter();
+        //mDeckAdapter = new DeckListAdapter();
 
         Intent intent = getActivity().getIntent();
         mSubjectModel = intent.getParcelableExtra("subjectmodel");
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_deck_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_card_list, container, false);
 
         // Get a reference to the RecyclerView, and attach this adapter to it.
-        mRecyclerDecks = (RecyclerView) view.findViewById(R.id.recyclerDecks);
-        mRecyclerDecks.setHasFixedSize(true);
-        mRecyclerDecks.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        mRecyclerDecks.setAdapter(mDeckAdapter);
-
-        mDeckAdapter.setOnItemClickListener(new DeckListAdapter.MyClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                Intent intent = new Intent(getContext(), CardListActivity.class);
-
-                DeckModel model = mDeckAdapter.get(position);
-                intent.putExtra("deckmodel", model);
-
-                startActivity(intent);
-            }
-        });
-
+//        mRecyclerDecks = (RecyclerView) view.findViewById(R.id.recyclerCards);
+//        mRecyclerDecks.setHasFixedSize(true);
+//        mRecyclerDecks.setLayoutManager(new LinearLayoutManager(this.getContext()));
+//        mRecyclerDecks.setAdapter(mDeckAdapter);
+//
+//        mDeckAdapter.setOnItemClickListener(new DeckListAdapter.MyClickListener() {
+//             @Override
+//             public void onItemClick(int position, View v) {
+//             Intent intent = new Intent(getContext(), DeckListActivity.class);
+//
+//             DeckModel model = mDeckAdapter.get(position);
+//             intent.putExtra("deckmodel", model);
+//
+//             startActivity(intent);
+//             }
+//         });
+//
         mNoRecords = (TextView) view.findViewById(R.id.textNoRecords);
 
         FloatingActionButton fabAdd = (FloatingActionButton) view.findViewById(R.id.fabAdd);
@@ -105,7 +105,7 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(DECK_LOADER, null, this);
+        //getLoaderManager().initLoader(DECK_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -118,34 +118,38 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
         String sortOrder = DeckEntry.COLUMN_CREATE_DATE + ", " + DeckEntry.COLUMN_NAME + " COLLATE NOCASE ASC";
 
         // query decks for the given parent Subject
-        String selection = DeckEntry.COLUMN_SUBJECT_ID + " = ?";
-        String[] selectionArgs = new String[] {
-            mSubjectModel.getId().toString()
-        };
+        //String selection = DeckEntry.COLUMN_SUBJECT_ID + " = ?";
+        //String[] selectionArgs = new String[] {
+        //    mSubjectModel.getId().toString()
+        //};
 
         return new CursorLoader(getActivity(),
                 DeckEntry.CONTENT_URI,
                 DECK_COLUMNS,
-                selection,
-                selectionArgs,
+                null,//selection,
+                null,//selectionArgs,
                 sortOrder);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        ArrayList<DeckModel> decks = new ArrayList<>();
-        while (data.moveToNext()) {
-            DeckModel model = new DeckModel(data.getLong(0), data.getLong(1), data.getString(2), Converters.stringToDate(data.getString(3)));
-            decks.add(model);
-        }
-
-        mDeckAdapter.swapData(decks);
-
-        mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
+//        ArrayList<DeckModel> decks = new ArrayList<>();
+//        try {
+//            while (data.moveToNext()) {
+//                DeckModel model = new DeckModel(data.getLong(0), data.getLong(1), data.getString(2), Converters.stringToDate(data.getString(3)));
+//                decks.add(model);
+//            }
+//        } finally {
+//            data.close();
+//        }
+//
+//        mDeckAdapter.swapData(decks);
+//
+//        mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        mDeckAdapter.swapData(null);
+        //mDeckAdapter.swapData(null);
     }
 }

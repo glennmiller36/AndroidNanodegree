@@ -137,7 +137,7 @@ public class DeckModel extends BaseModel implements Parcelable {
                 }
             }
             else {  // update
-                values.put(DeckEntry.COLUMN_CREATE_DATE, getCreateDate().toString());
+                values.put(DeckEntry.COLUMN_CREATE_DATE, Converters.dateToString(getCreateDate()));
 
                 int rowsUpdated = StudiosityApp.getInstance().getContentResolver().update(DeckEntry.buildItemUri(getId()), values, null, null);
                 return (rowsUpdated == 1) ? this : null;
@@ -173,7 +173,7 @@ public class DeckModel extends BaseModel implements Parcelable {
         parcel.writeLong(getId());
         parcel.writeLong(getSubjectId());
         parcel.writeString(getName());
-        parcel.writeString(getCreateDate() == null ? "" : getCreateDate().toString());
+        parcel.writeString(getCreateDate() == null ? "" : Converters.dateToString(getCreateDate()));
 
         // base fields
         parcel.writeByte((byte) (getIsDirty() ? 1 : 0));   //if mIsDirty == true, byte == 1

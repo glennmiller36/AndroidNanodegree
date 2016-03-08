@@ -10,26 +10,26 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.fluidminds.android.studiosity.R;
-import com.fluidminds.android.studiosity.eventbus.SubjectChangedEvent;
-import com.fluidminds.android.studiosity.models.SubjectModel;
+import com.fluidminds.android.studiosity.eventbus.DeckChangedEvent;
+import com.fluidminds.android.studiosity.models.DeckModel;
 
 import org.greenrobot.eventbus.Subscribe;
 
 /**
- * An activity to display Card Decks for the requested Subject.
+ * An activity to display Cards for the requested Drck.
  */
-public class DeckListActivity extends BaseActivity {
+public class CardListActivity extends BaseActivity {
 
-    private SubjectModel mSubjectModel;
+    private DeckModel mDeckModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_deck_list);
+        setContentView(R.layout.activity_card_list);
 
         Intent intent = getIntent();
-        mSubjectModel = intent.getParcelableExtra("subjectmodel");
+        mDeckModel = intent.getParcelableExtra("deckmodel");
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
@@ -37,7 +37,7 @@ public class DeckListActivity extends BaseActivity {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            getSupportActionBar().setTitle(mSubjectModel.getSubject());
+            getSupportActionBar().setTitle(mDeckModel.getName());
         }
 
         // Register as a subscriber
@@ -57,7 +57,7 @@ public class DeckListActivity extends BaseActivity {
         mMenu = menu;
 
         // color toolbar based on model Theme Color
-        colorizeToolbar(mSubjectModel.getColorInt());
+        //colorizeToolbar(mDeckModel.getColorInt());
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -69,23 +69,23 @@ public class DeckListActivity extends BaseActivity {
                 finish();
                 return true;
             case android.R.id.edit:
-                Intent intent = new Intent(this, SubjectEditActivity.class);
-                intent.putExtra("subjectmodel", mSubjectModel);
+                Intent intent = new Intent(this, DeckEditActivity.class);
+                intent.putExtra("deckmodel", mDeckModel);
 
                 startActivity(intent);
                 return true;
             case R.id.action_delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.alert_delete_title)
-                        .setMessage(String.format(getString(R.string.delete_deck), mSubjectModel.getSubject()))
+                        .setMessage(String.format(getString(R.string.delete_deck), mDeckModel.getName()))
                         .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                String error = mSubjectModel.delete();
+                                String error = mDeckModel.delete();
                                 if (error.isEmpty())
                                     finish();
                                 else {
-                                    Toast.makeText(DeckListActivity.this, "R.string.alert_delete_title", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CardListActivity.this, "R.string.alert_delete_title", Toast.LENGTH_SHORT).show();
                                     dialogInterface.dismiss();
                                 }
                             }
@@ -104,11 +104,9 @@ public class DeckListActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void onEvent(SubjectChangedEvent event){
-        mSubjectModel = event.getModel();
+    public void onEvent(DeckChangedEvent event){
+        mDeckModel = event.getModel();
 
-        colorizeToolbar(mSubjectModel.getColorInt());
-
-        getSupportActionBar().setTitle(mSubjectModel.getSubject());
+        getSupportActionBar().setTitle(mDeckModel.getName());
     }
 }

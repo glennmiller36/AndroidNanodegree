@@ -11,7 +11,6 @@
     <string name="action_edit">Edit</string>
     <string name="action_delete">Delete</string>
     <string name="alert_delete_title">Delete</string>
-    <string name="delete_subject">Delete subject \'%s\'?</string>
 
     <!-- Subjects -->
     <string name="subjects">Subjects</string>
@@ -19,9 +18,15 @@
     <string name="subject_name">Subject Name</string>
     <string name="subject">Subject</string>
     <string name="theme_color">Theme Color</string>
+    <string name="delete_subject">Delete subject \'%s\'?</string>
 
     <!-- Decks -->
     <string name="no_decks">No Decks</string>
     <string name="deck_name">Deck Name</string>
     <string name="deck">Deck</string>
+    <string name="delete_deck">Delete deck \'%s\'?</string>
+
+    <!-- Cards -->
+    <string name="no_cards">No Cards</string>
+    <string name="delete_card">Delete card \'%s\'?</string>
 </resources>
