@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.eventbus.DeckChangedEvent;
 import com.fluidminds.android.studiosity.models.DeckModel;
+import com.fluidminds.android.studiosity.models.SubjectModel;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -20,6 +21,7 @@ import org.greenrobot.eventbus.Subscribe;
  */
 public class CardListActivity extends BaseActivity {
 
+    private SubjectModel mSubjectModel;
     private DeckModel mDeckModel;
 
     @Override
@@ -29,6 +31,7 @@ public class CardListActivity extends BaseActivity {
         setContentView(R.layout.activity_card_list);
 
         Intent intent = getIntent();
+        mSubjectModel = intent.getParcelableExtra("subjectmodel");
         mDeckModel = intent.getParcelableExtra("deckmodel");
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -57,7 +60,8 @@ public class CardListActivity extends BaseActivity {
         mMenu = menu;
 
         // color toolbar based on model Theme Color
-        //colorizeToolbar(mDeckModel.getColorInt());
+        if(mSubjectModel != null)
+            colorizeToolbar(mSubjectModel.getColorInt());
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -70,6 +74,7 @@ public class CardListActivity extends BaseActivity {
                 return true;
             case android.R.id.edit:
                 Intent intent = new Intent(this, DeckEditActivity.class);
+                intent.putExtra("subjectmodel", mSubjectModel);
                 intent.putExtra("deckmodel", mDeckModel);
 
                 startActivity(intent);

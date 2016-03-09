@@ -81,6 +81,7 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
                 Intent intent = new Intent(getContext(), CardListActivity.class);
 
                 DeckModel model = mDeckAdapter.get(position);
+                intent.putExtra("subjectmodel", mSubjectModel);
                 intent.putExtra("deckmodel", model);
 
                 startActivity(intent);

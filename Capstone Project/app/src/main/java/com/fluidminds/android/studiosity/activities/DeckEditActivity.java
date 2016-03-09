@@ -41,18 +41,17 @@ public class DeckEditActivity extends BaseActivity {
         LinearLayout buttonSave = (LinearLayout) findViewById(R.id.buttonDone);
         buttonSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DeckEditFragment editFragment = (DeckEditFragment)getSupportFragmentManager().findFragmentById(R.id.fragDeckEdit);
-                if(null != editFragment && editFragment.isInLayout())
-                {
+                DeckEditFragment editFragment = (DeckEditFragment) getSupportFragmentManager().findFragmentById(R.id.fragDeckEdit);
+                if (null != editFragment && editFragment.isInLayout()) {
                     DeckModel model = editFragment.save();
                     if (model != null) {
                         if (model.getIsNew()) {
                             Intent intent = new Intent(that, CardListActivity.class);
+                            intent.putExtra("subjectmodel", getIntent().getParcelableExtra("subjectmodel"));
                             intent.putExtra("deckmodel", model);
 
                             startActivity(intent);
-                        }
-                        else {
+                        } else {
                             finish();
                         }
                     }

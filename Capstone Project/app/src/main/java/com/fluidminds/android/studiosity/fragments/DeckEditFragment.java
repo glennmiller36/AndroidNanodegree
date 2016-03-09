@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 
 import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.activities.BaseActivity;
 import com.fluidminds.android.studiosity.eventbus.DeckChangedEvent;
 import com.fluidminds.android.studiosity.models.DeckModel;
+import com.fluidminds.android.studiosity.models.SubjectModel;
 import com.fluidminds.android.studiosity.viewmodels.DeckViewModel;
 
 import org.greenrobot.eventbus.EventBus;
@@ -72,8 +74,9 @@ public class DeckEditFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
 
         // color toolbar based on model Theme Color
-        //if(mViewModel != null)
-        //    ((BaseActivity) getActivity()).colorizeToolbar(mViewModel.getModel().getColorInt());
+        SubjectModel subjectModel = getActivity().getIntent().getParcelableExtra("subjectmodel");
+        if(subjectModel != null)
+            ((BaseActivity) getActivity()).colorizeToolbar(subjectModel.getColorInt());
     }
 
     /**
