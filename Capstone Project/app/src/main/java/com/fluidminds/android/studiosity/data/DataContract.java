@@ -20,6 +20,7 @@ public class DataContract {
     // Possible paths (appended to base content URI for possible URI's)
     public static final String PATH_SUBJECT = "subject";
     public static final String PATH_DECK = "deck";
+    public static final String PATH_CARD = "card";
 
     /**
      * Inner class that defines the table contents of the Subjects table
@@ -65,6 +66,32 @@ public class DataContract {
         // Column names
         public static final String COLUMN_SUBJECT_ID = "subjectid";
         public static final String COLUMN_NAME = "name";
+
+        public static Uri buildItemUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+
+    /**
+     * Inner class that defines the table contents of the Card table
+     */
+    public static final class CardEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_CARD).build();
+
+        public static final String CONTENT_LIST_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CARD;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CARD;
+
+        // Table name
+        public static final String TABLE_NAME = "card";
+
+        // Column names
+        public static final String COLUMN_DECK_ID = "deckid";
+        public static final String COLUMN_QUESTION = "question";
+        public static final String COLUMN_ANSWER = "answer";
 
         public static Uri buildItemUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

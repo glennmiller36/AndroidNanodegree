@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
+import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
 import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 
@@ -26,6 +27,8 @@ public class StudiosityProvider extends ContentProvider {
     static final int SUBJECT_ID = 101;
     static final int DECKS = 200;
     static final int DECK_ID = 201;
+    static final int CARDS = 300;
+    static final int CARD_ID = 301;
 
     /**
      * UriMatcher will match each integer constants defined above.
@@ -40,6 +43,8 @@ public class StudiosityProvider extends ContentProvider {
         matcher.addURI(authority, DataContract.PATH_SUBJECT + "/#", SUBJECT_ID);
         matcher.addURI(authority, DataContract.PATH_DECK, DECKS);
         matcher.addURI(authority, DataContract.PATH_DECK + "/#", DECK_ID);
+        matcher.addURI(authority, DataContract.PATH_CARD, CARDS);
+        matcher.addURI(authority, DataContract.PATH_CARD + "/#", CARD_ID);
 
         return matcher;
     }
@@ -86,6 +91,18 @@ public class StudiosityProvider extends ContentProvider {
              */
             case DECK_ID:
                 return DeckEntry.CONTENT_ITEM_TYPE;
+
+            /**
+             * Get all Card records for the requested Deck
+             */
+            case CARDS:
+                return CardEntry.CONTENT_LIST_TYPE;
+
+            /**
+             * Get a particular Card
+             */
+            case CARD_ID:
+                return CardEntry.CONTENT_ITEM_TYPE;
 
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -155,6 +172,32 @@ public class StudiosityProvider extends ContentProvider {
                 break;
             }
 
+            case CARDS: {
+                retCursor = mDatabase.getReadableDatabase().query(
+                        CardEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+
+            case CARD_ID: {
+                retCursor = mDatabase.getReadableDatabase().query(
+                        CardEntry.TABLE_NAME,
+                        projection,
+                        CardEntry._ID + " = " + uri.getLastPathSegment(),
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -182,6 +225,7 @@ public class StudiosityProvider extends ContentProvider {
                 }
                 break;
             }
+
             case DECK_ID: {
                 rowID = db.insertOrThrow(DeckEntry.TABLE_NAME, null, values);
                 if (rowID > 0)
@@ -192,6 +236,18 @@ public class StudiosityProvider extends ContentProvider {
                 }
                 break;
             }
+
+            case CARD_ID: {
+                rowID = db.insertOrThrow(CardEntry.TABLE_NAME, null, values);
+                if (rowID > 0)
+                {
+                    Uri returnUri = ContentUris.withAppendedId(CardEntry.CONTENT_URI, rowID);
+                    getContext().getContentResolver().notifyChange(returnUri, null);
+                    return returnUri;
+                }
+                break;
+            }
+
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -211,13 +267,17 @@ public class StudiosityProvider extends ContentProvider {
         if ( null == selection ) selection = "1";
         switch (match) {
             case SUBJECT_ID:
-                rowsDeleted = db.delete(
-                        SubjectEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(SubjectEntry.TABLE_NAME, selection, selectionArgs);
                 break;
+
             case DECK_ID:
-                rowsDeleted = db.delete(
-                        DeckEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(DeckEntry.TABLE_NAME, selection, selectionArgs);
                 break;
+
+            case CARD_ID:
+                rowsDeleted = db.delete(CardEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -242,10 +302,17 @@ public class StudiosityProvider extends ContentProvider {
                 rowsUpdated = db.update(SubjectEntry.TABLE_NAME, values, SubjectEntry._ID + " = " + uri.getLastPathSegment(),
                         selectionArgs);
                 break;
+
             case DECK_ID:
                 rowsUpdated = db.update(DeckEntry.TABLE_NAME, values, DeckEntry._ID + " = " + uri.getLastPathSegment(),
                         selectionArgs);
                 break;
+
+            case CARD_ID:
+                rowsUpdated = db.update(CardEntry.TABLE_NAME, values, CardEntry._ID + " = " + uri.getLastPathSegment(),
+                        selectionArgs);
+                break;
+
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }

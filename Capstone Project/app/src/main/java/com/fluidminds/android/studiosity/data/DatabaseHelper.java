@@ -4,8 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
+import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
+import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 
 /**
  * Manages a local database data.
@@ -27,6 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super.onOpen(db);
 
         if (!db.isReadOnly()) {
+            // enable CASCADE DELETE
             db.execSQL("PRAGMA foreign_keys=ON;");
         }
     }
@@ -53,6 +55,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " );";
         sqLiteDatabase.execSQL(SQL_CREATE_DECK_TABLE);
 
+        // Create a table to hold Cards for a Deck.
+        final String SQL_CREATE_CARD_TABLE = "CREATE TABLE " + CardEntry.TABLE_NAME + " (" +
+                CardEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                CardEntry.COLUMN_DECK_ID + " INTEGER NOT NULL, " +
+                CardEntry.COLUMN_QUESTION + " TEXT NOT NULL UNIQUE COLLATE NOCASE, " +
+                CardEntry.COLUMN_ANSWER + " TEXT NOT NULL, " +
+                " FOREIGN KEY(" + CardEntry.COLUMN_DECK_ID + ") REFERENCES " + DeckEntry.TABLE_NAME + "(" + DeckEntry._ID + ") ON DELETE CASCADE " +
+                " );";
+        sqLiteDatabase.execSQL(SQL_CREATE_CARD_TABLE);
+
         seedData(sqLiteDatabase);
     }
 
@@ -74,7 +86,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (1, 'Computers - Test2')");
         sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (1, 'Computers - Test3')");
 
-        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (2, 'Chemistry - Test1')");
-        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (2, 'Chemistry - Test2')");
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (5, 'State Capitals')");
+
+        // Cards
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (4, 'Iowa', 'Des Moines')");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (4, 'Nebraska', 'Lincoln')");
     }
 }
