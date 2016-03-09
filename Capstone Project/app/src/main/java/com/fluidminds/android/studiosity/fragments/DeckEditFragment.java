@@ -64,9 +64,7 @@ public class DeckEditFragment extends Fragment {
         mBinding.setVariable(BR.handler, this);
 
         // Inflate the layout for this fragment
-        View view = mBinding.getRoot();
-
-        return view;
+        return mBinding.getRoot();
     }
 
     @Override

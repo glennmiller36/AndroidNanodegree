@@ -24,7 +24,6 @@ import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 import com.fluidminds.android.studiosity.utils.Converters;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 /**

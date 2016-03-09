@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHolder> {
     private ArrayList<DeckModel> mDataSet = new ArrayList<>();
-    private static MyClickListener myClickListener;
+    private static MyClickListener mItemClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mName;
@@ -31,12 +31,12 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            myClickListener.onItemClick(getPosition(), v);
+            mItemClickListener.onItemClick(getPosition(), v);
         }
     }
 
     public void setOnItemClickListener(MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
+        this.mItemClickListener = myClickListener;
     }
 
     @Override
@@ -50,16 +50,6 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mName.setText(mDataSet.get(position).getName());
-    }
-
-    public void addItem(DeckModel dataObj, int index) {
-        mDataSet.add(dataObj);
-        notifyItemInserted(index);
-    }
-
-    public void deleteItem(int index) {
-        mDataSet.remove(index);
-        notifyItemRemoved(index);
     }
 
     @Override
