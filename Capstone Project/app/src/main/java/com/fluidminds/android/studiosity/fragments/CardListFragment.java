@@ -1,6 +1,5 @@
 package com.fluidminds.android.studiosity.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,8 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +15,9 @@ import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.activities.DeckEditActivity;
-import com.fluidminds.android.studiosity.activities.DeckListActivity;
-import com.fluidminds.android.studiosity.adapters.DeckListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
-import com.fluidminds.android.studiosity.utils.Converters;
-
-import java.util.ArrayList;
 
 /**
  * A fragment to display Cards for the requested Deck.
@@ -44,14 +36,12 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
     private static final String[] DECK_COLUMNS = {
         DeckEntry.TABLE_NAME + "." + DeckEntry._ID,
         DeckEntry.COLUMN_SUBJECT_ID,
-        DeckEntry.COLUMN_NAME,
-        DeckEntry.COLUMN_CREATE_DATE
+        DeckEntry.COLUMN_NAME
     };
 
     // These indices are tied to DECK_COLUMNS.
     public static final int COL_ID = 0;
     public static final int COL_NAME = 1;
-    public static final int COL_CREATE_DATE = 2;
 
     public CardListFragment() {
         // Required empty public constructor
@@ -114,8 +104,8 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
      */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        // Sort order:  Ascending, by create_date, name.
-        String sortOrder = DeckEntry.COLUMN_CREATE_DATE + ", " + DeckEntry.COLUMN_NAME + " COLLATE NOCASE ASC";
+        // Sort order:  Ascending by name.
+        String sortOrder = DeckEntry.COLUMN_NAME + " COLLATE NOCASE ASC";
 
         // query decks for the given parent Subject
         //String selection = DeckEntry.COLUMN_SUBJECT_ID + " = ?";

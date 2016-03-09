@@ -39,8 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_DECK_TABLE = "CREATE TABLE " + DeckEntry.TABLE_NAME + " (" +
                 DeckEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 DeckEntry.COLUMN_SUBJECT_ID + " INTEGER NOT NULL, " +
-                DeckEntry.COLUMN_NAME + " TEXT NOT NULL UNIQUE COLLATE NOCASE, " +
-                DeckEntry.COLUMN_CREATE_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP " +
+                DeckEntry.COLUMN_NAME + " TEXT NOT NULL UNIQUE COLLATE NOCASE " +
                 " );";
         sqLiteDatabase.execSQL(SQL_CREATE_DECK_TABLE);
 
@@ -61,11 +60,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color) VALUES ('abcdefghijklmnopqrstuvwxyz', -14575885)");
 
         // Decks
-        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (1, 'Computers - Test1', '2014-03-01 13:01:01.126')");
-        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (1, 'Computers - Test2', '2014-02-01 13:02:01.126')");
-        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (1, 'Computers - Test3', '2014-01-01 13:03:01.126')");
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (1, 'Computers - Test1')");
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (1, 'Computers - Test2')");
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (1, 'Computers - Test3')");
 
-        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (2, 'Chemistry - Test1', '2014-03-01 13:01:01.126')");
-        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name, CreateDate) VALUES (2, 'Chemistry - Test2', '2014-02-01 13:02:01.126')");
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (2, 'Chemistry - Test1')");
+        sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (2, 'Chemistry - Test2')");
     }
 }

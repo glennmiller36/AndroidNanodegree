@@ -22,7 +22,6 @@ import com.fluidminds.android.studiosity.adapters.DeckListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
-import com.fluidminds.android.studiosity.utils.Converters;
 
 import java.util.ArrayList;
 
@@ -43,14 +42,12 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
     private static final String[] DECK_COLUMNS = {
         DeckEntry.TABLE_NAME + "." + DeckEntry._ID,
         DeckEntry.COLUMN_SUBJECT_ID,
-        DeckEntry.COLUMN_NAME,
-        DeckEntry.COLUMN_CREATE_DATE
+        DeckEntry.COLUMN_NAME
     };
 
     // These indices are tied to DECK_COLUMNS.
     public static final int COL_ID = 0;
     public static final int COL_NAME = 1;
-    public static final int COL_CREATE_DATE = 2;
 
     public DeckListFragment() {
         // Required empty public constructor
@@ -114,8 +111,8 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
      */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        // Sort order:  Ascending, by create_date, name.
-        String sortOrder = DeckEntry.COLUMN_CREATE_DATE + ", " + DeckEntry.COLUMN_NAME + " COLLATE NOCASE ASC";
+        // Sort order:  Ascending by name.
+        String sortOrder = DeckEntry.COLUMN_NAME + " COLLATE NOCASE ASC";
 
         // query decks for the given parent Subject
         String selection = DeckEntry.COLUMN_SUBJECT_ID + " = ?";
@@ -135,7 +132,7 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         ArrayList<DeckModel> decks = new ArrayList<>();
         while (data.moveToNext()) {
-            DeckModel model = new DeckModel(data.getLong(0), data.getLong(1), data.getString(2), Converters.stringToDate(data.getString(3)));
+            DeckModel model = new DeckModel(data.getLong(0), data.getLong(1), data.getString(2));
             decks.add(model);
         }
 

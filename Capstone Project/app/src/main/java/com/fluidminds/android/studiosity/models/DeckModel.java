@@ -11,7 +11,6 @@ import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
-import com.fluidminds.android.studiosity.utils.Converters;
 
 import java.util.Date;
 
@@ -24,20 +23,19 @@ public class DeckModel extends BaseModel implements Parcelable {
     public static final String sID = "Id";
     public static final String sSUBJECTID = "SubjectId";
     public static final String sNAME = "Name";
-    public static final String sCREATEDATE = "CreateDate";
 
     public DeckModel(Long subjectId) {
         super();
 
-        initializeFieldData(0L, subjectId, "", null);
+        initializeFieldData(0L, subjectId, "");
 
         markAsNew();
     }
 
-    public DeckModel(Long id, Long subjectId, String name, Date createDate) {
+    public DeckModel(Long id, Long subjectId, String name) {
         super();
 
-        initializeFieldData(id, subjectId, name, createDate);
+        initializeFieldData(id, subjectId, name);
 
         markAsOld();
     }
@@ -51,12 +49,11 @@ public class DeckModel extends BaseModel implements Parcelable {
     /**
      * Put the initial field key/value into the FieldDataList.
      */
-    private void initializeFieldData(Long id, Long subjectId, String name, Date createDate) {
+    private void initializeFieldData(Long id, Long subjectId, String name) {
         /* Initially load properties without dirtying the model */
         loadFieldData(sID, id);
         loadFieldData(sSUBJECTID, subjectId);
         loadFieldData(sNAME, name);
-        loadFieldData(sCREATEDATE, createDate);
     }
 
     /**
@@ -94,20 +91,6 @@ public class DeckModel extends BaseModel implements Parcelable {
     }
 
     /**
-     * CreateDate
-     */
-    @Bindable
-    public Date getCreateDate() {
-        return getFieldData().getDate(sCREATEDATE);
-    }
-
-    public void setCreateDate(Date date) {
-        if (!getCreateDate().equals(date)) {
-            setFieldData(sCREATEDATE, date);
-        }
-    }
-
-    /**
      * Saves the object to the database.
      */
     public DeckModel save() {
@@ -137,8 +120,6 @@ public class DeckModel extends BaseModel implements Parcelable {
                 }
             }
             else {  // update
-                values.put(DeckEntry.COLUMN_CREATE_DATE, Converters.dateToString(getCreateDate()));
-
                 int rowsUpdated = StudiosityApp.getInstance().getContentResolver().update(DeckEntry.buildItemUri(getId()), values, null, null);
                 return (rowsUpdated == 1) ? this : null;
             }
@@ -173,7 +154,6 @@ public class DeckModel extends BaseModel implements Parcelable {
         parcel.writeLong(getId());
         parcel.writeLong(getSubjectId());
         parcel.writeString(getName());
-        parcel.writeString(getCreateDate() == null ? "" : Converters.dateToString(getCreateDate()));
 
         // base fields
         parcel.writeByte((byte) (getIsDirty() ? 1 : 0));   //if mIsDirty == true, byte == 1
@@ -194,7 +174,7 @@ public class DeckModel extends BaseModel implements Parcelable {
     public DeckModel(Parcel parcel){
         super();
 
-        initializeFieldData(parcel.readLong(), parcel.readLong(), parcel.readString(), Converters.stringToDate(parcel.readString()));
+        initializeFieldData(parcel.readLong(), parcel.readLong(), parcel.readString());
 
         // base fields
         if (parcel.readByte() != 0)
