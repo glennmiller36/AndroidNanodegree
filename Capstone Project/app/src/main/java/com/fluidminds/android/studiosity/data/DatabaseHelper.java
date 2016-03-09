@@ -22,6 +22,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         context.deleteDatabase(DATABASE_NAME);
     }
 
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+
+        if (!db.isReadOnly()) {
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
+    }
+
     /**
      * Called when the database is created for the first time.
      */
@@ -39,7 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_DECK_TABLE = "CREATE TABLE " + DeckEntry.TABLE_NAME + " (" +
                 DeckEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 DeckEntry.COLUMN_SUBJECT_ID + " INTEGER NOT NULL, " +
-                DeckEntry.COLUMN_NAME + " TEXT NOT NULL UNIQUE COLLATE NOCASE " +
+                DeckEntry.COLUMN_NAME + " TEXT NOT NULL UNIQUE COLLATE NOCASE, " +
+                " FOREIGN KEY(" + DeckEntry.COLUMN_SUBJECT_ID + ") REFERENCES " + SubjectEntry.TABLE_NAME + "(" + SubjectEntry._ID + ") ON DELETE CASCADE " +
                 " );";
         sqLiteDatabase.execSQL(SQL_CREATE_DECK_TABLE);
 

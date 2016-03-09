@@ -85,7 +85,7 @@ public class DeckListActivity extends BaseActivity {
                                 if (error.isEmpty())
                                     finish();
                                 else {
-                                    Toast.makeText(DeckListActivity.this, "R.string.alert_delete_title", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(DeckListActivity.this, error, Toast.LENGTH_SHORT).show();
                                     dialogInterface.dismiss();
                                 }
                             }
