@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     tools:context=".activities.CardListFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerCards"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
+
     <TextView
         android:id="@+id/textNoRecords"
         android:layout_width="match_parent"
