@@ -29,4 +29,6 @@
     <!-- Cards -->
     <string name="no_cards">No Cards</string>
     <string name="delete_card">Delete card \'%s\'?</string>
+    <string name="question">Question</string>
+    <string name="answer">Answer</string>
 </resources>

@@ -16,10 +16,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.activities.CardEditActivity;
 import com.fluidminds.android.studiosity.adapters.CardListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.models.CardModel;
 import com.fluidminds.android.studiosity.models.DeckModel;
+import com.fluidminds.android.studiosity.models.SubjectModel;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,7 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
     private RecyclerView mRecyclerCards;
     private TextView mNoRecords;
 
+    private SubjectModel mSubjectModel;
     private DeckModel mDeckModel;
 
     private static final int CARD_LOADER = 0;
@@ -60,6 +63,7 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
         mCardAdapter = new CardListAdapter();
 
         Intent intent = getActivity().getIntent();
+        mSubjectModel = intent.getParcelableExtra("subjectmodel");
         mDeckModel = intent.getParcelableExtra("deckmodel");
 
         // Inflate the layout for this fragment
@@ -71,29 +75,29 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
         mRecyclerCards.setLayoutManager(new LinearLayoutManager(this.getContext()));
         mRecyclerCards.setAdapter(mCardAdapter);
 
-//        mDeckAdapter.setOnItemClickListener(new DeckListAdapter.MyClickListener() {
-//            @Override
-//            public void onItemClick(int position, View v) {
-//                Intent intent = new Intent(getContext(), CardListActivity.class);
-//
-//                DeckModel model = mDeckAdapter.get(position);
-//                intent.putExtra("subjectmodel", mSubjectModel);
-//                intent.putExtra("deckmodel", model);
-//
-//                startActivity(intent);
-//            }
-//        });
+        mCardAdapter.setOnItemClickListener(new CardListAdapter.MyClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Intent intent = new Intent(getContext(), CardEditActivity.class);
+
+                CardModel model = mCardAdapter.get(position);
+                intent.putExtra("subjectmodel", mSubjectModel);
+                intent.putExtra("cardmodel", model);
+
+                startActivity(intent);
+            }
+        });
 
         mNoRecords = (TextView) view.findViewById(R.id.textNoRecords);
 
         FloatingActionButton fabAdd = (FloatingActionButton) view.findViewById(R.id.fabAdd);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), DeckEditActivity.class);
-//                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // open activity without save into the stack
-//                intent.putExtra("subjectmodel", mSubjectModel);
-//                intent.putExtra("deckmodel", new DeckModel(mSubjectModel.getId()));
-//                startActivity(intent);
+                Intent intent = new Intent(getContext(), CardEditActivity.class);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // open activity without save into the stack
+                intent.putExtra("subjectmodel", mSubjectModel);
+                intent.putExtra("cardmodel", new CardModel(mDeckModel.getId()));
+                startActivity(intent);
             }
         });
 

@@ -44,6 +44,10 @@
         <activity
             android:name=".activities.CardListActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.CardEditActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <provider
             android:name=".data.StudiosityProvider"
