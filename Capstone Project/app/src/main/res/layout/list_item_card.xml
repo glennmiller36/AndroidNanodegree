@@ -4,24 +4,84 @@
     android:layout_height="match_parent"
     android:background="?android:attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/textQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@android:color/black"
-            android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/screen_edge_margin"
+        android:layout_marginRight="@dimen/screen_edge_margin"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/screen_edge_margin"
+        android:paddingLeft="@dimen/screen_edge_margin"
+        android:layout_marginTop="@dimen/recycler_vertical_margin"
+        android:layout_marginBottom="@dimen/recycler_vertical_margin">
 
-        <TextView
-            android:id="@+id/textAnswer"
+        <View
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/avatar_margin"
+            android:layout_marginLeft="@dimen/avatar_margin"
+            android:layout_marginEnd="@dimen/avatar_margin"
+            android:layout_marginRight="@dimen/avatar_margin"
+            android:background="@color/wallet_holo_blue_light"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@android:color/black"
-            android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/screen_edge_margin"
+            android:layout_marginStart="@dimen/screen_edge_margin"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/word_spacer"
+                    android:layout_marginRight="@dimen/word_spacer"
+                    android:paddingBottom="@dimen/textview_label_padding_bottom"
+                    android:text="@string/letter_q"
+                    android:textColor="@color/grey500"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                <TextView
+                    android:id="@+id/textQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/textview_label_padding_bottom"
+                    android:text="@string/theme_color"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/word_spacer"
+                    android:layout_marginRight="@dimen/word_spacer"
+                    android:text="@string/letter_a"
+                    android:textColor="@color/grey500"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                <TextView
+                    android:id="@+id/textAnswer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/textview_label_padding_bottom"
+                    android:text="@string/theme_color"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

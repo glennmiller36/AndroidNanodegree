@@ -31,4 +31,6 @@
     <string name="delete_card">Delete card \'%s\'?</string>
     <string name="question">Question</string>
     <string name="answer">Answer</string>
+    <string name="letter_q">Q:</string>
+    <string name="letter_a">A:</string>
 </resources>

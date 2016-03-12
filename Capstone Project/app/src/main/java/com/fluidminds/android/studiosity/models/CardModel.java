@@ -42,7 +42,7 @@ public class CardModel extends BaseModel implements Parcelable {
     @Override
     protected void addBusinessRules() {
         mBusinessRules.addRule(new RequiredRule(sQUESTION, StudiosityApp.getInstance().getString(R.string.required)));
-        //mBusinessRules.addRule(new RequiredRule(sANSWER, StudiosityApp.getInstance().getString(R.string.required)));
+        mBusinessRules.addRule(new RequiredRule(sANSWER, StudiosityApp.getInstance().getString(R.string.required)));
     }
 
     /**
@@ -97,7 +97,7 @@ public class CardModel extends BaseModel implements Parcelable {
     public String getAnswer() { return getFieldData().getString(sANSWER); }
 
     public void setAnswer(String answer) {
-        if (!getQuestion().equals(answer)) {
+        if (!getAnswer().equals(answer)) {
             setFieldData(sANSWER, answer.trim());
         }
     }

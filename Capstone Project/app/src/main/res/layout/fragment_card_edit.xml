@@ -41,7 +41,8 @@
                 app:addTextChangedListener="@{viewModel.onQuestionChanged}"
                 android:ellipsize="end"
                 android:hint="@string/question"
-                android:singleLine="true"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
                 android:text="@{viewModel.Model.Question}"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
@@ -53,7 +54,7 @@
             android:layout_marginLeft="@dimen/content_margin_left"
             android:layout_marginEnd="@dimen/screen_edge_margin"
             android:layout_marginRight="@dimen/screen_edge_margin"
-            android:text="@{viewModel.Model.BrokenRules[&quot;Name&quot;]}"
+            android:text="@{viewModel.Model.BrokenRules[&quot;Question&quot;]}"
             android:textAllCaps="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/red500" />
@@ -61,6 +62,50 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/space_between_fields"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_margin_left"
+            android:layout_marginLeft="@dimen/content_margin_left"
+            android:layout_marginEnd="@dimen/screen_edge_margin"
+            android:layout_marginRight="@dimen/screen_edge_margin"
+            android:text="@string/answer"
+            android:textAppearance="?android:attr/textAppearance"
+            android:textAllCaps="true"
+            android:textColor="@color/textColorSecondary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/edittext_margin_left"
+            android:layout_marginLeft="@dimen/edittext_margin_left"
+            android:layout_marginEnd="@dimen/screen_edge_margin"
+            android:layout_marginRight="@dimen/screen_edge_margin" >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:addTextChangedListener="@{viewModel.onAnswerChanged}"
+                android:ellipsize="end"
+                android:hint="@string/answer"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:text="@{viewModel.Model.Answer}"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_margin_left"
+            android:layout_marginLeft="@dimen/content_margin_left"
+            android:layout_marginEnd="@dimen/screen_edge_margin"
+            android:layout_marginRight="@dimen/screen_edge_margin"
+            android:text="@{viewModel.Model.BrokenRules[&quot;Answer&quot;]}"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/red500" />
 
     </LinearLayout>
 </layout>

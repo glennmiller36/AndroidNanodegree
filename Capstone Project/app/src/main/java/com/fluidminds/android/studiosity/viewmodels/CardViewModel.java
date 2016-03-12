@@ -39,4 +39,21 @@ public class CardViewModel {
             }
         }
     };
+
+    public final TextWatcher onAnswerChanged = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (!mModel.getAnswer().equals(s.toString())) {
+                mModel.setAnswer(s.toString());
+            }
+        }
+    };
 }

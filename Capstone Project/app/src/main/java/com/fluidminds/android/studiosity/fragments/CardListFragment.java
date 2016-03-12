@@ -22,6 +22,7 @@ import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.models.CardModel;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+import com.fluidminds.android.studiosity.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
 
@@ -74,6 +75,8 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
         mRecyclerCards.setHasFixedSize(true);
         mRecyclerCards.setLayoutManager(new LinearLayoutManager(this.getContext()));
         mRecyclerCards.setAdapter(mCardAdapter);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
+        mRecyclerCards.addItemDecoration(itemDecoration);
 
         mCardAdapter.setOnItemClickListener(new CardListAdapter.MyClickListener() {
             @Override
