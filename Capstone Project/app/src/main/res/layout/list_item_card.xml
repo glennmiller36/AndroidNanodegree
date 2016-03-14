@@ -16,22 +16,10 @@
         android:layout_marginTop="@dimen/recycler_vertical_margin"
         android:layout_marginBottom="@dimen/recycler_vertical_margin">
 
-        <View
-            android:layout_width="@dimen/avatar_size"
-            android:layout_height="@dimen/avatar_size"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/avatar_margin"
-            android:layout_marginLeft="@dimen/avatar_margin"
-            android:layout_marginEnd="@dimen/avatar_margin"
-            android:layout_marginRight="@dimen/avatar_margin"
-            android:background="@color/wallet_holo_blue_light"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/screen_edge_margin"
-            android:layout_marginStart="@dimen/screen_edge_margin"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"

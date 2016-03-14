@@ -18,8 +18,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/content_margin_left"
-            android:layout_marginLeft="@dimen/content_margin_left"
+            android:layout_marginStart="@dimen/screen_edge_margin"
+            android:layout_marginLeft="@dimen/screen_edge_margin"
             android:layout_marginEnd="@dimen/screen_edge_margin"
             android:layout_marginRight="@dimen/screen_edge_margin"
             android:text="@string/question"
@@ -30,8 +30,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/edittext_margin_left"
-            android:layout_marginLeft="@dimen/edittext_margin_left"
+            android:layout_marginStart="@dimen/edittext_margin_left_no_avatar"
+            android:layout_marginLeft="@dimen/edittext_margin_left_no_avatar"
             android:layout_marginEnd="@dimen/screen_edge_margin"
             android:layout_marginRight="@dimen/screen_edge_margin" >
             <EditText
@@ -50,8 +50,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/content_margin_left"
-            android:layout_marginLeft="@dimen/content_margin_left"
+            android:layout_marginStart="@dimen/screen_edge_margin"
+            android:layout_marginLeft="@dimen/screen_edge_margin"
             android:layout_marginEnd="@dimen/screen_edge_margin"
             android:layout_marginRight="@dimen/screen_edge_margin"
             android:text="@{viewModel.Model.BrokenRules[&quot;Question&quot;]}"
@@ -66,8 +66,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/content_margin_left"
-            android:layout_marginLeft="@dimen/content_margin_left"
+            android:layout_marginStart="@dimen/screen_edge_margin"
+            android:layout_marginLeft="@dimen/screen_edge_margin"
             android:layout_marginEnd="@dimen/screen_edge_margin"
             android:layout_marginRight="@dimen/screen_edge_margin"
             android:text="@string/answer"
@@ -78,8 +78,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/edittext_margin_left"
-            android:layout_marginLeft="@dimen/edittext_margin_left"
+            android:layout_marginStart="@dimen/edittext_margin_left_no_avatar"
+            android:layout_marginLeft="@dimen/edittext_margin_left_no_avatar"
             android:layout_marginEnd="@dimen/screen_edge_margin"
             android:layout_marginRight="@dimen/screen_edge_margin" >
             <EditText
@@ -98,8 +98,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/content_margin_left"
-            android:layout_marginLeft="@dimen/content_margin_left"
+            android:layout_marginStart="@dimen/screen_edge_margin"
+            android:layout_marginLeft="@dimen/screen_edge_margin"
             android:layout_marginEnd="@dimen/screen_edge_margin"
             android:layout_marginRight="@dimen/screen_edge_margin"
             android:text="@{viewModel.Model.BrokenRules[&quot;Answer&quot;]}"

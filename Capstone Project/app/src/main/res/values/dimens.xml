@@ -13,6 +13,7 @@
     <dimen name="content_margin_left">72dp</dimen>
     <dimen name="screen_edge_margin">16dp</dimen>
     <dimen name="edittext_margin_left">68dp</dimen>
+    <dimen name="edittext_margin_left_no_avatar">12dp</dimen>
     <dimen name="avatar_margin">0dp</dimen>
     <dimen name="avatar_size">40dp</dimen>
     <dimen name="detail_item_height">72dp</dimen>

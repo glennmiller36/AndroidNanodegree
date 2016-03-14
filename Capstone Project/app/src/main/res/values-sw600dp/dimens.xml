@@ -12,6 +12,7 @@
     <dimen name="content_margin_left">104dp</dimen>
     <dimen name="screen_edge_margin">24dp</dimen>
     <dimen name="edittext_margin_left">100dp</dimen>
+    <dimen name="edittext_margin_left_no_avatar">20dp</dimen>
     <dimen name="textview_label_padding_bottom">8dp</dimen>
     <dimen name="avatar_margin">8dp</dimen>
 
