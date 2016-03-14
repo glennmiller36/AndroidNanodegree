@@ -29,6 +29,8 @@ public class CardEditFragment extends Fragment {
     private ViewDataBinding mBinding;
     private CardViewModel mViewModel;
 
+    public CardViewModel getViewModel() { return mViewModel; }
+
     public CardEditFragment() {
         // Required empty public constructor
     }

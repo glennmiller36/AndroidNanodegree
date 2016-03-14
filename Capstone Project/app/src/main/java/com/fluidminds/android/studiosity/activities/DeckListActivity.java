@@ -77,7 +77,7 @@ public class DeckListActivity extends BaseActivity {
             case R.id.action_delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.alert_delete_title)
-                        .setMessage(String.format(getString(R.string.delete_deck), mSubjectModel.getSubject()))
+                        .setMessage(String.format(getString(R.string.delete_subject), mSubjectModel.getSubject()))
                         .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

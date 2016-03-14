@@ -56,7 +56,7 @@ public class CardListActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_deck_list, menu);
+        getMenuInflater().inflate(R.menu.menu_card_list, menu);
         mMenu = menu;
 
         // color toolbar based on model Theme Color

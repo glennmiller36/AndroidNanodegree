@@ -9,7 +9,6 @@
     <string name="required">Required</string>
     <string name="duplicate_name">Duplicate Name</string>
     <string name="action_edit">Edit</string>
-    <string name="action_delete">Delete</string>
     <string name="alert_delete_title">Delete</string>
 
     <!-- Subjects -->
@@ -19,12 +18,14 @@
     <string name="subject">Subject</string>
     <string name="theme_color">Theme Color</string>
     <string name="delete_subject">Delete subject \'%s\'?</string>
+    <string name="action_delete_subject">Delete Subject</string>
 
     <!-- Decks -->
     <string name="no_decks">No Decks</string>
     <string name="deck_name">Deck Name</string>
     <string name="deck">Deck</string>
     <string name="delete_deck">Delete deck \'%s\'?</string>
+    <string name="action_delete_deck">Delete Deck</string>
 
     <!-- Cards -->
     <string name="no_cards">No Cards</string>
@@ -33,4 +34,5 @@
     <string name="answer">Answer</string>
     <string name="letter_q">Q:</string>
     <string name="letter_a">A:</string>
+    <string name="action_delete_card">Delete Card</string>
 </resources>
