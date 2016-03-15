@@ -32,7 +32,7 @@
                     android:layout_marginRight="@dimen/word_spacer"
                     android:paddingBottom="@dimen/textview_label_padding_bottom"
                     android:text="@string/letter_q"
-                    android:textColor="@color/grey500"
+                    android:textColor="@color/textColorSecondary"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
                 <TextView
                     android:id="@+id/textQuestion"
@@ -40,7 +40,6 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/textview_label_padding_bottom"
                     android:text="@string/theme_color"
-                    android:textColor="@android:color/black"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:maxLines="1"
                     android:ellipsize="end"/>
@@ -55,7 +54,7 @@
                     android:layout_marginEnd="@dimen/word_spacer"
                     android:layout_marginRight="@dimen/word_spacer"
                     android:text="@string/letter_a"
-                    android:textColor="@color/grey500"
+                    android:textColor="@color/textColorSecondary"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
                 <TextView
                     android:id="@+id/textAnswer"
@@ -63,7 +62,6 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/textview_label_padding_bottom"
                     android:text="@string/theme_color"
-                    android:textColor="@android:color/black"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:maxLines="1"
                     android:ellipsize="end" />

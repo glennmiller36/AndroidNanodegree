@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -31,7 +32,7 @@ public class CustomizeToolbarHelper {
      */
     public static void colorizeToolbar(Activity activity, Toolbar toolbarView, Menu menu, int toolbarBackgroundColor) {
 
-        Integer toolbarIconsColor = ThemeColor.isWhiteContrastColor(toolbarBackgroundColor) ? Color.WHITE : Color.BLACK;
+        Integer toolbarIconsColor = ThemeColor.isWhiteContrastColor(toolbarBackgroundColor) ? Color.WHITE : ContextCompat.getColor(activity, R.color.textColorPrimary);;
         final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(toolbarIconsColor, PorterDuff.Mode.MULTIPLY);
 
         // change the background color of a mToolbar

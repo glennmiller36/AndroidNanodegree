@@ -3,6 +3,7 @@ package com.fluidminds.android.studiosity.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +64,7 @@ public class SubjectListAdapter extends CursorAdapter {
         if (ThemeColor.isWhiteContrastColor(color))
             viewHolder.mName.setTextColor(Color.WHITE);
         else
-            viewHolder.mName.setTextColor(Color.BLACK);
+            viewHolder.mName.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary));
     }
 
     @Override
