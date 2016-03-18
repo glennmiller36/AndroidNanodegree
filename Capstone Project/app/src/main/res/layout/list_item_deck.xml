@@ -1,16 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?android:attr/selectableItemBackground">
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="?android:attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/textName"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="#B6B6B6"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/screen_edge_margin"
+            android:layout_marginRight="@dimen/screen_edge_margin"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/screen_edge_margin"
+            android:paddingLeft="@dimen/screen_edge_margin"
+            android:layout_marginTop="@dimen/recycler_vertical_margin"
+            android:layout_marginBottom="@dimen/recycler_vertical_margin">
+
+            <TextView
+                android:id="@+id/textName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/textview_label_padding_bottom"
+                android:text="@string/theme_color"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/textName1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/textview_label_padding_bottom"
+                android:text="@string/theme_color"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#B6B6B6"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Include our custom button -->
+                <include layout="@layout/button_study" />
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+                <!-- Include our custom button -->
+                <include layout="@layout/button_quiz" />
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+                <!-- Include our custom button -->
+                <include layout="@layout/button_stats" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

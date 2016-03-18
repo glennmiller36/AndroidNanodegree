@@ -26,6 +26,9 @@
     <string name="deck">Deck</string>
     <string name="delete_deck">Delete deck \'%s\'?</string>
     <string name="action_delete_deck">Delete Deck</string>
+    <string name="study">Study</string>
+    <string name="quiz">Quiz</string>
+    <string name="stats">Stats</string>
 
     <!-- Cards -->
     <string name="no_cards">No Cards</string>
