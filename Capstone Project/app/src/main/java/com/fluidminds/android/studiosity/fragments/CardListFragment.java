@@ -141,6 +141,7 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
         }
 
         mCardAdapter.swapData(cards);
+        getLoaderManager().destroyLoader(CARD_LOADER);
 
         mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
     }

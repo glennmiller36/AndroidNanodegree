@@ -6,4 +6,5 @@
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#727272</color>
     <color name="red500">#F44336</color>
+    <color name="card_grey">#E9EAED</color>
 </resources>
