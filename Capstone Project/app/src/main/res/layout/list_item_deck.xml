@@ -6,7 +6,7 @@
     android:background="@color/card_grey"
     android:paddingLeft="@dimen/card_padding"
     android:paddingRight="@dimen/card_padding"
-    android:paddingTop="@dimen/card_padding">
+    android:paddingTop="@dimen/card_paddingTop">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

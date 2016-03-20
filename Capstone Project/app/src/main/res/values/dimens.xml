@@ -28,8 +28,9 @@
 
     <!-- widget.CardView -->
     <dimen name="card_padding">10dp</dimen>
+    <dimen name="card_paddingTop">5dp</dimen>
     <dimen name="card_radius">4dp</dimen>
 
     <!-- Flash Card View -->
-    <dimen name="word_spacer">5dp</dimen>
+    <dimen name="word_spacer">8dp</dimen>
 </resources>
