@@ -4,53 +4,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/card_grey"
-    android:paddingLeft="@dimen/card_padding"
-    android:paddingRight="@dimen/card_padding"
-    android:paddingTop="@dimen/card_paddingTop">
+    android:paddingLeft="@dimen/card_layout_padding"
+    android:paddingRight="@dimen/card_layout_padding"
+    android:paddingTop="@dimen/card_layout_padding">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="@dimen/card_radius"
         card_view:cardBackgroundColor="@android:color/white"
+        card_view:contentPaddingLeft="@dimen/card_padding"
+        card_view:contentPaddingRight="@dimen/card_padding"
+        card_view:contentPaddingTop="@dimen/card_padding"
+        card_view:contentPaddingBottom="@dimen/card_paddingBottom"
         android:foreground="?android:attr/selectableItemBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/screen_edge_margin"
-            android:layout_marginRight="@dimen/screen_edge_margin"
-            android:orientation="vertical"
-            android:paddingTop="6dp"
-            android:paddingStart="@dimen/screen_edge_margin"
-            android:paddingLeft="@dimen/screen_edge_margin">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/textview_label_padding_bottom"
                 android:text="@string/theme_color"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:maxLines="1"
-                android:ellipsize="end"/>
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-light"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"
+                android:textColor="@color/textColorPrimary" />
 
             <TextView
-                android:id="@+id/textName1"
+                android:id="@+id/textSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/theme_color"
-                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:maxLines="1"
-                android:ellipsize="end"/>
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-light"
+                android:paddingTop="4dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/textColorSecondary" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:background="@color/card_grey"/>
+                android:background="@color/card_grey"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="@dimen/card_paddingBottom"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E9EAED"
+    android:background="@color/card_grey"
     android:fitsSystemWindows="true"
-    tools:context=".activities.DeckListActivity">
+    tools:context=".activities.StudyListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
 
         <fragment
             android:name="com.fluidminds.android.studiosity.fragments.DeckListFragment"
-            android:id="@+id/fragDeckList"
+            android:id="@+id/fragStudyList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

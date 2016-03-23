@@ -27,8 +27,9 @@
     <dimen name="active_checkmark_margin">5dp</dimen>
 
     <!-- widget.CardView -->
-    <dimen name="card_padding">10dp</dimen>
-    <dimen name="card_paddingTop">5dp</dimen>
+    <dimen name="card_layout_padding">6dp</dimen>
+    <dimen name="card_padding">12dp</dimen>
+    <dimen name="card_paddingBottom">6dp</dimen>
     <dimen name="card_radius">4dp</dimen>
 
     <!-- Flash Card View -->

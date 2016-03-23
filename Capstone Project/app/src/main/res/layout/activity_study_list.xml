@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/card_grey"
     android:fitsSystemWindows="true"
-    tools:context=".activities.CardListActivity">
+    tools:context=".activities.StudyListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,8 +27,8 @@
         </android.support.design.widget.AppBarLayout>
 
         <fragment
-            android:name="com.fluidminds.android.studiosity.fragments.CardListFragment"
-            android:id="@+id/fragCardList"
+            android:name="com.fluidminds.android.studiosity.fragments.StudyListFragment"
+            android:id="@+id/fragStudyList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

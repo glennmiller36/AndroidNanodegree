@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="@dimen/card_radius"
         card_view:cardBackgroundColor="@android:color/white"
-        card_view:contentPadding="@dimen/card_padding"
-        android:foreground="?android:attr/selectableItemBackground">
+        card_view:contentPadding="@dimen/card_padding">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,9 +40,7 @@
                     android:text="@string/theme_color"
                     android:fontFamily="sans-serif"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/textColorPrimary"
-                    android:maxLines="1"
-                    android:ellipsize="end" />
+                    android:textColor="@color/textColorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -66,9 +63,7 @@
                     android:text="@string/theme_color"
                     android:fontFamily="sans-serif-light"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:maxLines="1"
-                    android:ellipsize="end" />
+                    android:textColor="@color/textColorSecondary" />
             </LinearLayout>
 
         </LinearLayout>

@@ -93,7 +93,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (1, 'ORD', 'Chicago O’Hare International')");
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (1, 'PDX', 'Portland International')");
 
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (2, 'Arizona', 'Phoenix')");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (2, 'Arizona Executing tasks: [clean, :app:generateDebugSources, :app:prepareDebugUnitTestDependencies, :app:mockable', 'Phoenix Executing tasks: [clean, :app:generateDebugSources, :app:prepareDebugUnitTestDependencies, :app:mockable')");
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (2, 'California', 'Sacramento')");
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (2, 'Illinois', 'Springfield')");
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (2, 'Louisiana', 'Baton Rouge')");

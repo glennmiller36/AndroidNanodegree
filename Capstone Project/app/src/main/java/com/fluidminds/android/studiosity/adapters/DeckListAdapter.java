@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
@@ -22,16 +23,27 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mName;
+        TextView mSubtitle;
+        LinearLayout mButtonStudy;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mName = (TextView) itemView.findViewById(R.id.textName);
+            mSubtitle = (TextView) itemView.findViewById(R.id.textSubtitle);
+            mButtonStudy = (LinearLayout) itemView.findViewById(R.id.buttonStudy);
+
             itemView.setOnClickListener(this);
+            mButtonStudy.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            mItemClickListener.onItemClick(getPosition(), v);
+            boolean glenn = false;
+            if (v.getId() == mButtonStudy.getId()) {
+                mItemClickListener.onStudyClick(getPosition(), v);
+            }
+            else
+                mItemClickListener.onItemClick(getPosition(), v);
         }
     }
 
@@ -50,6 +62,7 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mName.setText(mDataSet.get(position).getName());
+        holder.mSubtitle.setText(mDataSet.get(position).getName());
     }
 
     @Override
@@ -71,5 +84,6 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
 
     public interface MyClickListener {
         public void onItemClick(int position, View v);
+        public void onStudyClick(int position, View v);
     }
 }
