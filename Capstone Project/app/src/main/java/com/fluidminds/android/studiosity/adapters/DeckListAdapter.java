@@ -25,15 +25,18 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
         TextView mName;
         TextView mSubtitle;
         LinearLayout mButtonStudy;
+        LinearLayout mButtonStats;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mName = (TextView) itemView.findViewById(R.id.textName);
             mSubtitle = (TextView) itemView.findViewById(R.id.textSubtitle);
             mButtonStudy = (LinearLayout) itemView.findViewById(R.id.buttonStudy);
+            mButtonStats = (LinearLayout) itemView.findViewById(R.id.buttonStats);
 
             itemView.setOnClickListener(this);
             mButtonStudy.setOnClickListener(this);
+            mButtonStats.setOnClickListener(this);
         }
 
         @Override
@@ -41,6 +44,9 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
             boolean glenn = false;
             if (v.getId() == mButtonStudy.getId()) {
                 mItemClickListener.onStudyClick(getPosition(), v);
+            }
+            else if (v.getId() == mButtonStats.getId()) {
+                mItemClickListener.onStatsClick(getPosition(), v);
             }
             else
                 mItemClickListener.onItemClick(getPosition(), v);
@@ -85,5 +91,6 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
     public interface MyClickListener {
         public void onItemClick(int position, View v);
         public void onStudyClick(int position, View v);
+        public void onStatsClick(int position, View v);
     }
 }

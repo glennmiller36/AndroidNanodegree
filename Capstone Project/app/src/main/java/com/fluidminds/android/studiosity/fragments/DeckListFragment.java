@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.activities.CardListActivity;
 import com.fluidminds.android.studiosity.activities.DeckEditActivity;
+import com.fluidminds.android.studiosity.activities.StatsTabActivity;
 import com.fluidminds.android.studiosity.activities.StudyListActivity;
 import com.fluidminds.android.studiosity.adapters.DeckListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
@@ -87,6 +88,17 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
             @Override
             public void onStudyClick(int position, View v) {
                 Intent intent = new Intent(getContext(), StudyListActivity.class);
+
+                DeckModel model = mDeckAdapter.get(position);
+                intent.putExtra("subjectmodel", mSubjectModel);
+                intent.putExtra("deckmodel", model);
+
+                startActivity(intent);
+            }
+
+            @Override
+            public void onStatsClick(int position, View v) {
+                Intent intent = new Intent(getContext(), StatsTabActivity.class);
 
                 DeckModel model = mDeckAdapter.get(position);
                 intent.putExtra("subjectmodel", mSubjectModel);
