@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
 import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
+import com.fluidminds.android.studiosity.data.DataContract.QuizEntry;
 
 /**
  * Manages a local database data.
@@ -65,6 +66,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " );";
         sqLiteDatabase.execSQL(SQL_CREATE_CARD_TABLE);
 
+        // Create a table to hold Quiz history.
+        final String SQL_CREATE_QUIZ_TABLE = "CREATE TABLE " + QuizEntry.TABLE_NAME + " (" +
+                QuizEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                QuizEntry.COLUMN_DECK_ID + " INTEGER NOT NULL, " +
+                QuizEntry.COLUMN_CREATE_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                QuizEntry.COLUMN_NUM_CORRECT + " INTEGER NOT NULL, " +
+                QuizEntry.COLUMN_TOTAL_CARDS + " INTEGER NOT NULL, " +
+                QuizEntry.COLUMN_PERCENT_CORRECT + " INTEGER NOT NULL, " +
+                " FOREIGN KEY(" + QuizEntry.COLUMN_DECK_ID + ") REFERENCES " + DeckEntry.TABLE_NAME + "(" + DeckEntry._ID + ") ON DELETE CASCADE " +
+                " );";
+        sqLiteDatabase.execSQL(SQL_CREATE_QUIZ_TABLE);
+
         seedData(sqLiteDatabase);
     }
 
@@ -104,5 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (2, 'Ohio', 'Columbus')");
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (2, 'Washington', 'Olympia')");
 
+        // Quiz History
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
     }
 }

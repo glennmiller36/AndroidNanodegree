@@ -10,6 +10,7 @@ import android.net.Uri;
 
 import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
+import com.fluidminds.android.studiosity.data.DataContract.QuizEntry;
 import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 
 /**
@@ -29,6 +30,8 @@ public class StudiosityProvider extends ContentProvider {
     static final int DECK_ID = 201;
     static final int CARDS = 300;
     static final int CARD_ID = 301;
+    static final int QUIZZES = 400;
+    static final int QUIZ_ID = 401;
 
     /**
      * UriMatcher will match each integer constants defined above.
@@ -45,6 +48,8 @@ public class StudiosityProvider extends ContentProvider {
         matcher.addURI(authority, DataContract.PATH_DECK + "/#", DECK_ID);
         matcher.addURI(authority, DataContract.PATH_CARD, CARDS);
         matcher.addURI(authority, DataContract.PATH_CARD + "/#", CARD_ID);
+        matcher.addURI(authority, DataContract.PATH_QUIZ, QUIZZES);
+        matcher.addURI(authority, DataContract.PATH_QUIZ + "/#", QUIZ_ID);
 
         return matcher;
     }
@@ -103,6 +108,18 @@ public class StudiosityProvider extends ContentProvider {
              */
             case CARD_ID:
                 return CardEntry.CONTENT_ITEM_TYPE;
+
+            /**
+             * Get all Quiz records for the requested Deck
+             */
+            case QUIZZES:
+                return QuizEntry.CONTENT_LIST_TYPE;
+
+            /**
+             * Get a particular Quiz
+             */
+            case QUIZ_ID:
+                return QuizEntry.CONTENT_ITEM_TYPE;
 
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -198,6 +215,32 @@ public class StudiosityProvider extends ContentProvider {
                 break;
             }
 
+            case QUIZZES: {
+                retCursor = mDatabase.getReadableDatabase().query(
+                        QuizEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+
+            case QUIZ_ID: {
+                retCursor = mDatabase.getReadableDatabase().query(
+                        QuizEntry.TABLE_NAME,
+                        projection,
+                        QuizEntry._ID + " = " + uri.getLastPathSegment(),
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -248,6 +291,17 @@ public class StudiosityProvider extends ContentProvider {
                 break;
             }
 
+            case QUIZ_ID: {
+                rowID = db.insertOrThrow(QuizEntry.TABLE_NAME, null, values);
+                if (rowID > 0)
+                {
+                    Uri returnUri = ContentUris.withAppendedId(QuizEntry.CONTENT_URI, rowID);
+                    getContext().getContentResolver().notifyChange(returnUri, null);
+                    return returnUri;
+                }
+                break;
+            }
+
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -276,6 +330,10 @@ public class StudiosityProvider extends ContentProvider {
 
             case CARD_ID:
                 rowsDeleted = db.delete(CardEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+
+            case QUIZ_ID:
+                rowsDeleted = db.delete(QuizEntry.TABLE_NAME, selection, selectionArgs);
                 break;
 
             default:
@@ -310,6 +368,11 @@ public class StudiosityProvider extends ContentProvider {
 
             case CARD_ID:
                 rowsUpdated = db.update(CardEntry.TABLE_NAME, values, CardEntry._ID + " = " + uri.getLastPathSegment(),
+                        selectionArgs);
+                break;
+
+            case QUIZ_ID:
+                rowsUpdated = db.update(QuizEntry.TABLE_NAME, values, QuizEntry._ID + " = " + uri.getLastPathSegment(),
                         selectionArgs);
                 break;
 

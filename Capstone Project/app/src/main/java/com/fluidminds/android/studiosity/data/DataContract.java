@@ -21,6 +21,7 @@ public class DataContract {
     public static final String PATH_SUBJECT = "subject";
     public static final String PATH_DECK = "deck";
     public static final String PATH_CARD = "card";
+    public static final String PATH_QUIZ = "quiz";
 
     /**
      * Inner class that defines the table contents of the Subjects table
@@ -92,6 +93,34 @@ public class DataContract {
         public static final String COLUMN_DECK_ID = "deckid";
         public static final String COLUMN_QUESTION = "question";
         public static final String COLUMN_ANSWER = "answer";
+
+        public static Uri buildItemUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+
+    /**
+     * Inner class that defines the table contents of the Quiz history table
+     */
+    public static final class QuizEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_QUIZ).build();
+
+        public static final String CONTENT_LIST_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_QUIZ;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_QUIZ;
+
+        // Table name
+        public static final String TABLE_NAME = "quiz";
+
+        // Column names
+        public static final String COLUMN_DECK_ID = "deckid";
+        public static final String COLUMN_CREATE_DATE = "createdate";
+        public static final String COLUMN_NUM_CORRECT = "numcorrect";
+        public static final String COLUMN_TOTAL_CARDS = "totalcards";
+        public static final String COLUMN_PERCENT_CORRECT = "percentCorrect";
 
         public static Uri buildItemUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

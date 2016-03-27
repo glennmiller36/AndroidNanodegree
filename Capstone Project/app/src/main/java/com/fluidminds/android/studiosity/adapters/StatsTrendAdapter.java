@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fluidminds.android.studiosity.R;
-import com.fluidminds.android.studiosity.models.CardModel;
+import com.fluidminds.android.studiosity.models.QuizModel;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * from a {@link Cursor} to a {@link RecyclerView}.
  */
 public class StatsTrendAdapter extends RecyclerView.Adapter<StatsTrendAdapter.ViewHolder> {
-    private ArrayList<CardModel> mDataSet = new ArrayList<>();
+    private ArrayList<QuizModel> mDataSet = new ArrayList<>();
     private static MyClickListener mItemClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -59,7 +59,7 @@ public class StatsTrendAdapter extends RecyclerView.Adapter<StatsTrendAdapter.Vi
         return mDataSet.size();
     }
 
-    public void swapData(ArrayList<CardModel> dataset) {
+    public void swapData(ArrayList<QuizModel> dataset) {
         mDataSet = dataset;
         notifyDataSetChanged();
     }
@@ -67,7 +67,7 @@ public class StatsTrendAdapter extends RecyclerView.Adapter<StatsTrendAdapter.Vi
     /**
      * Return strongly typed business object for the cursor.
      */
-    public CardModel get(int position) {
+    public QuizModel get(int position) {
         return mDataSet.get(position);
     }
 

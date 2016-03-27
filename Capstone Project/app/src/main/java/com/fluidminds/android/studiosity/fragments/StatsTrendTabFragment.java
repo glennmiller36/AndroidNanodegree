@@ -1,5 +1,6 @@
 package com.fluidminds.android.studiosity.fragments;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,59 +15,71 @@ import android.view.ViewGroup;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.adapters.StatsTrendAdapter;
-import com.fluidminds.android.studiosity.data.DataContract;
-import com.fluidminds.android.studiosity.models.CardModel;
+import com.fluidminds.android.studiosity.data.DataContract.QuizEntry;
+import com.fluidminds.android.studiosity.models.DeckModel;
+import com.fluidminds.android.studiosity.models.QuizModel;
+import com.fluidminds.android.studiosity.utils.Converters;
 import com.fluidminds.android.studiosity.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
 
 /**
- * 'Trends' tab for the Stats Activity.
+ * Trends tab for the Stats Activity.
  */
 public class StatsTrendTabFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private StatsTrendAdapter mTrendAdapter;
 
-    private RecyclerView mRecyclerCards;
+    private RecyclerView mRecyclerQuizzes;
 
-    private static final int CARD_LOADER = 0;
+    private DeckModel mDeckModel;
 
-    private static final String[] CARD_COLUMNS = {
-            DataContract.CardEntry.TABLE_NAME + "." + DataContract.CardEntry._ID,
-            DataContract.CardEntry.COLUMN_DECK_ID,
-            DataContract.CardEntry.COLUMN_QUESTION,
-            DataContract.CardEntry.COLUMN_ANSWER
+    private static final int QUIZ_LOADER = 0;
+
+    private static final String[] QUIZ_COLUMNS = {
+            QuizEntry.TABLE_NAME + "." + QuizEntry._ID,
+            QuizEntry.COLUMN_DECK_ID,
+            QuizEntry.COLUMN_CREATE_DATE,
+            QuizEntry.COLUMN_NUM_CORRECT,
+            QuizEntry.COLUMN_TOTAL_CARDS,
+            QuizEntry.COLUMN_PERCENT_CORRECT,
     };
 
-    // These indices are tied to CARD_COLUMNS.
+    // These indices are tied to QUIZ_COLUMNS.
     public static final int COL_ID = 0;
-    public static final int COL_QUESTION = 1;
-    public static final int COL_ASNSWER = 2;
+    public static final int COL_DECK_ID = 1;
+    public static final int COL_CREATE_DATE = 2;
+    public static final int COL_NUM_CORRECT = 3;
+    public static final int COL_TOTAL_CARDS = 4;
+    public static final int COL_PERCENT_CORRECT = 5;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mTrendAdapter = new StatsTrendAdapter();
 
+        Intent intent = getActivity().getIntent();
+        mDeckModel = intent.getParcelableExtra("deckmodel");
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_stats_trend_tab, container, false);
 
         // Get a reference to the RecyclerView, and attach this adapter to it.
-        mRecyclerCards = (RecyclerView) view.findViewById(R.id.recyclerTrends);
-        mRecyclerCards.setHasFixedSize(true);
-        mRecyclerCards.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        mRecyclerCards.setAdapter(mTrendAdapter);
+        mRecyclerQuizzes = (RecyclerView) view.findViewById(R.id.recyclerTrends);
+        mRecyclerQuizzes.setHasFixedSize(true);
+        mRecyclerQuizzes.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        mRecyclerQuizzes.setAdapter(mTrendAdapter);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
-        mRecyclerCards.addItemDecoration(itemDecoration);
+        mRecyclerQuizzes.addItemDecoration(itemDecoration);
 
-        mRecyclerCards.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerQuizzes.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(CARD_LOADER, null, this);
+        getLoaderManager().initLoader(QUIZ_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -75,30 +88,33 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
      */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        // query Cards for the given parent Deck
-        String selection = DataContract.CardEntry.COLUMN_DECK_ID + " = ?";
+        // Sort order:  Ascending, by create_date.
+        String sortOrder = QuizEntry.COLUMN_CREATE_DATE;
+
+        // query Quizzes for the given parent Deck
+        String selection = QuizEntry.COLUMN_DECK_ID + " = ?";
         String[] selectionArgs = new String[] {
-            "2"
+            mDeckModel.getId().toString()
         };
 
         return new CursorLoader(getActivity(),
-                DataContract.CardEntry.CONTENT_URI,
-                CARD_COLUMNS,
+                QuizEntry.CONTENT_URI,
+                QUIZ_COLUMNS,
                 selection,
                 selectionArgs,
-                null);
+                sortOrder);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        ArrayList<CardModel> cards = new ArrayList<>();
+        ArrayList<QuizModel> quizzes = new ArrayList<>();
         while (data.moveToNext()) {
-            CardModel model = new CardModel(data.getLong(0), data.getLong(1), data.getString(2), data.getString(3));
-            cards.add(model);
+            QuizModel model = new QuizModel(data.getLong(0), data.getLong(1), Converters.stringToDate(data.getString(2)), data.getInt(3), data.getInt(4), data.getInt(5));
+            quizzes.add(model);
         }
 
-        mTrendAdapter.swapData(cards);
-        getLoaderManager().destroyLoader(CARD_LOADER);
+        mTrendAdapter.swapData(quizzes);
+        getLoaderManager().destroyLoader(QUIZ_LOADER);
 
         //mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
     }
