@@ -16,7 +16,6 @@
         card_view:contentPaddingLeft="@dimen/card_padding"
         card_view:contentPaddingRight="@dimen/card_padding"
         card_view:contentPaddingTop="@dimen/card_padding"
-        card_view:contentPaddingBottom="@dimen/card_paddingBottom"
         android:foreground="?android:attr/selectableItemBackground">
 
         <LinearLayout
@@ -54,12 +53,12 @@
                 android:layout_height="1dp"
                 android:layout_gravity="center"
                 android:background="@color/background_grey200"
-                android:layout_marginTop="9dp"
-                android:layout_marginBottom="@dimen/card_paddingBottom"/>
+                android:layout_marginTop="9dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingRight="10dp"
                 android:orientation="horizontal">
                 <!-- Include our custom button -->
                 <include layout="@layout/button_study" />
