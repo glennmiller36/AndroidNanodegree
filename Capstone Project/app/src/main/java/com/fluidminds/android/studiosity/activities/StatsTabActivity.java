@@ -55,7 +55,7 @@ public class StatsTabActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_study_list, menu);
+        getMenuInflater().inflate(R.menu.menu_stats_list, menu);
         mMenu = menu;
 
         // color toolbar based on model Theme Color
