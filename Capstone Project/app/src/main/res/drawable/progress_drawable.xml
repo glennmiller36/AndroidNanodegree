@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
-        <color android:color="#FFF" />
+        <color android:color="@color/chartRemainingProgress" />
     </item>
     <item android:id="@android:id/progress">
         <clip
             android:clipOrientation="vertical"
             android:gravity="bottom">
             <shape>
-                <gradient
-                    android:startColor="#00FF00"
-                    android:centerColor="#FFFF00"
-                    android:endColor="#FF0000"
+                <solid android:color="@color/chartProgress_green500"
                     android:angle="90" />
             </shape>
         </clip>

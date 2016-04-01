@@ -98,14 +98,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="bottom"
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/textNumCorrect"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
                         android:fontFamily="sans-serif-light"
                         android:textColor="@color/chartProgress_green500"
                         android:textSize="35sp"
@@ -114,7 +112,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
@@ -127,7 +124,6 @@
                         android:id="@+id/textTotalCards"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
                         android:fontFamily="sans-serif-light"
                         android:textColor="@color/chartProgress_green500"
                         android:textSize="35sp"
@@ -145,6 +141,17 @@
                     android:textColor="@color/textColorSecondary"/>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Date"
+                android:textColor="@color/textColorSecondary"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -155,14 +162,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/textAccuracy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
                         android:fontFamily="sans-serif-light"
                         android:textColor="@color/chartProgress_green500"
                         android:textSize="35sp"
@@ -171,7 +176,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="5dp"
                         android:text="@string/percentage_symbol"
@@ -191,17 +195,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textDate"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textAllCaps="true"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Date"
-            android:textColor="@color/textColorSecondary" />
 
     </LinearLayout>
 

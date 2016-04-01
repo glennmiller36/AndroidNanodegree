@@ -38,4 +38,12 @@
     <string name="letter_q">Q:</string>
     <string name="letter_a">A:</string>
     <string name="action_delete_card">Delete Card</string>
+
+    <!-- Stats -->
+    <string name="no_quizzes">No Quizzes</string>
+    <string name="average">Average</string>
+    <string name="score">Score</string>
+    <string name="accuracy">Accuracy</string>
+    <string name="percentage_symbol">%</string>
+    <string name="forward_slash">/</string>
 </resources>

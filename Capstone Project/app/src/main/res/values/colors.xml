@@ -6,6 +6,8 @@
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#727272</color>
     <color name="textColorDivider">#B6B6B6</color>
-    <color name="red500">#F44336</color>
-    <color name="card_grey">#E9EAED</color>
+    <color name="required_red500">#F44336</color>
+    <color name="background_grey200">#EEEEEE</color>
+    <color name="chartRemainingProgress">#EEEEEE</color>
+    <color name="chartProgress_green500">#4CAF50</color>
 </resources>

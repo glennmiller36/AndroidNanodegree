@@ -57,7 +57,7 @@
             android:text="@{viewModel.Model.BrokenRules[&quot;Question&quot;]}"
             android:textAllCaps="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/red500" />
+            android:textColor="@color/required_red500" />
 
         <Space
             android:layout_width="match_parent"
@@ -105,7 +105,7 @@
             android:text="@{viewModel.Model.BrokenRules[&quot;Answer&quot;]}"
             android:textAllCaps="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/red500" />
+            android:textColor="@color/required_red500" />
 
     </LinearLayout>
 </layout>

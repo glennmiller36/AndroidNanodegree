@@ -26,11 +26,15 @@ public class Converters {
     }
 
     public static String dateToString(Date date) {
+        return dateToString(date, sDATEFORMAT);
+    }
+
+    public static String dateToString(Date date, String format) {
         String string = null;
         if (date == null)
             return null;
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat(sDATEFORMAT, Locale.US);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);
         return dateFormat.format(date);
     }
 }
