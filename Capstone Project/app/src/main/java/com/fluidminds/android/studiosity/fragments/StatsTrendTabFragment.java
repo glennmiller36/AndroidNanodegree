@@ -42,19 +42,11 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
     private static final String[] QUIZ_COLUMNS = {
             QuizEntry.TABLE_NAME + "." + QuizEntry._ID,
             QuizEntry.COLUMN_DECK_ID,
-            QuizEntry.COLUMN_CREATE_DATE,
+            QuizEntry.COLUMN_START_DATE,
             QuizEntry.COLUMN_NUM_CORRECT,
             QuizEntry.COLUMN_TOTAL_CARDS,
             QuizEntry.COLUMN_PERCENT_CORRECT,
     };
-
-    // These indices are tied to QUIZ_COLUMNS.
-    public static final int COL_ID = 0;
-    public static final int COL_DECK_ID = 1;
-    public static final int COL_CREATE_DATE = 2;
-    public static final int COL_NUM_CORRECT = 3;
-    public static final int COL_TOTAL_CARDS = 4;
-    public static final int COL_PERCENT_CORRECT = 5;
 
     private TextView mAverageAccuracy;
 
@@ -117,8 +109,8 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
      */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        // Sort order:  Ascending, by create_date.
-        String sortOrder = QuizEntry.COLUMN_CREATE_DATE;
+        // Sort order:  Ascending, by start_date.
+        String sortOrder = QuizEntry.COLUMN_START_DATE;
 
         // query Quizzes for the given parent Deck
         String selection = QuizEntry.COLUMN_DECK_ID + " = ?";
@@ -187,7 +179,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
             mSelectedNumCorrect.setText(String.valueOf(quiz.getNumCorrect()));
             mSelectedTotalCards.setText(String.valueOf(quiz.getTotalCards()));
             mSelectedAccuracy.setText(String.valueOf(quiz.getPercentCorrect()));
-            mSelectedDate.setText(Converters.dateToString(quiz.getCreateDate(), "E, MMM d, yyyy h:mm a"));
+            mSelectedDate.setText(Converters.dateToString(quiz.getStartDate(), "E, MMM d, yyyy h:mm a"));
         }
     }
 }

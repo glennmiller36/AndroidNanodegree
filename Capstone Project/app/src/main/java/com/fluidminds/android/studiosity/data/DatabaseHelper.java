@@ -70,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_QUIZ_TABLE = "CREATE TABLE " + QuizEntry.TABLE_NAME + " (" +
                 QuizEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 QuizEntry.COLUMN_DECK_ID + " INTEGER NOT NULL, " +
-                QuizEntry.COLUMN_CREATE_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                QuizEntry.COLUMN_START_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
                 QuizEntry.COLUMN_NUM_CORRECT + " INTEGER NOT NULL, " +
                 QuizEntry.COLUMN_TOTAL_CARDS + " INTEGER NOT NULL, " +
                 QuizEntry.COLUMN_PERCENT_CORRECT + " INTEGER NOT NULL, " +
@@ -118,25 +118,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer) VALUES (2, 'Washington', 'Olympia')");
 
         // Quiz History
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 10)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 30)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 20)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 65)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 100)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 45)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 35)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 20)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 85)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 65)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 100)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 45)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 35)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 20)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, CreateDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 85)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 10)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 30)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 20)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 65)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 100)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 45)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 35)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 20)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 85)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 65)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 100)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 45)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 35)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 20)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 85)");
     }
 }

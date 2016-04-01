@@ -117,7 +117,7 @@ public class DataContract {
 
         // Column names
         public static final String COLUMN_DECK_ID = "deckid";
-        public static final String COLUMN_CREATE_DATE = "createdate";
+        public static final String COLUMN_START_DATE = "startdate";
         public static final String COLUMN_NUM_CORRECT = "numcorrect";
         public static final String COLUMN_TOTAL_CARDS = "totalcards";
         public static final String COLUMN_PERCENT_CORRECT = "percentCorrect";

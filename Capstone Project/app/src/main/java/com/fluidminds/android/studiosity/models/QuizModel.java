@@ -21,7 +21,7 @@ public class QuizModel extends BaseModel implements Parcelable {
     // Field Names
     public static final String sID = "Id";
     public static final String sDECKID = "DeckId";
-    public static final String sCREATEDATE = "CreateDate";
+    public static final String sSTARTDATE = "StartDate";
     public static final String sNUMCORRECT = "NumCorrect";
     public static final String sTOTALCARDS = "TotalCards";
     public static final String sPERCENTCORRECT = "PercentCorrect";
@@ -34,10 +34,10 @@ public class QuizModel extends BaseModel implements Parcelable {
         markAsNew();
     }
 
-    public QuizModel(Long id, Long deckId, Date createDate, Integer numCorrect, Integer totalCards, Integer percentCorrect) {
+    public QuizModel(Long id, Long deckId, Date startDate, Integer numCorrect, Integer totalCards, Integer percentCorrect) {
         super();
 
-        initializeFieldData(id, deckId, createDate, numCorrect, totalCards, percentCorrect);
+        initializeFieldData(id, deckId, startDate, numCorrect, totalCards, percentCorrect);
 
         markAsOld();
     }
@@ -50,11 +50,11 @@ public class QuizModel extends BaseModel implements Parcelable {
     /**
      * Put the initial field key/value into the FieldDataList.
      */
-    private void initializeFieldData(Long id, Long deckId, Date createDate, Integer numCorrect, Integer totalCards, Integer percentCorrect) {
+    private void initializeFieldData(Long id, Long deckId, Date startDate, Integer numCorrect, Integer totalCards, Integer percentCorrect) {
         /* Initially load properties without dirtying the model */
         loadFieldData(sID, id);
         loadFieldData(sDECKID, deckId);
-        loadFieldData(sCREATEDATE, createDate);
+        loadFieldData(sSTARTDATE, startDate);
         loadFieldData(sNUMCORRECT, numCorrect);
         loadFieldData(sTOTALCARDS, totalCards);
         loadFieldData(sPERCENTCORRECT, percentCorrect);
@@ -83,14 +83,14 @@ public class QuizModel extends BaseModel implements Parcelable {
     }
 
     /**
-     * CreateDate
+     * StartDate
      */
     @Bindable
-    public Date getCreateDate() { return getFieldData().getDate(sCREATEDATE); }
+    public Date getStartDate() { return getFieldData().getDate(sSTARTDATE); }
 
-    public void setCreateDate(Date date) {
-        if (!getCreateDate().equals(date)) {
-            setFieldData(sCREATEDATE, date);
+    public void setStartDate(Date date) {
+        if (!getStartDate().equals(date)) {
+            setFieldData(sSTARTDATE, date);
             }
     }
 
@@ -161,7 +161,7 @@ public class QuizModel extends BaseModel implements Parcelable {
             }
         }
         else {  // update
-            values.put(QuizEntry.COLUMN_CREATE_DATE, Converters.dateToString(getCreateDate()));
+            values.put(QuizEntry.COLUMN_START_DATE, Converters.dateToString(getStartDate()));
 
             int rowsUpdated = StudiosityApp.getInstance().getContentResolver().update(QuizEntry.buildItemUri(getId()), values, null, null);
             return (rowsUpdated == 1) ? this : null;
@@ -192,7 +192,7 @@ public class QuizModel extends BaseModel implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeLong(getId());
         parcel.writeLong(getDeckId());
-        parcel.writeString(getCreateDate() == null ? "" : Converters.dateToString(getCreateDate()));
+        parcel.writeString(getStartDate() == null ? "" : Converters.dateToString(getStartDate()));
         parcel.writeInt(getNumCorrect());
         parcel.writeInt(getTotalCards());
         parcel.writeInt(getPercentCorrect());
