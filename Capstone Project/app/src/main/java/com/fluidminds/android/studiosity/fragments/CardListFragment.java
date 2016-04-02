@@ -109,7 +109,7 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(CARD_LOADER, null, this);
+        getLoaderManager().initLoader(CARD_LOADER, null, this).forceLoad();
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -141,7 +141,6 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
         }
 
         mCardAdapter.swapData(cards);
-        getLoaderManager().destroyLoader(CARD_LOADER);
 
         mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
     }

@@ -100,7 +100,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(QUIZ_LOADER, null, this);
+        getLoaderManager().initLoader(QUIZ_LOADER, null, this).forceLoad();
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -142,7 +142,6 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
         }
 
         mTrendAdapter.swapData(quizzes);
-        getLoaderManager().destroyLoader(QUIZ_LOADER);
 
         // scroll to the most current Quiz
         int position = quizzes.size() - 1;

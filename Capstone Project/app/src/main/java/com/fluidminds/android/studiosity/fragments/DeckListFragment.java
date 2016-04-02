@@ -126,7 +126,7 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(DECK_LOADER, null, this);
+        getLoaderManager().initLoader(DECK_LOADER, null, this).forceLoad();
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -161,7 +161,6 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
         }
 
         mDeckAdapter.swapData(decks);
-        getLoaderManager().destroyLoader(DECK_LOADER);
 
         mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
     }
