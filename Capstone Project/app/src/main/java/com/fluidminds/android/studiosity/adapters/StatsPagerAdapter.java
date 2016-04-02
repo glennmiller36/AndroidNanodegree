@@ -4,7 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.fluidminds.android.studiosity.fragments.StatsDetailTabFragment;
+import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.app.StudiosityApp;
+import com.fluidminds.android.studiosity.fragments.StatsScoreTabFragment;
 import com.fluidminds.android.studiosity.fragments.StatsTrendTabFragment;
 
 /**
@@ -12,11 +14,12 @@ import com.fluidminds.android.studiosity.fragments.StatsTrendTabFragment;
  */
 public class StatsPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[] { "Trends", "Details" };
+    private String tabTitles[];
 
     public StatsPagerAdapter(FragmentManager fm) {
         super(fm);
-    }
+
+        tabTitles = new String[] {StudiosityApp.getInstance().getString(R.string.trends), StudiosityApp.getInstance().getString(R.string.scores)};    }
 
     @Override
     public int getCount() {
@@ -30,7 +33,7 @@ public class StatsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new StatsTrendTabFragment();
             case 1:
-                return new StatsDetailTabFragment();
+                return new StatsScoreTabFragment();
             default:
                 return null;
         }

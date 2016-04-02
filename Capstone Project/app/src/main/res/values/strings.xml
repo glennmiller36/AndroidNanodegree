@@ -40,6 +40,8 @@
     <string name="action_delete_card">Delete Card</string>
 
     <!-- Stats -->
+    <string name="trends">Trends</string>
+    <string name="scores">Scores</string>
     <string name="no_quizzes">No Quizzes</string>
     <string name="average">Average</string>
     <string name="score">Score</string>

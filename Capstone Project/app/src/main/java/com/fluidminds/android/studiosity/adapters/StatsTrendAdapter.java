@@ -88,7 +88,7 @@ public class StatsTrendAdapter extends RecyclerView.Adapter<StatsTrendAdapter.Vi
         mDataSet = dataset;
 
         // default to the most recent Quiz
-        if (!dataset.isEmpty())
+        if (dataset != null && !dataset.isEmpty())
             mCurrentIndex = mDataSet.size() - 1;
 
         notifyDataSetChanged();
