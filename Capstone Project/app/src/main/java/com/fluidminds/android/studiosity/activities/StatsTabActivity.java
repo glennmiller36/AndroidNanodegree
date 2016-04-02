@@ -1,8 +1,10 @@
 package com.fluidminds.android.studiosity.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,6 +14,7 @@ import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.adapters.StatsPagerAdapter;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+import com.fluidminds.android.studiosity.utils.ThemeColor;
 
 /**
  * An activity to display statistics about Quiz history.
@@ -48,9 +51,14 @@ public class StatsTabActivity extends BaseActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        // color toolbar based on model Theme Color
-        if(mSubjectModel != null)
+        // Color toolbar based on model Theme Color
+        if(mSubjectModel != null) {
             tabLayout.setBackgroundColor(mSubjectModel.getColorInt());
+
+            // Determine appropriate contrast color for the tab color
+            if (!ThemeColor.isWhiteContrastColor(mSubjectModel.getColorInt()))
+                tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.tabSelectedTextColor), ContextCompat.getColor(this, R.color.textColorPrimary));
+        }
     }
 
     @Override
