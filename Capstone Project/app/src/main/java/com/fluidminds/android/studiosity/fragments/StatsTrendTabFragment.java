@@ -34,6 +34,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
     private RecyclerView mRecyclerQuizzes;
     private LinearLayout mContent;
     private TextView mNoRecords;
+    private int mActiveIndex = -1;
 
     private DeckModel mDeckModel;
 
@@ -59,6 +60,11 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        if (savedInstanceState != null) {
+            // Restore last state
+            mActiveIndex = savedInstanceState.getInt("activeindex");
+        }
+
         mTrendAdapter = new StatsTrendAdapter();
 
         Intent intent = getActivity().getIntent();
@@ -83,6 +89,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
         mTrendAdapter.setOnItemClickListener(new StatsTrendAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
+                mActiveIndex = position;
                 mTrendAdapter.setActive(position);
 
                 // Update the fields for the selected index
@@ -102,6 +109,14 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
     public void onActivityCreated(Bundle savedInstanceState) {
         getLoaderManager().initLoader(QUIZ_LOADER, null, this).forceLoad();
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("activeindex", mActiveIndex);
+
+        getLoaderManager().destroyLoader(QUIZ_LOADER);
     }
 
     /**
@@ -144,7 +159,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
         mTrendAdapter.swapData(quizzes);
 
         // scroll to the most current Quiz
-        int position = quizzes.size() - 1;
+        int position = mActiveIndex == -1 ? quizzes.size() - 1 : mActiveIndex;
         mTrendAdapter.setActive(position);
         mRecyclerQuizzes.scrollToPosition(position);
 
