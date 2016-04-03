@@ -52,6 +52,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
     private TextView mAverageAccuracy;
 
     // Selected item details
+    private LinearLayout mSelectedItemContent;
     private TextView mSelectedNumCorrect;
     private TextView mSelectedTotalCards;
     private TextView mSelectedAccuracy;
@@ -75,6 +76,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
 
         mAverageAccuracy = (TextView) view.findViewById(R.id.textAverageAccuracy);
 
+        mSelectedItemContent = (LinearLayout) view.findViewById(R.id.contentSelectedItem);
         mSelectedNumCorrect = (TextView) view.findViewById(R.id.textNumCorrect);
         mSelectedTotalCards = (TextView) view.findViewById(R.id.textTotalCards);
         mSelectedAccuracy = (TextView) view.findViewById(R.id.textAccuracy);
@@ -174,6 +176,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
         // Update the fields for the selected index
         onBindSelectedItem(position);
 
+        mSelectedItemContent.setVisibility(View.VISIBLE);
         mContent.setVisibility(data.getCount() > 0 ? View.VISIBLE : View.GONE);
         mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
     }
