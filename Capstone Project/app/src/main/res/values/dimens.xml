@@ -7,6 +7,7 @@
 
     <!-- Subject List -->
     <dimen name="content_square">125dp</dimen>
+    <dimen name="subject_square_margin">10dp</dimen>
 
     <!-- Detail View -->
     <dimen name="content_spacer_height">48dp</dimen>

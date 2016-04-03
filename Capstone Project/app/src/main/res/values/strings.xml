@@ -21,7 +21,7 @@
     <string name="action_delete_subject">Delete Subject</string>
 
     <!-- Decks -->
-    <string name="no_decks">No Decks</string>
+    <string name="no_decks">No Deck of Cards</string>
     <string name="deck_name">Deck Name</string>
     <string name="deck">Deck</string>
     <string name="delete_deck">Delete deck \'%s\'?</string>
