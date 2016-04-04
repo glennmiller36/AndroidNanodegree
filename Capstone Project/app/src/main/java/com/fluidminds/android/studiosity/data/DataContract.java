@@ -93,6 +93,9 @@ public class DataContract {
         public static final String COLUMN_DECK_ID = "deckid";
         public static final String COLUMN_QUESTION = "question";
         public static final String COLUMN_ANSWER = "answer";
+        public static final String COLUMN_NUM_CORRECT = "numcorrect";
+        public static final String COLUMN_NUM_ATTEMPTED = "numattempted";
+        public static final String COLUMN_PERCENT_CORRECT = "percentcorrect";
 
         public static Uri buildItemUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
@@ -120,7 +123,7 @@ public class DataContract {
         public static final String COLUMN_START_DATE = "startdate";
         public static final String COLUMN_NUM_CORRECT = "numcorrect";
         public static final String COLUMN_TOTAL_CARDS = "totalcards";
-        public static final String COLUMN_PERCENT_CORRECT = "percentCorrect";
+        public static final String COLUMN_PERCENT_CORRECT = "percentcorrect";
 
         public static Uri buildItemUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

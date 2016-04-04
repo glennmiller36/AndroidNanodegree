@@ -22,19 +22,22 @@ public class CardModel extends BaseModel implements Parcelable {
     public static final String sDECKID = "DeckId";
     public static final String sQUESTION = "Question";
     public static final String sANSWER = "Answer";
+    public static final String sNUMCORRECT = "NumCorrect";
+    public static final String sNUMATTEMPTED = "NumAttempted";
+    public static final String sPERCENTCORRECT = "PercentCorrect";
 
     public CardModel(Long deckId) {
         super();
 
-        initializeFieldData(0L, deckId, "", "");
+        initializeFieldData(0L, deckId, "", "", 0, 0, 0);
 
         markAsNew();
     }
 
-    public CardModel(Long id, Long deckId, String question, String answer) {
+    public CardModel(Long id, Long deckId, String question, String answer, Integer numCorrect, Integer numAttempted, Integer percentCorrect) {
         super();
 
-        initializeFieldData(id, deckId, question, answer);
+        initializeFieldData(id, deckId, question, answer, numCorrect, numAttempted, percentCorrect);
 
         markAsOld();
     }
@@ -48,12 +51,15 @@ public class CardModel extends BaseModel implements Parcelable {
     /**
      * Put the initial field key/value into the FieldDataList.
      */
-    private void initializeFieldData(Long id, Long deckId, String question, String answer) {
+    private void initializeFieldData(Long id, Long deckId, String question, String answer, Integer numCorrect, Integer numAttempted, Integer percentCorrect) {
         /* Initially load properties without dirtying the model */
         loadFieldData(sID, id);
         loadFieldData(sDECKID, deckId);
         loadFieldData(sQUESTION, question);
         loadFieldData(sANSWER, answer);
+        loadFieldData(sNUMCORRECT, numCorrect);
+        loadFieldData(sNUMATTEMPTED, numAttempted);
+        loadFieldData(sPERCENTCORRECT, percentCorrect);
     }
 
     /**
@@ -103,6 +109,42 @@ public class CardModel extends BaseModel implements Parcelable {
     }
 
     /**
+     * Number Correct
+     */
+    @Bindable
+    public Integer getNumCorrect() { return getFieldData().getInteger(sNUMCORRECT); }
+
+    public void setNumCorrect(Integer numCorrect) {
+        if (!getNumCorrect().equals(numCorrect)) {
+            setFieldData(sNUMCORRECT, numCorrect);
+        }
+    }
+
+    /**
+     * Number Attempted
+     */
+    @Bindable
+    public Integer getNumAttempted() { return getFieldData().getInteger(sNUMATTEMPTED); }
+
+    public void setNumAttempted(Integer numAttempted) {
+        if (!getNumAttempted().equals(numAttempted)) {
+            setFieldData(sNUMATTEMPTED, numAttempted);
+        }
+    }
+
+    /**
+     * Percent Correct
+     */
+    @Bindable
+    public Integer getPercentCorrect() { return getFieldData().getInteger(sPERCENTCORRECT); }
+
+    public void setPercentCorrect(Integer percentCorrect) {
+        if (!getPercentCorrect().equals(percentCorrect)) {
+            setFieldData(sPERCENTCORRECT, percentCorrect);
+        }
+    }
+
+    /**
      * Saves the object to the database.
      */
     public CardModel save() {
@@ -123,6 +165,9 @@ public class CardModel extends BaseModel implements Parcelable {
         values.put(CardEntry.COLUMN_DECK_ID, getDeckId());
         values.put(CardEntry.COLUMN_QUESTION, getQuestion());
         values.put(CardEntry.COLUMN_ANSWER, getAnswer());
+        values.put(CardEntry.COLUMN_NUM_CORRECT, getNumCorrect());
+        values.put(CardEntry.COLUMN_NUM_ATTEMPTED, getNumAttempted());
+        values.put(CardEntry.COLUMN_PERCENT_CORRECT, getPercentCorrect());
 
         try {
             if (getId() == 0) { // insert
@@ -168,6 +213,9 @@ public class CardModel extends BaseModel implements Parcelable {
         parcel.writeLong(getDeckId());
         parcel.writeString(getQuestion());
         parcel.writeString(getAnswer());
+        parcel.writeInt(getNumCorrect());
+        parcel.writeInt(getNumAttempted());
+        parcel.writeInt(getPercentCorrect());
 
         // base fields
         parcel.writeByte((byte) (getIsDirty() ? 1 : 0));   //if mIsDirty == true, byte == 1
@@ -188,7 +236,7 @@ public class CardModel extends BaseModel implements Parcelable {
     public CardModel(Parcel parcel){
         super();
 
-        initializeFieldData(parcel.readLong(), parcel.readLong(), parcel.readString(), parcel.readString());
+        initializeFieldData(parcel.readLong(), parcel.readLong(), parcel.readString(), parcel.readString(), parcel.readInt(), parcel.readInt(), parcel.readInt());
 
         // base fields
         if (parcel.readByte() != 0)

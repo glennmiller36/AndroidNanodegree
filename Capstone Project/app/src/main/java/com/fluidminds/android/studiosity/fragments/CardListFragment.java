@@ -45,13 +45,19 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
         CardEntry.TABLE_NAME + "." + CardEntry._ID,
         CardEntry.COLUMN_DECK_ID,
         CardEntry.COLUMN_QUESTION,
-        CardEntry.COLUMN_ANSWER
+        CardEntry.COLUMN_ANSWER,
+        CardEntry.COLUMN_NUM_CORRECT,
+        CardEntry.COLUMN_NUM_ATTEMPTED,
+        CardEntry.COLUMN_PERCENT_CORRECT
     };
 
     // These indices are tied to CARD_COLUMNS.
     public static final int COL_ID = 0;
     public static final int COL_QUESTION = 1;
-    public static final int COL_ASNSWER = 2;
+    public static final int COL_ANSWER2 = 2;
+    public static final int COL_NUM_CORRECT = 3;
+    public static final int COL_NUM_ATTEMPTED = 4;
+    public static final int COL_PERCENT_COMPLETE = 5;
 
     public CardListFragment() {
         // Required empty public constructor
@@ -136,7 +142,7 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         ArrayList<CardModel> cards = new ArrayList<>();
         while (data.moveToNext()) {
-            CardModel model = new CardModel(data.getLong(0), data.getLong(1), data.getString(2), data.getString(3));
+            CardModel model = new CardModel(data.getLong(0), data.getLong(1), data.getString(2), data.getString(3), data.getInt(4), data.getInt(5), data.getInt(6));
             cards.add(model);
         }
 
