@@ -48,4 +48,7 @@
     <string name="accuracy">Accuracy</string>
     <string name="percentage_symbol">%</string>
     <string name="forward_slash">/</string>
+    <string name="last">Last</string>
+    <string name="five">5</string>
+    <string name="quiz_accuracy">Quiz Accuracy</string>
 </resources>
