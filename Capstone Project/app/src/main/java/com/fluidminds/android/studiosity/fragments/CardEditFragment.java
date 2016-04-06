@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.activities.BaseActivity;
-import com.fluidminds.android.studiosity.eventbus.CardChangedEvent;
 import com.fluidminds.android.studiosity.models.CardModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 import com.fluidminds.android.studiosity.viewmodels.CardViewModel;
@@ -83,13 +82,6 @@ public class CardEditFragment extends Fragment {
      * Called from the Activity when user clicks Done button.
      */
     public CardModel save() {
-        CardModel model = mViewModel.getModel().save();
-        if (model != null) {
-            // Post the event
-            EventBus bus = EventBus.getDefault();
-            bus.post(new CardChangedEvent(mViewModel.getModel()));
-        }
-
-        return model;
+        return mViewModel.getModel().save();
     }
 }
