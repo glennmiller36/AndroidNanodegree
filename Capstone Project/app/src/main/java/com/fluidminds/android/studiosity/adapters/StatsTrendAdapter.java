@@ -1,6 +1,11 @@
 package com.fluidminds.android.studiosity.adapters;
 
+import android.content.res.ColorStateList;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +19,8 @@ import android.widget.TextView;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.models.QuizModel;
+import com.fluidminds.android.studiosity.utils.Converters;
+import com.fluidminds.android.studiosity.utils.ThemeColor;
 
 import java.util.ArrayList;
 
@@ -63,6 +70,14 @@ public class StatsTrendAdapter extends RecyclerView.Adapter<StatsTrendAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         QuizModel model = mDataSet.get(position);
+
+        int accuracyColor = Converters.accuracyPercentToColor(model.getPercentCorrect());
+        if (accuracyColor == ThemeColor.RED)
+            holder.mProgressBar.setProgressDrawable(StudiosityApp.getInstance().getResources().getDrawable(R.drawable.progress_drawable_red));
+        else if (accuracyColor == ThemeColor.YELLOW)
+            holder.mProgressBar.setProgressDrawable(StudiosityApp.getInstance().getResources().getDrawable(R.drawable.progress_drawable_yellow));
+        else
+            holder.mProgressBar.setProgressDrawable(StudiosityApp.getInstance().getResources().getDrawable(R.drawable.progress_drawable_green));
 
         holder.mProgressBar.setProgress(model.getPercentCorrect());
         holder.mIndexText.setText(String.valueOf(position + 1));

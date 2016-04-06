@@ -10,5 +10,7 @@
     <color name="background_grey200">#EEEEEE</color>
     <color name="chartRemainingProgress">#EEEEEE</color>
     <color name="chartProgress_green500">#4CAF50</color>
+    <color name="chartProgress_yellow500">#FFEB3B</color>
+    <color name="chartProgress_red500">#F44336</color>
     <color name="tabSelectedTextColor">#263238</color>
 </resources>

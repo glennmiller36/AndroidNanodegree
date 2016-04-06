@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         android:layout_weight = "1"
         android:max="100"
-        android:progressDrawable="@drawable/progress_drawable"
+        android:progressDrawable="@drawable/progress_drawable_green"
         android:paddingBottom="8dp"/>
 
         <LinearLayout

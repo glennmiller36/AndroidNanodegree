@@ -190,7 +190,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
      * Update the fields for the selected index
      */
     private void onBindSelectedItem(int position) {
-        if (position > 0) {
+        if (position > -1) {
             QuizModel quiz = mTrendAdapter.get(position);
 
             mSelectedNumCorrect.setText(String.valueOf(quiz.getNumCorrect()));
