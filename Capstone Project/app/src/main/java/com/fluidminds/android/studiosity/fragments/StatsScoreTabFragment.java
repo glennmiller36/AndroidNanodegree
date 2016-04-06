@@ -12,15 +12,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.adapters.StatsScoreAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
+import com.fluidminds.android.studiosity.eventbus.NoQuizzesForDeckEvent;
 import com.fluidminds.android.studiosity.models.CardModel;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 import com.fluidminds.android.studiosity.utils.DividerItemDecoration;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -32,10 +37,13 @@ public class StatsScoreTabFragment extends Fragment implements LoaderManager.Loa
     private StatsScoreAdapter mScoreAdapter;
 
     private RecyclerView mRecyclerCards;
+    private LinearLayout mLastFiveQuizzesMessage;
     private TextView mNoRecords;
 
     private SubjectModel mSubjectModel;
     private DeckModel mDeckModel;
+
+    protected EventBus mEventBus = EventBus.getDefault();
 
     private static final int CARD_LOADER = 0;
 
@@ -88,6 +96,8 @@ public class StatsScoreTabFragment extends Fragment implements LoaderManager.Loa
                 // do nothing
             }
         });
+
+        mLastFiveQuizzesMessage = (LinearLayout) view.findViewById(R.id.linearLastFiveQuizzesMessage);
         mNoRecords = (TextView) view.findViewById(R.id.textNoRecords);
 
         return view;
@@ -96,7 +106,18 @@ public class StatsScoreTabFragment extends Fragment implements LoaderManager.Loa
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         getLoaderManager().initLoader(CARD_LOADER, null, this).forceLoad();
+
+        // Register as a subscriber
+        mEventBus.register(this);
+
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy() {
+        // Unregister
+        mEventBus.unregister(this);
+        super.onDestroy();
     }
 
     /**
@@ -129,13 +150,26 @@ public class StatsScoreTabFragment extends Fragment implements LoaderManager.Loa
             cards.add(model);
         }
 
-        mScoreAdapter.swapData(cards);
+        // display Cards unless Stats Trend tab has already determined that no Quizzes exist
+        if (mNoRecords.getVisibility() == View.GONE) {
+            mScoreAdapter.swapData(cards);
 
-        mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
+            mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mScoreAdapter.swapData(null);
+    }
+
+    @Subscribe
+    public void onEvent(NoQuizzesForDeckEvent event){
+        // Stats Trend tab LoadCursor returned No Quizzes so honor that on the Stats Score tab
+        if (event.getModel().getId() == mDeckModel.getId()) {
+            mLastFiveQuizzesMessage.setVisibility(View.GONE);
+            mRecyclerCards.setVisibility(View.GONE);
+            mNoRecords.setVisibility(View.VISIBLE);
+        }
     }
 }

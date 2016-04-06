@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.StatsTabActivity">
+    tools:context=".activities.StatsTabActivity"
+    android:background="@color/background_grey200">
 
     <LinearLayout
+        android:id="@+id/linearLastFiveQuizzesMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background_grey200"
@@ -57,9 +59,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/no_cards"
+        android:text="@string/no_quizzes"
         android:visibility="gone"
         android:textAlignment="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:background="@android:color/white"/>
 
 </LinearLayout>

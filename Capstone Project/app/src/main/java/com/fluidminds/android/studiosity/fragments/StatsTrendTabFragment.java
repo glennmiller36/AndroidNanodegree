@@ -18,9 +18,13 @@ import android.widget.TextView;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.adapters.StatsTrendAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.QuizEntry;
+import com.fluidminds.android.studiosity.eventbus.DeckChangedEvent;
+import com.fluidminds.android.studiosity.eventbus.NoQuizzesForDeckEvent;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.QuizModel;
 import com.fluidminds.android.studiosity.utils.Converters;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -147,6 +151,12 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         int sumNumCorrect = 0;
         int sumTotalCards = 0;
+
+        if (data.getCount() == 0) {
+            // Stats Trend tab LoadCursor returned No Quizzes so honor that on the Stats Score tab
+            EventBus bus = EventBus.getDefault();
+            bus.post(new NoQuizzesForDeckEvent(mDeckModel));
+        }
 
         ArrayList<QuizModel> quizzes = new ArrayList<>();
         while (data.moveToNext()) {
