@@ -1,14 +1,20 @@
 package com.fluidminds.android.studiosity.adapters;
 
 import android.database.Cursor;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.models.CardModel;
+import com.fluidminds.android.studiosity.utils.Converters;
+import com.fluidminds.android.studiosity.utils.ThemeColor;
 
 import java.util.ArrayList;
 
@@ -21,13 +27,17 @@ public class StatsScoreAdapter extends RecyclerView.Adapter<StatsScoreAdapter.Vi
     private static MyClickListener mItemClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView mQuestion;
+        LinearLayout mAccuracy;
         TextView mPercentComplete;
+        TextView mPercentSymbol;
+        TextView mQuestion;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mQuestion = (TextView) itemView.findViewById(R.id.textQuestion);
+            mAccuracy = (LinearLayout) itemView.findViewById(R.id.linearAccuracy);
             mPercentComplete = (TextView) itemView.findViewById(R.id.textPercentComplete);
+            mPercentSymbol = (TextView) itemView.findViewById(R.id.textPercentSymbol);
+            mQuestion = (TextView) itemView.findViewById(R.id.textQuestion);
             itemView.setOnClickListener(this);
         }
 
@@ -51,8 +61,19 @@ public class StatsScoreAdapter extends RecyclerView.Adapter<StatsScoreAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        int percentAccuracy = mDataSet.get(position).getPercentCorrect();
+
+        int backgroundColor = Converters.accuracyPercentToColor(percentAccuracy);
+        holder.mAccuracy.setBackgroundColor(backgroundColor);
+        holder.mPercentComplete.setText(String.valueOf(percentAccuracy));
         holder.mQuestion.setText(mDataSet.get(position).getQuestion());
-        holder.mPercentComplete.setText(String.valueOf(mDataSet.get(position).getPercentCorrect()));
+
+        int textColor = Color.WHITE;
+        if (!ThemeColor.isWhiteContrastColor(backgroundColor))
+            textColor = ContextCompat.getColor(StudiosityApp.getInstance(), R.color.textColorPrimary);
+
+        holder.mPercentComplete.setTextColor(textColor);
+        holder.mPercentSymbol.setTextColor(textColor);
     }
 
     @Override

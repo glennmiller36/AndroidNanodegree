@@ -37,4 +37,17 @@ public class Converters {
         SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);
         return dateFormat.format(date);
     }
+
+    /**
+     * Converts accuracy percentage to color - like a stop light. Green means you
+     * got it; Yellow means it needs some work; Red means you don't know it.
+     */
+    public static int accuracyPercentToColor(Integer accuracy) {
+        if (accuracy >= 80)
+            return ThemeColor.GREEN;    // Got It!
+        else if (accuracy >= 60)
+            return ThemeColor.YELLOW;   // Caution - needs work
+        else
+            return ThemeColor.RED;      // Don't know it
+    }
 }

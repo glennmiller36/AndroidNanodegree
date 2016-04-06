@@ -68,7 +68,7 @@ public class StatsTrendAdapter extends RecyclerView.Adapter<StatsTrendAdapter.Vi
         holder.mIndexText.setText(String.valueOf(position + 1));
 
         if (mCurrentIndex == position) {
-            holder.mIndexCircle.setBackgroundResource(R.drawable.trend_circle);
+            holder.mIndexCircle.setBackgroundResource(R.drawable.trend_circle_black);
             holder.mIndexText.setTextColor(ContextCompat.getColor(StudiosityApp.getInstance(), android.R.color.white));;
             holder.mActiveArrow.setVisibility(View.VISIBLE);
         }

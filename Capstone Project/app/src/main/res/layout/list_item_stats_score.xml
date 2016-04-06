@@ -12,44 +12,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="@dimen/card_radius"
-        card_view:cardBackgroundColor="@android:color/white"
-        card_view:contentPadding="@dimen/card_padding">
+        card_view:cardBackgroundColor="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:id="@+id/linearAccuracy"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/card_padding">
+
                 <TextView
+                    android:id="@+id/textPercentComplete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingRight="@dimen/word_spacer"
-                    android:text="@string/letter_q"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary" />
+                    android:fontFamily="sans-serif-condensed"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:id="@+id/textPercentSymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=" %"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:paddingTop="@dimen/card_padding"
+                android:paddingBottom="@dimen/card_padding"
+                android:paddingLeft="@dimen/word_spacer"
+                android:paddingRight="@dimen/word_spacer"
+                android:text="@string/letter_q"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/textColorSecondary" />
+
                 <TextView
                     android:id="@+id/textQuestion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/card_padding"
+                    android:paddingBottom="@dimen/card_padding"
+                    android:paddingRight="@dimen/card_padding"
                     android:text="@string/theme_color"
                     android:fontFamily="sans-serif"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/textColorPrimary" />
-            </LinearLayout>
-            <TextView
-                android:id="@+id/textPercentComplete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/theme_color"
-                android:fontFamily="sans-serif"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/textColorPrimary" />
 
          </LinearLayout>
 
