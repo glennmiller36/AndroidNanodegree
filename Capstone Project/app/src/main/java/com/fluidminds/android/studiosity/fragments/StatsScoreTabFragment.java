@@ -52,8 +52,7 @@ public class StatsScoreTabFragment extends Fragment implements LoaderManager.Loa
             CardEntry.COLUMN_DECK_ID,
             CardEntry.COLUMN_QUESTION,
             CardEntry.COLUMN_ANSWER,
-            CardEntry.COLUMN_NUM_CORRECT,
-            CardEntry.COLUMN_NUM_ATTEMPTED,
+            CardEntry.COLUMN_RECENT_SCORES,
             CardEntry.COLUMN_PERCENT_CORRECT
     };
 
@@ -61,9 +60,8 @@ public class StatsScoreTabFragment extends Fragment implements LoaderManager.Loa
     public static final int COL_ID = 0;
     public static final int COL_QUESTION = 1;
     public static final int COL_ANSWER = 2;
-    public static final int COL_NUM_CORRECT = 3;
-    public static final int COL_NUM_ATTEMPTED = 4;
-    public static final int COL_PERCENT_CORRECT = 5;
+    public static final int COL_RECENT_SCORES = 3;
+    public static final int COL_PERCENT_CORRECT = 4;
 
     public StatsScoreTabFragment() {
         // Required empty public constructor
@@ -146,7 +144,7 @@ public class StatsScoreTabFragment extends Fragment implements LoaderManager.Loa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         ArrayList<CardModel> cards = new ArrayList<>();
         while (data.moveToNext()) {
-            CardModel model = new CardModel(data.getLong(0), data.getLong(1), data.getString(2), data.getString(3), data.getInt(4), data.getInt(5), data.getInt(6));
+            CardModel model = new CardModel(data.getLong(0), data.getLong(1), data.getString(2), data.getString(3), data.getString(4), data.getInt(5));
             cards.add(model);
         }
 

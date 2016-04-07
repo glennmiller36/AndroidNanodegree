@@ -62,8 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 CardEntry.COLUMN_DECK_ID + " INTEGER NOT NULL, " +
                 CardEntry.COLUMN_QUESTION + " TEXT NOT NULL UNIQUE COLLATE NOCASE, " +
                 CardEntry.COLUMN_ANSWER + " TEXT NOT NULL, " +
-                CardEntry.COLUMN_NUM_CORRECT + " INTEGER NOT NULL, " +
-                CardEntry.COLUMN_NUM_ATTEMPTED + " INTEGER NOT NULL, " +
+                CardEntry.COLUMN_RECENT_SCORES + " TEXT, " +
                 CardEntry.COLUMN_PERCENT_CORRECT + " INTEGER NOT NULL, " +
                 " FOREIGN KEY(" + CardEntry.COLUMN_DECK_ID + ") REFERENCES " + DeckEntry.TABLE_NAME + "(" + DeckEntry._ID + ") ON DELETE CASCADE " +
                 " );";
@@ -98,30 +97,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO DECK (SubjectId, Name) VALUES (1, 'U.S. State Capitals')");
 
         // Cards
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'BNA', 'Nashville International', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'BWI', 'Baltimore/Washington International', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'DFW', 'Dallas Fort Worth International', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'DTW', 'Detroit Metropolitan Wayne County', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'JFK', 'John F Kennedy International, New York', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'LAS', 'McCarran International, Las Vegas', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'MCO', 'Orlando International', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'MSP', 'Minneapolis-St Paul International', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'ORD', 'Chicago O’Hare International', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (1, 'PDX', 'Portland International', 0, 0, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'BNA', 'Nashville International', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'BWI', 'Baltimore/Washington International', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'DFW', 'Dallas Fort Worth International', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'DTW', 'Detroit Metropolitan Wayne County', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'JFK', 'John F Kennedy International, New York', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'LAS', 'McCarran International, Las Vegas', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'MCO', 'Orlando International', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'MSP', 'Minneapolis-St Paul International', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'ORD', 'Chicago O’Hare International', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'PDX', 'Portland International', NULL, 0)");
 
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'Arizona Executing tasks: [clean, :app:generateDebugSources, :app:prepareDebugUnitTestDependencies, :app:mockable', 'Phoenix Executing tasks: [clean, :app:generateDebugSources, :app:prepareDebugUnitTestDependencies, :app:mockable', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'California', 'Sacramento', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'Illinois', 'Springfield', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'Louisiana', 'Baton Rouge', 0, 0, 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'Maryland', 'Annapolis', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'Massachusetts', 'Boston', 0, 0, 70)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'Minnesota', 'St. Paul', 0, 0, 0)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'New York', 'Albany', 0, 0, 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'Ohio', 'Columbus', 0, 0, 50)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, NumCorrect, NumAttempted, PercentCorrect) VALUES (2, 'Washington', 'Olympia', 0, 0, 40)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Arizona Executing tasks: [clean, :app:generateDebugSources, :app:prepareDebugUnitTestDependencies, :app:mockable', 'Phoenix Executing tasks: [clean, :app:generateDebugSources, :app:prepareDebugUnitTestDependencies, :app:mockable', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'California', 'Sacramento', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Illinois', 'Springfield', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Louisiana', 'Baton Rouge', NULL, 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Maryland', 'Annapolis', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Massachusetts', 'Boston', NULL, 70)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Minnesota', 'St. Paul', NULL, 0)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'New York', 'Albany', NULL, 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Ohio', 'Columbus', NULL, 50)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Washington', 'Olympia', NULL, 40)");
 
         // Quiz History
-        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 10)");
+        sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 1, 10, 10)");
         sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 30)");
         sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-01 13:01:01.126', 8, 10, 80)");
         sqLiteDatabase.execSQL("INSERT INTO QUIZ (DeckId, StartDate, NumCorrect, TotalCards, PercentCorrect) VALUES (2, '2014-03-02 15:01:01.126', 5, 10, 20)");

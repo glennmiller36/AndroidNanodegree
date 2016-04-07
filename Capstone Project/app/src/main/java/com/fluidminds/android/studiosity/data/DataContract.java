@@ -93,8 +93,7 @@ public class DataContract {
         public static final String COLUMN_DECK_ID = "deckid";
         public static final String COLUMN_QUESTION = "question";
         public static final String COLUMN_ANSWER = "answer";
-        public static final String COLUMN_NUM_CORRECT = "numcorrect";
-        public static final String COLUMN_NUM_ATTEMPTED = "numattempted";
+        public static final String COLUMN_RECENT_SCORES = "recentScores";
         public static final String COLUMN_PERCENT_CORRECT = "percentcorrect";
 
         public static Uri buildItemUri(long id) {
