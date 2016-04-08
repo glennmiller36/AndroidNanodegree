@@ -54,6 +54,9 @@
         <activity
             android:name=".activities.StatsTabActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.QuizActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <provider
             android:name=".data.StudiosityProvider"
