@@ -40,7 +40,7 @@ public class QuizActivity extends BaseActivity {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            getSupportActionBar().setTitle(mDeckModel.getName());
+            getSupportActionBar().setTitle("");
         }
 
         // Register as a subscriber
@@ -59,9 +59,8 @@ public class QuizActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.menu_quiz, menu);
         mMenu = menu;
 
-        // color toolbar based on model Theme Color
-        if(mSubjectModel != null)
-            colorizeToolbar(mSubjectModel.getColorInt());
+        // color toolbar black to blend in with the Quiz slider
+        colorizeToolbar(getResources().getColor(R.color.quizBackground_black));
 
         return super.onCreateOptionsMenu(menu);
     }

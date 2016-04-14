@@ -2,27 +2,27 @@ package com.fluidminds.android.studiosity.fragments;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
-import com.fluidminds.android.studiosity.activities.CardEditActivity;
-import com.fluidminds.android.studiosity.adapters.CardListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.models.CardModel;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
-import com.fluidminds.android.studiosity.utils.DividerItemDecoration;
+import com.fluidminds.android.studiosity.views.TransparentSemicircleView;
 
 import java.util.ArrayList;
 
@@ -32,6 +32,8 @@ import java.util.ArrayList;
 public class QuizFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     ArrayList<CardModel> mCards = new ArrayList<>();
+    private LinearLayout mAnswerContent;
+    private SlidingPaneLayout mSlidingPane;
     private TextView mNoRecords;
 
     private SubjectModel mSubjectModel;
@@ -62,6 +64,41 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
+
+        mAnswerContent = (LinearLayout) view.findViewById(R.id.answerContent);
+        mSlidingPane = (SlidingPaneLayout) view.findViewById(R.id.slidingPanel);
+
+        Button clickButton = (Button) view.findViewById(R.id.buttonSlide);
+        clickButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (mSlidingPane.isOpen())
+                    mSlidingPane.closePane();
+                else
+                    mSlidingPane.openPane();
+            }
+        });
+
+
+        // don't dim SlidePane while it's animating open
+        SlidingPaneLayout layout = (SlidingPaneLayout) view.findViewById(R.id.slidingPanel);
+        layout.setSliderFadeColor(Color.TRANSPARENT);
+
+        // color SlidePane based on Subject Theme Color
+        View roundedCornersTop = view.findViewById(R.id.roundedCornersTop);
+        GradientDrawable roundedCornersTopBackground = (GradientDrawable) roundedCornersTop.getBackground();
+        roundedCornersTopBackground.setColor(mSubjectModel.getColorInt());
+
+        TransparentSemicircleView transparentSemicircle = (TransparentSemicircleView) view.findViewById(R.id.transparentSemicircle);
+        transparentSemicircle.setDrawBackgroundColor(mSubjectModel.getColorInt());
+
+        View roundedCornersBottom = view.findViewById(R.id.roundedCornersBottom);
+        GradientDrawable roundedCornersBottomBackground = (GradientDrawable) roundedCornersBottom.getBackground();
+        roundedCornersBottomBackground.setColor(mSubjectModel.getColorInt());
+
+        LinearLayout slideContent = (LinearLayout) view.findViewById(R.id.slideContent);
+        slideContent.setBackgroundColor(mSubjectModel.getColorInt());
 
         mNoRecords = (TextView) view.findViewById(R.id.textNoRecords);
 
@@ -101,7 +138,13 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
             mCards.add(model);
         }
 
-        mNoRecords.setVisibility(data.getCount() == 0 ? View.VISIBLE : View.GONE);
+        if (data.getCount() == 0) {
+            mAnswerContent.setVisibility(View.GONE);
+            mSlidingPane.setVisibility(View.GONE);
+            mNoRecords.setVisibility(View.VISIBLE);
+        }
+        else
+            mNoRecords.setVisibility(View.GONE);
     }
 
     @Override

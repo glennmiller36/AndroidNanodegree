@@ -2,7 +2,177 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CardListActivity">
+    tools:context=".activities.QuizActivity">
+
+    <!--in order to accomplish text that shows through transparent semicircle - created this content outside the SlidingPane-->
+    <LinearLayout
+        android:id="@+id/answerContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <!--left sidebar which holds the auto slide button-->
+        <View
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/quizBackground_black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--top screen edge black border-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/quizBackground_black" />
+
+            <!--white content area visible thru the transparent semicircle-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@android:color/white">
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/textColorPrimary"
+                    android:text="99 / 99" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    hello glenn" />
+
+            </LinearLayout>
+
+            <!--bottom screen edge black border-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/quizBackground_black" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v4.widget.SlidingPaneLayout
+        android:id="@+id/slidingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--left side: The master part. Contains content not visible thru transparent view -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="80dp"
+            android:orientation="vertical"
+            android:clickable="false">
+
+            <Button
+                android:id="@+id/buttonSlide"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="New Button" />
+
+            <Button
+                android:id="@+id/buttonCorrect"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="Correct" />
+
+            <Button
+                android:id="@+id/buttonIncorrect"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="Incorrect" />
+
+        </LinearLayout>
+
+        <!--right side: The detail part. Contains the sliding 'panel' containing the Question. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal"
+            android:background="@null"
+            android:alpha="255">
+
+            <!--invisible TextView that duplicates card count but gives appropriate spacing for the slide cover-->
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/textColorPrimary"
+                android:text="9999"
+                android:visibility="invisible"/>
+
+            <!--vertical container to create the transparent semicircle where the card count peaks thru-->
+            <LinearLayout
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@null"
+                android:alpha="255">
+
+                <View
+                    android:id="@+id/roundedCornersTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_rounded_corners_drawable" />
+
+                <com.fluidminds.android.studiosity.views.TransparentSemicircleView
+                    android:id="@+id/transparentSemicircle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+
+                <View
+                    android:id="@+id/roundedCornersBottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_rounded_corners_drawable" />
+
+                <!--bottom screen edge black border-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/quizBackground_black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--main slide panel-->
+                <LinearLayout
+                    android:id="@+id/slideContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@null"
+                    android:alpha="255">
+                </LinearLayout>
+
+                <!--bottom screen edge black border-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/quizBackground_black" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.SlidingPaneLayout>
 
     <TextView
         android:id="@+id/textNoRecords"
@@ -10,7 +180,7 @@
         android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/no_cards"
-        android:visibility="visible"
+        android:visibility="gone"
         android:textAlignment="center"
         android:gravity="center" />
 

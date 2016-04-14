@@ -13,4 +13,5 @@
     <color name="chartProgress_yellow500">#FFEB3B</color>
     <color name="chartProgress_red500">#F44336</color>
     <color name="tabSelectedTextColor">#263238</color>
+    <color name="quizBackground_black">#212121</color>
 </resources>
