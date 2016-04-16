@@ -51,4 +51,9 @@
     <string name="last">Last</string>
     <string name="five">5</string>
     <string name="quiz_accuracy">Quiz Accuracy</string>
+
+    <!-- Quiz -->
+    <string name="correct">Correct</string>
+    <string name="incorrect">Incorrect</string>
+
 </resources>

@@ -9,13 +9,25 @@
         android:id="@+id/answerContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:clickable="true">
 
-        <!--left sidebar which holds the auto slide button-->
-        <View
-            android:layout_width="50dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/quizBackground_black"/>
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:paddingLeft="4dp"
+            android:layout_gravity="bottom"
+            android:background="@color/quizBackground_black">
+
+            <include layout="@layout/button_slide_white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,18 +48,41 @@
                 android:orientation="horizontal"
                 android:background="@android:color/white">
 
-                <TextView android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="10dp"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textColorSecondary"
                     android:text="99 / 99" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="    hello glenn" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="100dp">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scrollbars="vertical"
+                        android:fillViewport="true">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/textColorPrimary"
+                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit, THE END" />
+                    </ScrollView>
+
+                    <!-- Include our custom Toolbar -->
+                    <include layout="@layout/toolbar_correct_incorrect" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -60,44 +95,24 @@
         </LinearLayout>
     </LinearLayout>
 
-    <android.support.v4.widget.SlidingPaneLayout
+    <com.fluidminds.android.studiosity.views.SlidingPaneLayoutExtended
         android:id="@+id/slidingPanel"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--left side: The master part. Contains content not visible thru transparent view -->
-        <LinearLayout
+        <!--The first child view becomes the left pane. Contains content not visible thru transparent view -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="1dp"
             android:layout_marginRight="80dp"
-            android:orientation="vertical"
-            android:clickable="false">
+            android:layout_gravity="left"
+            android:background="@null"/>
 
-            <Button
-                android:id="@+id/buttonSlide"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="New Button" />
-
-            <Button
-                android:id="@+id/buttonCorrect"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="Correct" />
-
-            <Button
-                android:id="@+id/buttonIncorrect"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="Incorrect" />
-
-        </LinearLayout>
-
-        <!--right side: The detail part. Contains the sliding 'panel' containing the Question. -->
+        <!--The second child becomes the right (content) pane. Contains the sliding 'panel' containing the Question. -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="52dp"
             android:orientation="horizontal"
             android:background="@null"
             android:alpha="255">
@@ -160,6 +175,25 @@
                     android:orientation="vertical"
                     android:background="@null"
                     android:alpha="255">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="50dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="75dp"
+                        android:scrollbars="vertical"
+                        android:fillViewport="true">
+                        <TextView
+                            android:id="@+id/textQuestion"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@android:color/white"
+                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit, THE END" />
+                    </ScrollView>
+
                 </LinearLayout>
 
                 <!--bottom screen edge black border-->
@@ -172,7 +206,7 @@
 
         </LinearLayout>
 
-    </android.support.v4.widget.SlidingPaneLayout>
+    </com.fluidminds.android.studiosity.views.SlidingPaneLayoutExtended>
 
     <TextView
         android:id="@+id/textNoRecords"

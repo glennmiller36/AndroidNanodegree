@@ -7,21 +7,23 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.models.CardModel;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+import com.fluidminds.android.studiosity.utils.ThemeColor;
 import com.fluidminds.android.studiosity.views.TransparentSemicircleView;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
     ArrayList<CardModel> mCards = new ArrayList<>();
     private LinearLayout mAnswerContent;
     private SlidingPaneLayout mSlidingPane;
+    private TextView mQuestion;
     private TextView mNoRecords;
 
     private SubjectModel mSubjectModel;
@@ -68,8 +71,8 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
         mAnswerContent = (LinearLayout) view.findViewById(R.id.answerContent);
         mSlidingPane = (SlidingPaneLayout) view.findViewById(R.id.slidingPanel);
 
-        Button clickButton = (Button) view.findViewById(R.id.buttonSlide);
-        clickButton.setOnClickListener(new View.OnClickListener() {
+        LinearLayout slideButton = (LinearLayout) view.findViewById(R.id.buttonSlide);
+        slideButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -80,10 +83,8 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
             }
         });
 
-
         // don't dim SlidePane while it's animating open
-        SlidingPaneLayout layout = (SlidingPaneLayout) view.findViewById(R.id.slidingPanel);
-        layout.setSliderFadeColor(Color.TRANSPARENT);
+        mSlidingPane.setSliderFadeColor(Color.TRANSPARENT);
 
         // color SlidePane based on Subject Theme Color
         View roundedCornersTop = view.findViewById(R.id.roundedCornersTop);
@@ -99,6 +100,24 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
 
         LinearLayout slideContent = (LinearLayout) view.findViewById(R.id.slideContent);
         slideContent.setBackgroundColor(mSubjectModel.getColorInt());
+
+        mQuestion = (TextView) view.findViewById(R.id.textQuestion);
+        if (!ThemeColor.isWhiteContrastColor(mSubjectModel.getColorInt()))
+            mQuestion.setTextColor(ContextCompat.getColor(getContext(), R.color.textColorPrimary));
+
+        LinearLayout buttonCorrect = (LinearLayout) view.findViewById(R.id.buttonThumbUp);
+        buttonCorrect.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Correct", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        LinearLayout buttonIncorrect = (LinearLayout) view.findViewById(R.id.buttonThumbDown);
+        buttonIncorrect.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Incorrect", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mNoRecords = (TextView) view.findViewById(R.id.textNoRecords);
 
