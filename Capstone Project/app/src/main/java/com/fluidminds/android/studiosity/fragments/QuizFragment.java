@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
@@ -33,10 +32,14 @@ import java.util.ArrayList;
  */
 public class QuizFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    int mCardsIndex = 0;
     ArrayList<CardModel> mCards = new ArrayList<>();
     private LinearLayout mAnswerContent;
-    private SlidingPaneLayout mSlidingPane;
+    private SlidingPaneLayout mSlidingPanel;
+    private TextView mAnswer;
     private TextView mQuestion;
+    private TextView mCardCount;
+    private TextView mCardCountSpacer;
     private TextView mNoRecords;
 
     private SubjectModel mSubjectModel;
@@ -69,22 +72,40 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
 
         mAnswerContent = (LinearLayout) view.findViewById(R.id.answerContent);
-        mSlidingPane = (SlidingPaneLayout) view.findViewById(R.id.slidingPanel);
+        mSlidingPanel = (SlidingPaneLayout) view.findViewById(R.id.slidingPanel);
 
         LinearLayout slideButton = (LinearLayout) view.findViewById(R.id.buttonSlide);
         slideButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (mSlidingPane.isOpen())
-                    mSlidingPane.closePane();
+                if (mSlidingPanel.isOpen())
+                    mSlidingPanel.closePane();
                 else
-                    mSlidingPane.openPane();
+                    mSlidingPanel.openPane();
             }
         });
 
         // don't dim SlidePane while it's animating open
-        mSlidingPane.setSliderFadeColor(Color.TRANSPARENT);
+        mSlidingPanel.setSliderFadeColor(Color.TRANSPARENT);
+
+        SlidingPaneLayout.PanelSlideListener panelListener = new SlidingPaneLayout.PanelSlideListener(){
+
+            @Override
+            public void onPanelClosed(View arg0) {
+                CardModel model = mCards.get(mCardsIndex);
+                mAnswer.setText(mCards.get(mCardsIndex).getAnswer());
+            }
+
+            @Override
+            public void onPanelOpened(View arg0) { }
+
+            @Override
+            public void onPanelSlide(View arg0, float arg1) { }
+
+        };
+        mSlidingPanel.setPanelSlideListener(panelListener);
+
 
         // color SlidePane based on Subject Theme Color
         View roundedCornersTop = view.findViewById(R.id.roundedCornersTop);
@@ -101,21 +122,38 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
         LinearLayout slideContent = (LinearLayout) view.findViewById(R.id.slideContent);
         slideContent.setBackgroundColor(mSubjectModel.getColorInt());
 
+        mAnswer = (TextView) view.findViewById(R.id.textAnswer);
         mQuestion = (TextView) view.findViewById(R.id.textQuestion);
         if (!ThemeColor.isWhiteContrastColor(mSubjectModel.getColorInt()))
             mQuestion.setTextColor(ContextCompat.getColor(getContext(), R.color.textColorPrimary));
 
+
+        mCardCount = (TextView) view.findViewById(R.id.textCardCount);
+        mCardCountSpacer = (TextView) view.findViewById(R.id.textCardCountSpacer);
+
         LinearLayout buttonCorrect = (LinearLayout) view.findViewById(R.id.buttonThumbUp);
         buttonCorrect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Correct", Toast.LENGTH_SHORT).show();
+                mCardsIndex++;
+                if (mCardsIndex == mCards.size())
+                    showSummary();
+                else {
+                    mSlidingPanel.closePane();
+                    bindView();
+                }
             }
         });
 
         LinearLayout buttonIncorrect = (LinearLayout) view.findViewById(R.id.buttonThumbDown);
         buttonIncorrect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Incorrect", Toast.LENGTH_SHORT).show();
+                mCardsIndex++;
+                if (mCardsIndex == mCards.size())
+                    showSummary();
+                else {
+                    mSlidingPanel.closePane();
+                    bindView();
+                }
             }
         });
 
@@ -159,15 +197,30 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
 
         if (data.getCount() == 0) {
             mAnswerContent.setVisibility(View.GONE);
-            mSlidingPane.setVisibility(View.GONE);
+            mSlidingPanel.setVisibility(View.GONE);
             mNoRecords.setVisibility(View.VISIBLE);
         }
         else
+            bindView();
             mNoRecords.setVisibility(View.GONE);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mCards.clear();
+    }
+
+    private void bindView() {
+        if (mCardsIndex < mCards.size()) {
+            CardModel model = mCards.get(mCardsIndex);
+            mQuestion.setText(model.getQuestion());
+            mAnswer.setText(mCardsIndex == 0 ? model.getAnswer() : "");
+
+            mCardCount.setText(String.format(getString(R.string.card_count), mCardsIndex + 1, mCards.size()));
+            mCardCountSpacer.setText(String.format(getString(R.string.card_count_spacer), mCardsIndex + 1, mCards.size()));
+        }
+    }
+
+    private void showSummary() {
     }
 }

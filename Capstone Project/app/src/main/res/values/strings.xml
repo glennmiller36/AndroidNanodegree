@@ -55,5 +55,7 @@
     <!-- Quiz -->
     <string name="correct">Correct</string>
     <string name="incorrect">Incorrect</string>
+    <string name="card_count" formatted="false">%d / %d</string>
+    <string name="card_count_spacer" formatted="false">%d%d</string>
 
 </resources>

@@ -49,13 +49,13 @@
                 android:background="@android:color/white">
 
                 <TextView
+                    android:id="@+id/textCardCount"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="10dp"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/textColorSecondary"
-                    android:text="99 / 99" />
+                    android:textColor="@color/textColorSecondary" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -72,12 +72,12 @@
                         android:scrollbars="vertical"
                         android:fillViewport="true">
                         <TextView
+                            android:id="@+id/textAnswer"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/textColorPrimary"
-                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit, THE END" />
+                            android:textColor="@color/textColorPrimary" />
                     </ScrollView>
 
                     <!-- Include our custom Toolbar -->
@@ -118,12 +118,13 @@
             android:alpha="255">
 
             <!--invisible TextView that duplicates card count but gives appropriate spacing for the slide cover-->
-            <TextView android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textCardCountSpacer"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="5dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/textColorPrimary"
-                android:text="9999"
                 android:visibility="invisible"/>
 
             <!--vertical container to create the transparent semicircle where the card count peaks thru-->
@@ -190,8 +191,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/white"
-                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit,Lorem ipsum dolor sit amet, consectetur adipiscing elit, THE END" />
+                            android:textColor="@android:color/white" />
                     </ScrollView>
 
                 </LinearLayout>
