@@ -40,7 +40,7 @@ public class QuizActivity extends BaseActivity {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            getSupportActionBar().setTitle("");
+            getSupportActionBar().setTitle(mDeckModel.getName());
         }
 
         // Register as a subscriber
