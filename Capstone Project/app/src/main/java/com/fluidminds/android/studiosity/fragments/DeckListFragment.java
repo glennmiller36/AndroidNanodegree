@@ -23,8 +23,12 @@ import com.fluidminds.android.studiosity.activities.StatsTabActivity;
 import com.fluidminds.android.studiosity.activities.StudyListActivity;
 import com.fluidminds.android.studiosity.adapters.DeckListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
+import com.fluidminds.android.studiosity.eventbus.SubjectChangedEvent;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -34,6 +38,8 @@ import java.util.ArrayList;
 public class DeckListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private DeckListAdapter mDeckAdapter;
+
+    protected EventBus mEventBus = EventBus.getDefault();
 
     private RecyclerView mRecyclerDecks;
     private TextView mNoRecords;
@@ -140,6 +146,16 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
     public void onActivityCreated(Bundle savedInstanceState) {
         getLoaderManager().initLoader(DECK_LOADER, null, this).forceLoad();
         super.onActivityCreated(savedInstanceState);
+
+        // Register as a subscriber
+        mEventBus.register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        // Unregister
+        mEventBus.unregister(this);
+        super.onDestroy();
     }
 
     /**
@@ -180,5 +196,10 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mDeckAdapter.swapData(null);
+    }
+
+    @Subscribe
+    public void onEvent(SubjectChangedEvent event){
+        mSubjectModel = event.getModel();
     }
 }
