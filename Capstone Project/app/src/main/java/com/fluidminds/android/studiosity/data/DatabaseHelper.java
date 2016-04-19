@@ -108,7 +108,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'ORD', 'Chicago O’Hare International', NULL, 0)");
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, 'PDX', 'Portland International', NULL, 0)");
 
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Arizona', 'Phoenix");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Arizona', 'Phoenix', NULL, 0)");
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'California', 'Sacramento', NULL, 0)");
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Illinois', 'Springfield', NULL, 0)");
         sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Louisiana', 'Baton Rouge', NULL, 80)");

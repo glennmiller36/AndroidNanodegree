@@ -14,6 +14,7 @@ import android.support.v4.widget.SlidingPaneLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,7 +22,9 @@ import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.models.CardModel;
 import com.fluidminds.android.studiosity.models.DeckModel;
+import com.fluidminds.android.studiosity.models.QuizModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+import com.fluidminds.android.studiosity.utils.Converters;
 import com.fluidminds.android.studiosity.utils.ThemeColor;
 import com.fluidminds.android.studiosity.views.TransparentSemicircleView;
 
@@ -40,10 +43,17 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
     private TextView mQuestion;
     private TextView mCardCount;
     private TextView mCardCountSpacer;
+    private LinearLayout mContentResults;
+    private TextView mResultsNumCorrect;
+    private TextView mResultsTotalCards;
+    private TextView mResultsAccuracy;
+    private TextView mResultsDate;
+
     private TextView mNoRecords;
 
     private SubjectModel mSubjectModel;
     private DeckModel mDeckModel;
+    private QuizModel mQuizModel;
 
     private static final int CARD_LOADER = 0;
 
@@ -134,9 +144,13 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
         LinearLayout buttonCorrect = (LinearLayout) view.findViewById(R.id.buttonThumbUp);
         buttonCorrect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // save the Quiz to the database
+                saveQuizCorrectAnswer();
+
                 mCardsIndex++;
+
                 if (mCardsIndex == mCards.size())
-                    showSummary();
+                    showResults();
                 else {
                     mSlidingPanel.closePane();
                     bindView();
@@ -147,13 +161,32 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
         LinearLayout buttonIncorrect = (LinearLayout) view.findViewById(R.id.buttonThumbDown);
         buttonIncorrect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // if missed the first question -- go ahead and save the initial quiz
+                if (mQuizModel.getId() == 0)
+                    mQuizModel = mQuizModel.save();
+
                 mCardsIndex++;
+
                 if (mCardsIndex == mCards.size())
-                    showSummary();
+                    showResults();
                 else {
                     mSlidingPanel.closePane();
                     bindView();
                 }
+            }
+        });
+
+        mContentResults = (LinearLayout) view.findViewById(R.id.contentResults);
+
+        mResultsNumCorrect = (TextView) view.findViewById(R.id.textNumCorrect);
+        mResultsTotalCards = (TextView) view.findViewById(R.id.textTotalCards);
+        mResultsAccuracy = (TextView) view.findViewById(R.id.textAccuracy);
+        mResultsDate = (TextView) view.findViewById(R.id.textDate);
+
+        Button buttonClose = (Button) view.findViewById(R.id.buttonClose);
+        buttonClose.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                getActivity().finish();
             }
         });
 
@@ -200,9 +233,14 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
             mSlidingPanel.setVisibility(View.GONE);
             mNoRecords.setVisibility(View.VISIBLE);
         }
-        else
-            bindView();
+        else {
             mNoRecords.setVisibility(View.GONE);
+
+            mQuizModel = new QuizModel(mDeckModel.getId());
+            mQuizModel.setTotalCards(data.getCount());
+
+            bindView();
+        }
     }
 
     @Override
@@ -221,6 +259,27 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
-    private void showSummary() {
+    private void showResults() {
+        mAnswerContent.setVisibility(View.GONE);
+        mSlidingPanel.setVisibility(View.GONE);
+        mNoRecords.setVisibility(View.GONE);
+        mContentResults.setVisibility(View.VISIBLE);
+
+        mResultsNumCorrect.setText(String.valueOf(mQuizModel.getNumCorrect()));
+        mResultsTotalCards.setText(String.valueOf(mQuizModel.getTotalCards()));
+        mResultsAccuracy.setText(String.valueOf(mQuizModel.getPercentCorrect()));
+        mResultsDate.setText(Converters.dateToString(mQuizModel.getStartDate(), "E, MMM d, yyyy h:mm a"));
+    }
+
+    /**
+     * Saves the Quiz to the database.
+     */
+    private void saveQuizCorrectAnswer() {
+        mQuizModel.setNumCorrect(mQuizModel.getNumCorrect() + 1);
+
+        int percentage = (int)(((double)mQuizModel.getNumCorrect()/(double)mQuizModel.getTotalCards()) * 100);
+        mQuizModel.setPercentCorrect(percentage);
+
+        mQuizModel = mQuizModel.save();
     }
 }

@@ -10,6 +10,7 @@
     <string name="duplicate_name">Duplicate Name</string>
     <string name="action_edit">Edit</string>
     <string name="alert_delete_title">Delete</string>
+    <string name="date">Date</string>
 
     <!-- Subjects -->
     <string name="subjects">Subjects</string>
@@ -57,5 +58,6 @@
     <string name="incorrect">Incorrect</string>
     <string name="card_count" formatted="false">%d / %d</string>
     <string name="card_count_spacer" formatted="false">%d%d</string>
+    <string name="results">Results</string>
 
 </resources>

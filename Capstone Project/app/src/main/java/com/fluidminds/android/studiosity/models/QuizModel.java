@@ -29,7 +29,7 @@ public class QuizModel extends BaseModel implements Parcelable {
     public QuizModel(Long deckId) {
         super();
 
-        initializeFieldData(0L, deckId, null, 0, 0, 0);
+        initializeFieldData(0L, deckId, new Date(), 0, 0, 0);
 
         markAsNew();
     }
@@ -154,6 +154,8 @@ public class QuizModel extends BaseModel implements Parcelable {
         values.put(QuizEntry.COLUMN_PERCENT_CORRECT, getPercentCorrect());
 
         if (getId() == 0) { // insert
+            values.put(QuizEntry.COLUMN_START_DATE, Converters.dateToString(getStartDate()));
+
             Uri insertedUri = StudiosityApp.getInstance().getContentResolver().insert(QuizEntry.buildItemUri(getId()), values);
             if (insertedUri != null && Integer.parseInt(insertedUri.getLastPathSegment()) > 0) {
                 setId(Long.parseLong(insertedUri.getLastPathSegment()));
@@ -161,8 +163,6 @@ public class QuizModel extends BaseModel implements Parcelable {
             }
         }
         else {  // update
-            values.put(QuizEntry.COLUMN_START_DATE, Converters.dateToString(getStartDate()));
-
             int rowsUpdated = StudiosityApp.getInstance().getContentResolver().update(QuizEntry.buildItemUri(getId()), values, null, null);
             return (rowsUpdated == 1) ? this : null;
         }
