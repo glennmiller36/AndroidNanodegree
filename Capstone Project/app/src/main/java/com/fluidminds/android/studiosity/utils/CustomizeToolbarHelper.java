@@ -1,11 +1,14 @@
 package com.fluidminds.android.studiosity.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
@@ -129,6 +132,17 @@ public class CustomizeToolbarHelper {
                     drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                 }
             }
+        }
+    }
+
+    /**
+     *  Update the FAB color to match Theme
+     */
+    public static void setFABColor(Context context, FloatingActionButton fab, Integer color) {
+        fab.setBackgroundTintList(ColorStateList.valueOf(color));
+        if (!ThemeColor.isWhiteContrastColor(color)) {
+            Drawable drawable = fab.getDrawable();
+            drawable.setColorFilter(ContextCompat.getColor(context, R.color.textColorPrimary), PorterDuff.Mode.SRC_ATOP);
         }
     }
 }

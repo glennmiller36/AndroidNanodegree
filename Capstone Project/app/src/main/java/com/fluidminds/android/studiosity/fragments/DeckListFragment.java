@@ -26,6 +26,7 @@ import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
 import com.fluidminds.android.studiosity.eventbus.SubjectChangedEvent;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+import com.fluidminds.android.studiosity.utils.CustomizeToolbarHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -138,6 +139,9 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
             startActivity(intent);
             }
         });
+
+        // update FAB color to match Theme
+        CustomizeToolbarHelper.setFABColor(getContext(), fabAdd, mSubjectModel.getColorInt());
 
         return view;
     }

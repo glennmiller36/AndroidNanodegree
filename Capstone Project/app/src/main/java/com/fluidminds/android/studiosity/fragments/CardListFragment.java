@@ -22,6 +22,7 @@ import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 import com.fluidminds.android.studiosity.models.CardModel;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+import com.fluidminds.android.studiosity.utils.CustomizeToolbarHelper;
 import com.fluidminds.android.studiosity.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -107,6 +108,9 @@ public class CardListFragment extends Fragment implements LoaderManager.LoaderCa
                 startActivity(intent);
             }
         });
+
+        // update FAB color to match Theme
+        CustomizeToolbarHelper.setFABColor(getContext(), fabAdd, mSubjectModel.getColorInt());
 
         return view;
     }
