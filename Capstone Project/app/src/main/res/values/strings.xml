@@ -20,6 +20,8 @@
     <string name="theme_color">Theme Color</string>
     <string name="delete_subject">Delete subject \'%s\'?</string>
     <string name="action_delete_subject">Delete Subject</string>
+    <string name="action_delete_sample_data">Delete Sample Data</string>
+    <string name="delete_sample_data">Delete all sample data?</string>
 
     <!-- Decks -->
     <string name="no_decks">No Deck of Cards</string>

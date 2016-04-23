@@ -43,7 +43,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_SUBJECT_TABLE = "CREATE TABLE " + SubjectEntry.TABLE_NAME + " (" +
                 SubjectEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 SubjectEntry.COLUMN_NAME + " TEXT NOT NULL UNIQUE COLLATE NOCASE, " +
-                SubjectEntry.COLUMN_COLOR + " INTEGER NOT NULL " +
+                SubjectEntry.COLUMN_COLOR + " INTEGER NOT NULL, " +
+                SubjectEntry.IS_SAMPLE_DATA + " INTEGER NOT NULL " +
                 " );";
         sqLiteDatabase.execSQL(SQL_CREATE_SUBJECT_TABLE);
 
@@ -89,10 +90,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void seedData(SQLiteDatabase sqLiteDatabase) {
         // Subject
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color) VALUES ('Languages', -14575885)");
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color) VALUES ('Math', -769226)");
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color) VALUES ('Science', -16121)");
-        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color) VALUES ('U.S. Geography', -11751600)");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color, IsSampleData) VALUES ('Languages', -14575885, 1)");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color, IsSampleData) VALUES ('Math', -769226, 1)");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color, IsSampleData) VALUES ('Science', -16121, 1)");
+        sqLiteDatabase.execSQL("INSERT INTO SUBJECT (Name, Color, IsSampleData) VALUES ('U.S. Geography', -11751600, 1)");
 
 
         // Decks

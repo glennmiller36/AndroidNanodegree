@@ -320,6 +320,7 @@ public class StudiosityProvider extends ContentProvider {
         // this makes delete all rows return the number of rows deleted
         if ( null == selection ) selection = "1";
         switch (match) {
+            case SUBJECTS:
             case SUBJECT_ID:
                 rowsDeleted = db.delete(SubjectEntry.TABLE_NAME, selection, selectionArgs);
                 break;

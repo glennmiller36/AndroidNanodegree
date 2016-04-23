@@ -42,6 +42,7 @@ public class DataContract {
         // Column names
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_COLOR = "color";
+        public static final String IS_SAMPLE_DATA = "issampledata";
 
         public static Uri buildItemUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

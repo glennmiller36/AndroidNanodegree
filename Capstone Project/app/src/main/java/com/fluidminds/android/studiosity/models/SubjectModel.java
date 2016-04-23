@@ -126,6 +126,7 @@ public class SubjectModel extends BaseModel implements Parcelable {
 
         try {
             if (getId() == 0) { // insert
+                values.put(SubjectEntry.IS_SAMPLE_DATA, 0);
                 Uri insertedUri = StudiosityApp.getInstance().getContentResolver().insert(SubjectEntry.buildItemUri(getId()), values);
                 if (insertedUri != null && Integer.parseInt(insertedUri.getLastPathSegment()) > 0) {
                     setId(Long.parseLong(insertedUri.getLastPathSegment()));
