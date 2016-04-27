@@ -164,8 +164,9 @@ public class StudiosityProvider extends ContentProvider {
             }
 
             case DECKS: {
+                // JOIN Deck data with the latest corresponding Quiz data
                 retCursor = mDatabase.getReadableDatabase().query(
-                        DeckEntry.TABLE_NAME,
+                        DeckEntry.TABLE_NAME + " LEFT JOIN (SELECT deckid, MAX(startdate) as startdate, percentcorrect FROM " + QuizEntry.TABLE_NAME + " GROUP BY deckid) as Q on Deck._ID = Q.deckId ",
                         projection,
                         selection,
                         selectionArgs,
@@ -173,6 +174,7 @@ public class StudiosityProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
+
                 break;
             }
 

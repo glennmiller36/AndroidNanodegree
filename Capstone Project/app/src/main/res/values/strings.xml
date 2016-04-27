@@ -61,5 +61,6 @@
     <string name="card_count" formatted="false">%d / %d</string>
     <string name="card_count_spacer" formatted="false">%d%d</string>
     <string name="results">Results</string>
+    <string name="last_quiz_info" formatted="false">%s\u0020\u0020•\u0020\u0020%s%%</string>
 
 </resources>

@@ -268,7 +268,7 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
         mResultsNumCorrect.setText(String.valueOf(mQuizModel.getNumCorrect()));
         mResultsTotalCards.setText(String.valueOf(mQuizModel.getTotalCards()));
         mResultsAccuracy.setText(String.valueOf(mQuizModel.getPercentCorrect()));
-        mResultsDate.setText(Converters.dateToString(mQuizModel.getStartDate(), "E, MMM d, yyyy h:mm a"));
+        mResultsDate.setText(Converters.dateToString(mQuizModel.getStartDate(), "E, MMM d, yyyy 'at' h:mm a"));
     }
 
     /**

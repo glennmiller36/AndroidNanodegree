@@ -9,7 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fluidminds.android.studiosity.R;
+import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.models.DeckModel;
+import com.fluidminds.android.studiosity.utils.Converters;
 
 import java.util.ArrayList;
 
@@ -74,7 +76,14 @@ public class DeckListAdapter extends RecyclerView.Adapter<DeckListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mName.setText(mDataSet.get(position).getName());
-        holder.mSubtitle.setText(mDataSet.get(position).getName());
+
+        if (mDataSet.get(position).getLastQuizDate() != null) {
+            String formatString = String.format(StudiosityApp.getInstance().getString(R.string.last_quiz_info), Converters.dateToString(mDataSet.get(position).getLastQuizDate(), "E, MMM d, yyyy 'at' h:mm a").replace("AM", "am").replace("PM", "pm"), mDataSet.get(position).getLastQuizAccuracy().toString());
+            holder.mSubtitle.setText(formatString);
+        }
+        else {
+            holder.mSubtitle.setText(StudiosityApp.getInstance().getString(R.string.no_quizzes));
+        }
     }
 
     @Override

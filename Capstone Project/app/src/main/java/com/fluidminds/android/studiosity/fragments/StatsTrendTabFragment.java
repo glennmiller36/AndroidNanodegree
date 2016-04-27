@@ -206,7 +206,7 @@ public class StatsTrendTabFragment extends Fragment implements LoaderManager.Loa
             mSelectedNumCorrect.setText(String.valueOf(quiz.getNumCorrect()));
             mSelectedTotalCards.setText(String.valueOf(quiz.getTotalCards()));
             mSelectedAccuracy.setText(String.valueOf(quiz.getPercentCorrect()));
-            mSelectedDate.setText(Converters.dateToString(quiz.getStartDate(), "E, MMM d, yyyy h:mm a"));
+            mSelectedDate.setText(Converters.dateToString(quiz.getStartDate(), "E, MMM d, yyyy 'at' h:mm a"));
         }
     }
 }

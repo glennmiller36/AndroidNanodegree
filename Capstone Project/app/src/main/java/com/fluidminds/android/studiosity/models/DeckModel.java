@@ -11,6 +11,7 @@ import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
+import com.fluidminds.android.studiosity.utils.Converters;
 
 import java.util.Date;
 
@@ -23,19 +24,21 @@ public class DeckModel extends BaseModel implements Parcelable {
     public static final String sID = "Id";
     public static final String sSUBJECTID = "SubjectId";
     public static final String sNAME = "Name";
+    public static final String sLASTQUIZDATE = "LastQuizDate";
+    public static final String sLASTQUIZACCURACY = "LastQuizAccuracy";
 
     public DeckModel(Long subjectId) {
         super();
 
-        initializeFieldData(0L, subjectId, "");
+        initializeFieldData(0L, subjectId, "", null, 0);
 
         markAsNew();
     }
 
-    public DeckModel(Long id, Long subjectId, String name) {
+    public DeckModel(Long id, Long subjectId, String name, Date lastQuizDate, Integer lastQuizAccuracy) {
         super();
 
-        initializeFieldData(id, subjectId, name);
+        initializeFieldData(id, subjectId, name, lastQuizDate, lastQuizAccuracy);
 
         markAsOld();
     }
@@ -49,11 +52,13 @@ public class DeckModel extends BaseModel implements Parcelable {
     /**
      * Put the initial field key/value into the FieldDataList.
      */
-    private void initializeFieldData(Long id, Long subjectId, String name) {
+    private void initializeFieldData(Long id, Long subjectId, String name, Date lastQuizDate, Integer lastQuizAccuracy) {
         /* Initially load properties without dirtying the model */
         loadFieldData(sID, id);
         loadFieldData(sSUBJECTID, subjectId);
         loadFieldData(sNAME, name);
+        loadFieldData(sLASTQUIZDATE, lastQuizDate);
+        loadFieldData(sLASTQUIZACCURACY, lastQuizAccuracy);
     }
 
     /**
@@ -89,6 +94,16 @@ public class DeckModel extends BaseModel implements Parcelable {
             setFieldData(sNAME, name.trim());
         }
     }
+
+    /**
+     * LastQuiztDate
+     */
+    public Date getLastQuizDate() { return getFieldData().getDate(sLASTQUIZDATE); }
+
+    /**
+     * LastQuiztAccuracy
+     */
+    public Integer getLastQuizAccuracy() { return getFieldData().getInteger(sLASTQUIZACCURACY); }
 
     /**
      * Saves the object to the database.
@@ -154,6 +169,8 @@ public class DeckModel extends BaseModel implements Parcelable {
         parcel.writeLong(getId());
         parcel.writeLong(getSubjectId());
         parcel.writeString(getName());
+        parcel.writeString(Converters.dateToString(getLastQuizDate()));
+        parcel.writeInt(getLastQuizAccuracy());
 
         // base fields
         parcel.writeByte((byte) (getIsDirty() ? 1 : 0));   //if mIsDirty == true, byte == 1
@@ -174,7 +191,7 @@ public class DeckModel extends BaseModel implements Parcelable {
     public DeckModel(Parcel parcel){
         super();
 
-        initializeFieldData(parcel.readLong(), parcel.readLong(), parcel.readString());
+        initializeFieldData(parcel.readLong(), parcel.readLong(), parcel.readString(), Converters.stringToDate(parcel.readString()), parcel.readInt());
 
         // base fields
         if (parcel.readByte() != 0)

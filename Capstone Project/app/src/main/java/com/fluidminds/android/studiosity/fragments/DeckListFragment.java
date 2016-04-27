@@ -23,9 +23,11 @@ import com.fluidminds.android.studiosity.activities.StatsTabActivity;
 import com.fluidminds.android.studiosity.activities.StudyListActivity;
 import com.fluidminds.android.studiosity.adapters.DeckListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.DeckEntry;
+import com.fluidminds.android.studiosity.data.DataContract.QuizEntry;
 import com.fluidminds.android.studiosity.eventbus.SubjectChangedEvent;
 import com.fluidminds.android.studiosity.models.DeckModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
+import com.fluidminds.android.studiosity.utils.Converters;
 import com.fluidminds.android.studiosity.utils.CustomizeToolbarHelper;
 
 import org.greenrobot.eventbus.EventBus;
@@ -52,12 +54,17 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
     private static final String[] DECK_COLUMNS = {
         DeckEntry.TABLE_NAME + "." + DeckEntry._ID,
         DeckEntry.COLUMN_SUBJECT_ID,
-        DeckEntry.COLUMN_NAME
+        DeckEntry.COLUMN_NAME,
+        QuizEntry.COLUMN_START_DATE,
+        QuizEntry.COLUMN_PERCENT_CORRECT
     };
 
     // These indices are tied to DECK_COLUMNS.
     public static final int COL_ID = 0;
-    public static final int COL_NAME = 1;
+    public static final int COL_SUBJECT_ID = 1;
+    public static final int COL_NAME = 2;
+    public static final int COL_LAST_QUIZ_STARTDATE = 3;
+    public static final int COL_LAST_QUIZ_ACCURACY = 4;
 
     public DeckListFragment() {
         // Required empty public constructor
@@ -188,7 +195,7 @@ public class DeckListFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         ArrayList<DeckModel> decks = new ArrayList<>();
         while (data.moveToNext()) {
-            DeckModel model = new DeckModel(data.getLong(0), data.getLong(1), data.getString(2));
+            DeckModel model = new DeckModel(data.getLong(COL_ID), data.getLong(COL_SUBJECT_ID), data.getString(COL_NAME), Converters.stringToDate(data.getString(COL_LAST_QUIZ_STARTDATE)), data.getInt(COL_LAST_QUIZ_ACCURACY));
             decks.add(model);
         }
 

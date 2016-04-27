@@ -40,13 +40,12 @@
                 android:id="@+id/textSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/theme_color"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-light"
-                android:paddingTop="4dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/textColorSecondary" />
+                android:textColor="@color/textColorSecondary"
+                android:paddingTop="4dp" />
 
             <View
                 android:layout_width="match_parent"
