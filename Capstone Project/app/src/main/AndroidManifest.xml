@@ -22,7 +22,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.SubjectListActivity"
-            android:label="@string/subjects"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
