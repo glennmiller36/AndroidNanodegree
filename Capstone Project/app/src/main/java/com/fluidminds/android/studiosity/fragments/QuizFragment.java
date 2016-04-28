@@ -147,6 +147,9 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
                 // save the Quiz to the database
                 saveQuizCorrectAnswer();
 
+                // update the individual Card accuracy
+                updateCardAccuracy(mCards.get(mCardsIndex), 1);
+
                 mCardsIndex++;
 
                 if (mCardsIndex == mCards.size())
@@ -164,6 +167,9 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
                 // if missed the first question -- go ahead and save the initial quiz
                 if (mQuizModel.getId() == 0)
                     mQuizModel = mQuizModel.save();
+
+                // update the individual Card accuracy
+                updateCardAccuracy(mCards.get(mCardsIndex), 0);
 
                 mCardsIndex++;
 
@@ -281,5 +287,13 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
         mQuizModel.setPercentCorrect(percentage);
 
         mQuizModel = mQuizModel.save();
+    }
+
+    /**
+     * Update the individual Card accuracy.
+     */
+    private void updateCardAccuracy(CardModel cardModel, int score) {
+        cardModel.updateQuizScore(score);
+        cardModel.save();
     }
 }

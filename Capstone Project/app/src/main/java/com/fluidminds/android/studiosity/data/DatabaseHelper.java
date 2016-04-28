@@ -109,93 +109,93 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Cards
         /* French Numbers */
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '1', 'Un (un)', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '2', 'Deux (deh)', '0, 0, 1, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '3', 'Trois (twah)', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '4', 'Quatre(KAH-trah)', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '5', 'Cinq (sank)', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '6', 'Six (seez)', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '7', 'Sept (set)', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '8', 'Huit (wheet)', '0, 0, 0, 1, 1', 40)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '9', 'Neuf (nehf)', '0, 0, 1, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '10', 'Dix (deez)', '1, 1, 1, 1, 1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '1', 'Un (un)', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '2', 'Deux (deh)', '0,0,1,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '3', 'Trois (twah)', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '4', 'Quatre(KAH-trah)', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '5', 'Cinq (sank)', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '6', 'Six (seez)', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '7', 'Sept (set)', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '8', 'Huit (wheet)', '0,0,0,1,1', 40)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '9', 'Neuf (nehf)', '0,0,1,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (1, '10', 'Dix (deez)', '1,1,1,1,1', 100)");
 
         /* Spanish Travel Phrases */
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Bus', 'Autobus (Ow-tow-boos)', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Water', 'Agua (ah-gwa)', '0, 1, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Hospital', 'Hospital (ose-pee-tahl)', '1, 1, 0, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Hotel', 'Hotel (oh-tell)', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Restaurant', 'Restaurante (res-tau-rahn-tay)', '1, 1, 1, 0, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Bathroom', 'baño (bahn-yo)', '1, 0, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Please', 'Por Favor(pour fah - vore)', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Thank you', 'Gracias (grah-see-ahs)', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Hello', 'Hola (Oh-lah)', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Chicken', 'Pollo (poy-oh)', '1, 1, 1, 0, 1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Bus', 'Autobus (Ow-tow-boos)', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Water', 'Agua (ah-gwa)', '0,1,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Hospital', 'Hospital (ose-pee-tahl)', '1,1,0,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Hotel', 'Hotel (oh-tell)', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Restaurant', 'Restaurante (res-tau-rahn-tay)', '1,1,1,0,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Bathroom', 'baño (bahn-yo)', '1,0,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Please', 'Por Favor(pour fah - vore)', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Thank you', 'Gracias (grah-see-ahs)', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Hello', 'Hola (Oh-lah)', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (2, 'Chicken', 'Pollo (poy-oh)', '1,1,1,0,1', 80)");
 
         /* Common Conversions */
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Quarts in a gallon', '4', '1, 0, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Ounces in a pound', '16', '1, 1, 0, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Weeks in a year', '52', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Inches in a foot', '12', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Inches in a yard', '36', '1, 1, 1, 0, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Feet in a mile', '5,280', '0, 1, 1, 0, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Cups in a quarts', '4', '0, 1, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Hours in a week', '168', '0, 0, 1, 1, 1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Quarts in a gallon', '4', '1,0,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Ounces in a pound', '16', '1,1,0,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Weeks in a year', '52', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Inches in a foot', '12', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Inches in a yard', '36', '1,1,1,0,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Feet in a mile', '5,280', '0,1,1,0,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Cups in a quarts', '4', '0,1,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (3, 'Hours in a week', '168', '0,0,1,1,1', 60)");
 
         /* Roman Numerals */
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'IV', '4', '1, 1, 1, 0, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'V', '5', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'VI', '6', '0, 1, 0, 0, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'IX', '9', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'X', '10', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'XX', '20', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'L', '50', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'C', '100', '1, 1, 1, 1, 0', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'D', '500', '0, 1, 1, 0, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'M', '1000', '0, 0, 1, 1, 1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'IV', '4', '1,1,1,0,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'V', '5', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'VI', '6', '0,1,0,0,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'IX', '9', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'X', '10', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'XX', '20', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'L', '50', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'C', '100', '1,1,1,1,0', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'D', '500', '0,1,1,0,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (4, 'M', '1000', '0,0,1,1,1', 60)");
 
         /* Human Body */
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'What’s the smallest bone in the body?', 'Stirrup', '0, 0, 0, 1, 1', 40)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'What is the most common blood type?', 'O+', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'How many bones does an adult human have?', '206', '1, 0, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'A typical brain weighs how much?', '3 pounds (1.4 kilograms)', '1, 0, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'How many chambers does the heart have?', 'Four', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'What is your body’s largest organ?', 'Skin', '1, 0, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'How fast does the hair on your head grow every month?', '1/2 inch', '0, 1, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'How fast do fingernails grow?', '1/10 of an inch each month', '0, 1, 1, 0, 1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'What’s the smallest bone in the body?', 'Stirrup', '0,0,0,1,1', 40)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'What is the most common blood type?', 'O+', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'How many bones does an adult human have?', '206', '1,0,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'A typical brain weighs how much?', '3 pounds (1.4 kilograms)', '1,0,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'How many chambers does the heart have?', 'Four', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'What is your body’s largest organ?', 'Skin', '1,0,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'How fast does the hair on your head grow every month?', '1/2 inch', '0,1 0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (5, 'How fast do fingernails grow?', '1/10 of an inch each month', '0,1,1,0,1', 60)");
 
         /* Solar System */
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Closest planet to the sun', 'Mercury', '0, 0, 1, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Hottest planet', 'Mercury', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Only planet having intelligent life', 'Earth', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Biggest planet', 'Jupiter', '1, 0, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Biggest rings', 'Saturn', '1, 0, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Windiest planet', 'Neptune', '0, 0, 0, 1, 1', 40)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Biggest mountain', 'Mars', '1, 0, 0, 0, 1', 40)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Closest planet to the sun', 'Mercury', '0,0,1,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Hottest planet', 'Mercury', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Only planet having intelligent life', 'Earth', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Biggest planet', 'Jupiter', '1,0,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Biggest rings', 'Saturn', '1,0,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Windiest planet', 'Neptune', '0,0,0,1,1', 40)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (6, 'Biggest mountain', 'Mars', '1,0,0,0,1', 40)");
 
         /* U.S. Airport Codes */
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'BNA', 'Nashville International', '1, 1, 0, 0, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'BWI', 'Baltimore/Washington International', '0, 1, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'DFW', 'Dallas Fort Worth International', '1, 0, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'DTW', 'Detroit Metropolitan Wayne County', '0, 1, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'JFK', 'John F Kennedy International, New York', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'LAS', 'McCarran International, Las Vegas', '0, 1, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'MCO', 'Orlando International', '1, 0, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'MSP', 'Minneapolis-St Paul International', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'ORD', 'Chicago O’Hare International', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'PDX', 'Portland International', '0, 1, 0, 1, 1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'BNA', 'Nashville International', '1,1,0,0,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'BWI', 'Baltimore/Washington International', '0,1,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'DFW', 'Dallas Fort Worth International', '1,0,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'DTW', 'Detroit Metropolitan Wayne County', '0,1,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'JFK', 'John F Kennedy International, New York', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'LAS', 'McCarran International, Las Vegas', '0,1,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'MCO', 'Orlando International', '1,0,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'MSP', 'Minneapolis-St Paul International', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'ORD', 'Chicago O’Hare International', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (7, 'PDX', 'Portland International', '0,1,0,1,1', 60)");
 
         /* U.S. State Capitals */
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Arizona', 'Phoenix', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'California', 'Sacramento', '1, 1, 1, 1, 1', 100)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Illinois', 'Springfield', '1, 1, 0, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Louisiana', 'Baton Rouge', '1, 0, 0, 1, 1', 60)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Maryland', 'Annapolis', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Massachusetts', 'Boston', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Minnesota', 'St. Paul', '1, 0, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'New York', 'Albany', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Ohio', 'Columbus', '0, 1, 1, 1, 1', 80)");
-        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Washington', 'Olympia', '1, 0, 0, 1, 1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Arizona', 'Phoenix', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'California', 'Sacramento', '1,1,1,1,1', 100)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Illinois', 'Springfield', '1,1,0,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Louisiana', 'Baton Rouge', '1,0,0,1,1', 60)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Maryland', 'Annapolis', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Massachusetts', 'Boston', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Minnesota', 'St. Paul', '1,0,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'New York', 'Albany', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Ohio', 'Columbus', '0,1,1,1,1', 80)");
+        sqLiteDatabase.execSQL("INSERT INTO CARD (DeckId, Question, Answer, RecentScores, PercentCorrect) VALUES (8, 'Washington', 'Olympia', '1,0,0,1,1', 60)");
 
 
         // Quiz History

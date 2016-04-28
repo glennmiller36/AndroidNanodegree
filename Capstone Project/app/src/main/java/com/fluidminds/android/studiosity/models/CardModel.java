@@ -12,6 +12,10 @@ import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.app.StudiosityApp;
 import com.fluidminds.android.studiosity.data.DataContract.CardEntry;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * A rich Model representing a Card, where the object encapsulates actual behavior (business and validation).
  */
@@ -28,7 +32,7 @@ public class CardModel extends BaseModel implements Parcelable {
     public CardModel(Long deckId) {
         super();
 
-        initializeFieldData(0L, deckId, "", "", null, 0);
+        initializeFieldData(0L, deckId, "", "", "", 0);
 
         markAsNew();
     }
@@ -116,6 +120,37 @@ public class CardModel extends BaseModel implements Parcelable {
         if (!getRecentScores().equals(recentScores)) {
             setFieldData(sRECENTSCORES, recentScores);
         }
+    }
+
+    public void updateQuizScore(int score) {
+        // convert String to Array
+        List<String> scores = new ArrayList<String>();
+
+        if (!getRecentScores().isEmpty())
+            scores.addAll(Arrays.asList(getRecentScores().split(",")));
+
+        if (scores.size() > 4)
+            scores.remove(0);
+
+        scores.add(String.valueOf(score));
+
+        int totalCorrect = 0;
+
+        // convert List back to String
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < scores.size(); i++) {
+            sb.append(scores.get(i));
+
+            totalCorrect += Integer.valueOf(scores.get(i));
+
+            if (i < scores.size() - 1)
+                sb.append(",");
+        }
+
+        setRecentScores(sb.toString());
+
+        int percentage = (int)(((double)totalCorrect/(scores.size())) * 100);
+        setPercentCorrect(percentage);
     }
 
     /**
