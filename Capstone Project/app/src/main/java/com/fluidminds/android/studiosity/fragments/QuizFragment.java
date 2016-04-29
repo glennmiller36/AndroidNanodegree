@@ -234,6 +234,8 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
             mCards.add(model);
         }
 
+        data.close();
+
         if (data.getCount() == 0) {
             mAnswerContent.setVisibility(View.GONE);
             mSlidingPanel.setVisibility(View.GONE);
