@@ -15,6 +15,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginRight="4dp"
+        android:layout_marginEnd="4dp"
         android:src="@drawable/ic_quiz_grey_24dp" />
 
     <TextView

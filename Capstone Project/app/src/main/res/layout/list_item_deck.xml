@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     android:background="@color/background_grey200"
     android:paddingLeft="@dimen/card_layout_padding"
+    android:paddingStart="@dimen/card_layout_padding"
     android:paddingRight="@dimen/card_layout_padding"
+    android:paddingEnd="@dimen/card_layout_padding"
     android:paddingTop="@dimen/card_layout_padding">
 
     <android.support.v7.widget.CardView
@@ -58,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:orientation="horizontal">
                 <!-- Include our custom button -->
                 <include layout="@layout/button_study" />

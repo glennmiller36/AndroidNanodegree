@@ -18,6 +18,7 @@
             android:orientation="vertical"
             android:gravity="bottom"
             android:paddingLeft="4dp"
+            android:paddingStart="4dp"
             android:layout_gravity="bottom"
             android:background="@color/quizBackground_black">
 
@@ -53,6 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/textColorSecondary" />
@@ -63,7 +65,9 @@
                     android:orientation="vertical"
                     android:layout_marginTop="50dp"
                     android:layout_marginLeft="50dp"
-                    android:layout_marginRight="100dp">
+                    android:layout_marginStart="50dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_marginEnd="100dp">
 
                     <ScrollView
                         android:layout_width="match_parent"
@@ -105,6 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginRight="80dp"
+            android:layout_marginEnd="80dp"
             android:layout_gravity="left"
             android:background="@null"/>
 
@@ -113,6 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
             android:orientation="horizontal"
             android:background="@null"
             android:alpha="255">
@@ -123,6 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="5dp"
+                android:paddingStart="5dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/textColorPrimary"
                 android:visibility="invisible"/>
@@ -182,7 +189,9 @@
                         android:layout_height="match_parent"
                         android:layout_margin="50dp"
                         android:layout_marginLeft="25dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginRight="75dp"
+                        android:layout_marginEnd="75dp"
                         android:scrollbars="vertical"
                         android:fillViewport="true">
                         <TextView
@@ -260,7 +269,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="5dp"
+                        android:paddingStart="5dp"
                         android:paddingRight="5dp"
+                        android:paddingEnd="5dp"
                         android:text="@string/forward_slash"
                         android:textAllCaps="true"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -314,6 +325,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="5dp"
+                        android:paddingStart="5dp"
                         android:text="@string/percentage_symbol"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/textColorSecondary"
