@@ -14,6 +14,8 @@ import android.support.v4.widget.SlidingPaneLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -268,9 +270,15 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     private void showResults() {
-        mAnswerContent.setVisibility(View.GONE);
         mSlidingPanel.setVisibility(View.GONE);
         mNoRecords.setVisibility(View.GONE);
+
+        Animation out = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_out);
+        mAnswerContent.startAnimation(out);
+        mAnswerContent.setVisibility(View.INVISIBLE);
+
+        Animation in = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in);
+        mContentResults.startAnimation(in);
         mContentResults.setVisibility(View.VISIBLE);
 
         mResultsNumCorrect.setText(String.valueOf(mQuizModel.getNumCorrect()));
