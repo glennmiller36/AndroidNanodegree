@@ -22,6 +22,11 @@ import com.fluidminds.android.studiosity.adapters.SubjectListAdapter;
 import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
 
 /**
  * A fragment representing the list of school Subjects.
@@ -32,6 +37,8 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
 
     private GridView mGridSubjects;
     private TextView mNoRecords;
+
+    private InterstitialAd mInterstitialAd;
 
     private static final int SUBJECT_LOADER = 0;
 
@@ -88,6 +95,28 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
             }
         });
 
+        AdView mAdView = (AdView) view.findViewById(R.id.adView);
+        // Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mAdView.loadAd(adRequest);
+
+
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+            }
+        });
+
+        requestNewInterstitial();
+
         return view;
     }
 
@@ -123,5 +152,13 @@ public class SubjectListFragment extends Fragment implements LoaderManager.Loade
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mSubjectAdapter.swapCursor(null);
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
     }
 }
