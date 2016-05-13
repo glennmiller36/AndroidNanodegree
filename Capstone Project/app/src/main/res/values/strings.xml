@@ -12,6 +12,7 @@
     <string name="alert_delete_title">Delete</string>
     <string name="date">Date</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="google_app_id">studiosity-1299</string>
 
     <!-- Subjects -->
     <string name="subjects">Subjects</string>
@@ -63,5 +64,17 @@
     <string name="card_count_spacer" formatted="false">%d%d</string>
     <string name="results">Results</string>
     <string name="last_quiz_info" formatted="false">%s\u0020\u0020•\u0020\u0020%s%%</string>
+
+    <!-- Google Drive -->
+    <string name="title_activity_backup">Studiosity Back Up</string>
+    <string name="action_backup_data">Studiosity Back Up</string>
+    <string name="backup_introduction">Back up your Studiosity data to Google Drive so if you lose your device or switch to a new one, your data is safe.</string>
+    <string name="last_backup">Last Backup</string>
+    <string name="size">Size</string>
+    <string name="account">Account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="backup_now">Back Up Now</string>
+    <string name="cloud_error">Studiosity could not back up due to an unknown Google Drive error.</string>
+    <string name="backup_file_name">StudiosityBackup_%s.json</string>
 
 </resources>

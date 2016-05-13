@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="viewModel" type="com.fluidminds.android.studiosity.viewmodels.BackupViewModel"/>
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fillViewport="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/screen_edge_margin"
+            android:layout_marginRight="@dimen/screen_edge_margin"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/content_spacer_height"
+            android:paddingStart="@dimen/screen_edge_margin"
+            android:paddingLeft="@dimen/screen_edge_margin">
+
+            <View
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:layout_gravity="top"
+                android:layout_marginStart="@dimen/avatar_margin"
+                android:layout_marginLeft="@dimen/avatar_margin"
+                android:layout_marginEnd="@dimen/avatar_margin"
+                android:layout_marginRight="@dimen/avatar_margin"
+                android:background="@drawable/ic_google_drive"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/screen_edge_margin"
+                android:layout_marginStart="@dimen/screen_edge_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/space_between_fields"
+                    android:text="@string/backup_introduction"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/textColorPrimary"/>
+
+                <LinearLayout
+                    android:id="@+id/lastBackupInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                   <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/textview_label_padding_bottom"
+                        android:text="@string/last_backup"
+                        android:textAllCaps="true"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/textColorSecondary"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/space_between_fields"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/textColorPrimary"
+                        android:text="@{viewModel.Model.ModifiedDateAsString}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/textview_label_padding_bottom"
+                        android:text="@string/size"
+                        android:textAllCaps="true"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/textColorSecondary"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/space_between_fields"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/textColorPrimary"
+                        android:text="@{viewModel.Model.FileSizeAsString}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/textview_label_padding_bottom"
+                        android:text="@string/account"
+                        android:textAllCaps="true"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/textColorSecondary"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/space_between_fields"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/textColorPrimary"
+                        android:text="@{viewModel.Model.Account}"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/buttonBackupNow"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/backup_now"
+                    android:textColor="@android:color/white"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

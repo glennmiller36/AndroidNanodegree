@@ -10,7 +10,6 @@ import android.os.Parcelable;
 import com.fluidminds.android.studiosity.BR;
 import com.fluidminds.android.studiosity.R;
 import com.fluidminds.android.studiosity.app.StudiosityApp;
-import com.fluidminds.android.studiosity.data.DataContract;
 import com.fluidminds.android.studiosity.data.DataContract.SubjectEntry;
 import com.fluidminds.android.studiosity.utils.ThemeColor;
 

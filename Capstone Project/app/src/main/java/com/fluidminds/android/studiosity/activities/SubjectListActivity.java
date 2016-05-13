@@ -3,6 +3,7 @@ package com.fluidminds.android.studiosity.activities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -96,6 +97,11 @@ public class SubjectListActivity extends BaseActivity {
                 builder.show();
 
                 return true;
+
+            case R.id.action_backup_data:
+                Intent intent = new Intent(this, BackupActivity.class);
+                startActivity(intent);
+
             default:
                 return super.onOptionsItemSelected(item);
         }

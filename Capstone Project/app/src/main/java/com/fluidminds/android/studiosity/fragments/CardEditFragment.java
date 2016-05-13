@@ -18,8 +18,6 @@ import com.fluidminds.android.studiosity.models.CardModel;
 import com.fluidminds.android.studiosity.models.SubjectModel;
 import com.fluidminds.android.studiosity.viewmodels.CardViewModel;
 
-import org.greenrobot.eventbus.EventBus;
-
 /**
  * A fragment to Add or Edit an individual Card.
  */
