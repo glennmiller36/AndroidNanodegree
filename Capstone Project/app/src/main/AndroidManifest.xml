@@ -17,6 +17,10 @@
         tools:node="remove" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".app.StudiosityApp"
         android:allowBackup="true"
@@ -71,13 +75,29 @@
         <provider
             android:name=".data.StudiosityProvider"
             android:authorities="@string/content_authority"
-            android:exported="false"
-            android:syncable="true" />
+            android:exported="true"
+            android:syncable="true"
+            android:grantUriPermissions="true"/>
 
         <activity
             android:name=".activities.BackupActivity"
             android:label="@string/title_activity_backup"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name=".widget.StudiosityWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/studosity_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widget.StudiosityWidgetRemoteViewsService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 
 </manifest>
