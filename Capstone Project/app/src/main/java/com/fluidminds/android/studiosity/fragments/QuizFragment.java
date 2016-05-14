@@ -1,6 +1,7 @@
 package com.fluidminds.android.studiosity.fragments;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -11,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SlidingPaneLayout;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -191,7 +193,10 @@ public class QuizFragment extends Fragment implements LoaderManager.LoaderCallba
         mResultsAccuracy = (TextView) view.findViewById(R.id.textAccuracy);
         mResultsDate = (TextView) view.findViewById(R.id.textDate);
 
+        // color button background using primary color
+        ColorStateList csl = new ColorStateList(new int[][]{new int[0]}, new int[]{0xff9C27B0});
         Button buttonClose = (Button) view.findViewById(R.id.buttonClose);
+        ((AppCompatButton)buttonClose).setSupportBackgroundTintList(csl);
         buttonClose.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 getActivity().finish();
