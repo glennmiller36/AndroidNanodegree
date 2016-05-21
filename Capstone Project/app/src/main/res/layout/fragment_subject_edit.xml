@@ -73,7 +73,7 @@
             android:orientation="horizontal"
             android:paddingStart="@dimen/screen_edge_margin"
             android:paddingLeft="@dimen/screen_edge_margin"
-            android:onClick="@{handler.onClick}">
+            android:onClick="@{handler::onClick}">
 
             <View
                 android:layout_width="@dimen/avatar_size"
